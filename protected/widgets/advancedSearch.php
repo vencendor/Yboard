@@ -53,10 +53,17 @@ class advancedSearch extends CWidget {
             echo "<input type='hidden' name='cat_id' value='$cat_id' />";
         }
 
-
-        echo "<label for='Adverts[price_min]'>Цена от</label><input type='text' name='Adverts[price_min]' value='".Yii::app()->request->getParam("Adverts")["price_min"]."' />";
-        echo "<label for='Adverts[price_max]' class='sh'>до</label><input type='text' name='Adverts[price_max]' value='".Yii::app()->request->getParam("Adverts")["price_max"]."' /><br/>";
-        echo "<label for='Adverts[location]'>" . t("Location") . "</label><input type='text' name='Adverts[location]' value='".Yii::app()->request->getParam("Adverts")["location"]."' />";
+		$price_min = Yii::app()->request->getParam("Adverts");
+		$price_min = $price_min["price_min"];
+		$price_max = Yii::app()->request->getParam("Adverts");
+		$price_max = $price_min["price_max"];
+		$location = Yii::app()->request->getParam("Adverts");
+		$location = $price_min["location"];
+		
+		
+        echo "<label for='Adverts[price_min]'>Цена от</label><input type='text' name='Adverts[price_min]' value='".$price_min."' />";
+        echo "<label for='Adverts[price_max]' class='sh'>до</label><input type='text' name='Adverts[price_max]' value='".$price_max."' /><br/>";
+        echo "<label for='Adverts[location]'>" . t("Location") . "</label><input type='text' name='Adverts[location]' value='".$location."' />";
         /*
           echo "<br/>";
           echo "<input type='hidden' name='searchStr' value='" . Yii::app()->request->getParam('searchStr') . "' /> ";

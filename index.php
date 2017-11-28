@@ -51,6 +51,7 @@ if (isset($_COOKIE['YII_DEBUG'])) {
     //Отключение вывода сообщений
     error_reporting(E_WARNING);
     ini_set("display_errors", 0);
+	defined('YII_DEBUG') or define('YII_DEBUG', false);
 }
 
 // Подключение параметров для режима отладки 

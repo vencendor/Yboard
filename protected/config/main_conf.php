@@ -110,7 +110,7 @@ return array (
     'log' => 
     array (
       'class' => 'CLogRouter',
-      'enabled' => true,
+      'enabled' => YII_DEBUG,
       'routes' => 
       array (
         0 => 

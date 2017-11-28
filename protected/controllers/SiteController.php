@@ -188,9 +188,9 @@ short_open_tag option must be enabled in the php.ini or another method available
                 if (!$db_error and ! $model->errors) {
                     $config_data = require $CONFIG;
 
-
-
                     $dump_file = file_get_contents(Yii::getPathOfAlias('application.data.install') . '.sql');
+					
+					$dump_file=preg_replace("~/\*.*\*/;~Uis","",$dump_file);
 
                     // Сохранение данных о пользователе 
                     $dump_file.=" INSERT INTO `users` 

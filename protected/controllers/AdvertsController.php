@@ -421,9 +421,12 @@ class AdvertsController extends Controller {
             $model->text = $searchStr;
         }
         $model->category_id = Yii::app()->request->getParam("cat_id");
-        $model->location = Yii::app()->request->getParam("Adverts")['location'];
-        $model->price_min = Yii::app()->request->getParam("Adverts")['price_min'];
-        $model->price_max = Yii::app()->request->getParam("Adverts")['price_max'];
+        $model->location = Yii::app()->request->getParam("Adverts");
+        $model->location = $model->location['location'];
+        $model->price_min = Yii::app()->request->getParam("Adverts");
+        $model->price_min = $model->price_min['price_min'];
+        $model->price_max = Yii::app()->request->getParam("Adverts");
+        $model->price_max = $model->price_max['price_max'];
         
         // Обработка дополнительных полей для поиска 
         $s_fields = $_GET['fields'];
