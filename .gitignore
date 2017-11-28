@@ -234,3 +234,4 @@ nbproject/project.properties
 themes/kubtab/css/admin.css
 yii/framework/yii.php
 -install
+protected/data/install
