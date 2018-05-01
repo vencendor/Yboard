@@ -12,8 +12,8 @@
  * Вудалить
  * 
  */
-class BulletinTypeWidget extends CWidget
-{
+class BulletinTypeWidget extends CWidget {
+
     /**
      * @var CActiveForm form
      */
@@ -25,8 +25,7 @@ class BulletinTypeWidget extends CWidget
     public $model;
 
     public function run() {
-        $this->render('bulletinTypeWidget',
-            array('model'=>$this->model, 'form'=>$this->form));
+        $this->render('bulletinTypeWidget', array('model' => $this->model, 'form' => $this->form));
     }
 
 }

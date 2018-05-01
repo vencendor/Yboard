@@ -1,8 +1,6 @@
 <?php
-
 /* @var $this MessagesController */
 /* @var $data Messages */
-
 ?>
 
 <div class="view mes_dialog">

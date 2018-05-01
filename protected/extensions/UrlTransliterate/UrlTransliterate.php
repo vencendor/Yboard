@@ -1,8 +1,8 @@
 <?php
-class UrlTransliterate
-{
-    public static function cleanString($string, $separator = '-',$cleanPunctuation = TRUE, $cleanSlash = TRUE)
-    {
+
+class UrlTransliterate {
+
+    public static function cleanString($string, $separator = '-', $cleanPunctuation = TRUE, $cleanSlash = TRUE) {
         // Default words to ignore
         $ignoreWords = array(
             'a', 'an', 'as', 'at', 'before', 'but', 'by', 'for', 'from', 'is', 'in',
@@ -11,19 +11,16 @@ class UrlTransliterate
         );
 
         $output = $string;
-        if ($cleanPunctuation)
-        {
+        if ($cleanPunctuation) {
             $punctuation = self::punctuationChars();
-            foreach ($punctuation as $name => $details) 
-            {
+            foreach ($punctuation as $name => $details) {
                 // Slightly tricky inline if which either replaces with the separator or nothing
                 $output = str_replace($details['value'], $separator, $output);
             }
         }
 
         // If something is already urlsafe then don't remove slashes
-        if ($cleanSlash) 
-        {
+        if ($cleanSlash) {
             $output = str_replace('/', '', $output);
         }
 
@@ -34,16 +31,12 @@ class UrlTransliterate
         // Reduce to the subset of ASCII96 letters and numbers
         //$pattern = '/[^a-zA-Z0-9\/]+/ ';
         //$output = preg_replace($pattern, $separator, $output);
-
         // Get rid of words that are on the ignore list
-        $ignoreRe = '\b'. preg_replace('/,/', '\b|\b', $ignoreWords) .'\b';
+        $ignoreRe = '\b' . preg_replace('/,/', '\b|\b', $ignoreWords) . '\b';
 
-        if (function_exists('mb_eregi_replace')) 
-        {
+        if (function_exists('mb_eregi_replace')) {
             $output = mb_eregi_replace($ignoreRe, '', $output);
-        }
-        else 
-        {
+        } else {
             $output = preg_replace("/$ignoreRe/i", '', $output);
         }
 
@@ -58,10 +51,9 @@ class UrlTransliterate
         //$output = substr($output, 0, $maxlength);
 
         return $output;
-        
     }
 
-     /**
+    /**
      * Clean path separators from a given string.
      *
      * Trims duplicates and strips leading and trailing separators.
@@ -76,13 +68,11 @@ class UrlTransliterate
      * @see pathauto_cleanstring()
      * @see pathauto_clean_alias()
      */
-    public static function cleanSeparators($string, $separator = NULL, $toLowCase = TRUE) 
-    {
+    public static function cleanSeparators($string, $separator = NULL, $toLowCase = TRUE) {
         $output = $string;
 
         // Clean duplicate or trailing separators.
-        if (isset($separator) && strlen($separator)) 
-        {
+        if (isset($separator) && strlen($separator)) {
             // Escape the separator.
             $seppattern = preg_quote($separator, '/');
 
@@ -97,13 +87,12 @@ class UrlTransliterate
         }
 
         // Optionally convert to lower case.
-        if ($toLowCase) 
-        {
+        if ($toLowCase) {
             $output = strtolower($output);
         }
 
         return $output;
-    }   
+    }
 
     /**
      * Return an array of arrays for punctuation values.
@@ -116,46 +105,44 @@ class UrlTransliterate
      *   An array of arrays for punctuation values keyed by a name, including the
      *   value and a textual description.
      */
-    public static function punctuationChars() 
-    {
+    public static function punctuationChars() {
         // Handle " ' ` , . - _ : ; | { [ } ] + = * & % ^ $ # @ ! ~ ( ) ? < > \
         return array(
-            "double_quotes"=>'"',
-            "quotes"=>"'",
-            "backtick"=>"`",
-            "comma"=>",",
-            "period"=>".",
-            "hyphen"=>"-",
-            "underscore"=>"_",
-            "colon"=>":",
-            "semicolon"=>";",
-            "pipe"=>"|",
-            "left_curly"=>"{",
-            "left_square"=>"[",
-            "right_curly"=>"}",
-            "right_square"=>"]",
-            "plus"=>"+",
-            "equal"=>"=",
-            "asterisk"=>"*",
-            "ampersand"=>"&",
-            "percent"=>"%",
-            "caret"=>"^",
-            "dollar"=>"$",
-            "hash"=>"#",
-            "at"=>"@",
-            "exclamation"=>"!",
-            "tilde"=>"~",
-            "left_parenthesis"=>"(",
-            "right_parenthesis"=>")",
-            "question_mark"=>"?",
-            "less_than"=>"<",
-            "greater_than"=>">",
-            "back_slash"=>'\\',
+            "double_quotes" => '"',
+            "quotes" => "'",
+            "backtick" => "`",
+            "comma" => ",",
+            "period" => ".",
+            "hyphen" => "-",
+            "underscore" => "_",
+            "colon" => ":",
+            "semicolon" => ";",
+            "pipe" => "|",
+            "left_curly" => "{",
+            "left_square" => "[",
+            "right_curly" => "}",
+            "right_square" => "]",
+            "plus" => "+",
+            "equal" => "=",
+            "asterisk" => "*",
+            "ampersand" => "&",
+            "percent" => "%",
+            "caret" => "^",
+            "dollar" => "$",
+            "hash" => "#",
+            "at" => "@",
+            "exclamation" => "!",
+            "tilde" => "~",
+            "left_parenthesis" => "(",
+            "right_parenthesis" => ")",
+            "question_mark" => "?",
+            "less_than" => "<",
+            "greater_than" => ">",
+            "back_slash" => '\\',
         );
-    } 
+    }
 
-    public static function i18nToAscII()
-    {
+    public static function i18nToAscII() {
         return array(
             "À" => "A",
             "Á" => "A",
@@ -717,7 +704,8 @@ class UrlTransliterate
             "ð" => "d",
             "Ð" => "D",
             "þ" => "th",
-            "Þ" => "TH" 
+            "Þ" => "TH"
         );
     }
+
 }

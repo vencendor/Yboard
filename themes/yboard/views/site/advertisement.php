@@ -2,7 +2,7 @@
 /* @var $this SiteController */
 /* @var $model Bulletin */
 
-$this->pageTitle=Yii::app()->name;
+$this->pageTitle = Yii::app()->name;
 $this->breadcrumbs = array();
 $this->breadcrumbs[] = CHtml::encode($model->name);
 ?>
@@ -29,12 +29,12 @@ $this->breadcrumbs[] = CHtml::encode($model->name);
             <td><?php echo CHtml::encode($model->phone); ?></td>
         </tr>
         <?php if ($model->youtube && is_array($model->youtube)): ?>
-        <?php foreach($model->youtube as $youtube): ?>
-        <tr class="<?php echo Yii::app()->evenness->next(); ?>">
-            <td><?php echo CHtml::encode($model->getAttributeLabel('youtube')); ?>:</td>
-            <td><?php $this->widget('ext.Yiitube', array('v' => $youtube, 'size' => 'small')); ?></td>
-        </tr>
-        <?php endforeach; ?>
+            <?php foreach ($model->youtube as $youtube): ?>
+                <tr class="<?php echo Yii::app()->evenness->next(); ?>">
+                    <td><?php echo CHtml::encode($model->getAttributeLabel('youtube')); ?>:</td>
+                    <td><?php $this->widget('ext.Yiitube', array('v' => $youtube, 'size' => 'small')); ?></td>
+                </tr>
+            <?php endforeach; ?>
         <?php endif; ?>
         <tr class="<?php echo Yii::app()->evenness->next(); ?>">
             <td><?php echo CHtml::encode($model->getAttributeLabel('description')); ?>:</td>

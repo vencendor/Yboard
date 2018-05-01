@@ -50,12 +50,11 @@ class RegistrationController extends Controller {
                         //$profile->save();
                         if (Yii::app()->controller->module->sendActivationMail) {
                             $activation_url = $this->createAbsoluteUrl('/user/registration/activation', array("activkey" => $model->activkey, "email" => $model->email));
-                            
+
                             Yii::app()->email->to = $model->email;
                             Yii::app()->email->subject = t("You registered from {site_name}", array('{site_name}' => Yii::app()->name));
                             Yii::app()->email->message = t("Please activate you account go to {activation_url}", array('{activation_url}' => $activation_url, '{username}' => $model->username, '{password}' => $model->password, '{site_name}' => Yii::app()->name));
                             Yii::app()->email->send();
-
                         }
 
                         if ((Yii::app()->controller->module->loginNotActiv || (Yii::app()->controller->module->activeAfterRegister && Yii::app()->controller->module->sendActivationMail == false)) && Yii::app()->controller->module->autoLogin) {
@@ -77,14 +76,12 @@ class RegistrationController extends Controller {
                         }
                     }
                 }  // else
-                    //$profile->validate();
+                //$profile->validate();
             }
-            $this->render('/user/registration', array('model' => $model ));
-
+            $this->render('/user/registration', array('model' => $model));
         }
     }
 
-    
     public function actionActivation() {
         $email = $_GET['email'];
         $activkey = $_GET['activkey'];
@@ -92,29 +89,30 @@ class RegistrationController extends Controller {
             $find = User::model()->notsafe()->findByAttributes(array('email' => $email));
             if (isset($find) && $find->status) {
                 $this->render('/user/message', array(
-                    'title' => t("User activation"), 
+                    'title' => t("User activation"),
                     'content' => t("You account is active.")
-                    )
+                        )
                 );
-            } elseif (isset($find->activkey) && ($find->activkey == $activkey)){
+            } elseif (isset($find->activkey) && ($find->activkey == $activkey)) {
                 $find->activkey = Yii::app()->user->crypt(microtime());
                 $find->status = 1;
                 $find->save();
-                $this->render('/user/'. $find->id, array(
-                    'title' => t("User activation"), 
+                $this->render('/user/' . $find->id, array(
+                    'title' => t("User activation"),
                     'content' => t("You account is activated.")
                 ));
             } else {
                 $this->render('/user/message', array(
-                    'title' => t("User activation"), 
+                    'title' => t("User activation"),
                     'content' => t("Incorrect activation URL.")
                 ));
             }
         } else {
             $this->render('/user/message', array(
-                'title' => t("User activation"), 
+                'title' => t("User activation"),
                 'content' => t("Incorrect activation URL.")
             ));
         }
     }
+
 }

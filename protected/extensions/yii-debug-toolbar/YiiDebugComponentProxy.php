@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ProxyComponent class file.
  *
@@ -15,104 +16,75 @@
  * @package
  * @since 1.1.7
  */
-class YiiDebugComponentProxy extends CComponent
-{
+class YiiDebugComponentProxy extends CComponent {
 
     private $_instance;
-
     private $_isProxy;
-
     protected $abstract = array();
 
-    public function init()
-    {
+    public function init() {
+        
     }
 
-    public function getIsProxy()
-    {
-        if (null === $this->_isProxy)
-        {
+    public function getIsProxy() {
+        if (null === $this->_isProxy) {
             $this->_isProxy = (null !== $this->_instance && !($this->_instance instanceof $this));
         }
         return $this->_isProxy;
     }
 
-    public function setInstance($value)
-    {
-        if (null === $this->_instance && false !== is_object($value))
-        {
+    public function setInstance($value) {
+        if (null === $this->_instance && false !== is_object($value)) {
             $this->abstract = array_merge($this->abstract, get_object_vars($value));
             $this->_instance = $value;
         }
     }
 
-    public function getInstance()
-    {
+    public function getInstance() {
         return $this->_instance;
     }
 
-    public function  __call($name, $parameters)
-    {
-        if (false !== $this->getIsProxy() && false !== method_exists($this->_instance, $name))
-        {
+    public function __call($name, $parameters) {
+        if (false !== $this->getIsProxy() && false !== method_exists($this->_instance, $name)) {
             return call_user_func_array(array($this->_instance, $name), $parameters);
         }
 
         return parent::__call($name, $parameters);
     }
 
-    public function  __set($name, $value)
-    {
-        $setter='set'.$name;
-        if (false !== method_exists($this, $setter))
-        {
+    public function __set($name, $value) {
+        $setter = 'set' . $name;
+        if (false !== method_exists($this, $setter)) {
             return call_user_func_array(array($this, $setter), array($value));
-        }
-        else if (false !== property_exists($this, $name))
-        {
+        } else if (false !== property_exists($this, $name)) {
             return $this->$name = $value;
-        }
-        else if (false !== $this->getIsProxy() && false !== method_exists($this->_instance, $setter))
-        {
+        } else if (false !== $this->getIsProxy() && false !== method_exists($this->_instance, $setter)) {
             return call_user_func_array(array($this->_instance, $setter), array($value));
-        }
-        else if (false !== $this->getIsProxy() && false !== property_exists($this->_instance, $name))
-        {
+        } else if (false !== $this->getIsProxy() && false !== property_exists($this->_instance, $name)) {
             return $this->_instance->$name = $value;
-        }
-        else if (false === $this->getIsProxy() && false !== array_key_exists ($name, $this->abstract))
-        {
+        } else if (false === $this->getIsProxy() && false !== array_key_exists($name, $this->abstract)) {
             return $this->abstract[$name] = $value;
         }
 
         return parent::__set($name, $value);
     }
 
-    public function  __get($name)
-    {
-        $getter='get'.$name;
+    public function __get($name) {
+        $getter = 'get' . $name;
 
-        if (false !== method_exists($this, $getter))
-        {
+        if (false !== method_exists($this, $getter)) {
             return call_user_func(array($this, $getter));
-        }
-        else if (false !== property_exists($this, $name))
-        {
+        } else if (false !== property_exists($this, $name)) {
             return $this->$name;
-        }
-        else if (false !== $this->getIsProxy() && false !== method_exists($this->_instance, $getter))
-        {
+        } else if (false !== $this->getIsProxy() && false !== method_exists($this->_instance, $getter)) {
             return call_user_func(array($this->_instance, $getter));
-        }
-        else if (false !== $this->getIsProxy() && false !== property_exists($this->_instance, $name))
-        {
+        } else if (false !== $this->getIsProxy() && false !== property_exists($this->_instance, $name)) {
             return $this->_instance->$name;
-        }
-        else if (false === $this->getIsProxy() && false !== array_key_exists ($name, $this->abstract))
-        {
+        } else if (false === $this->getIsProxy() && false !== array_key_exists($name, $this->abstract)) {
             return $this->abstract[$name];
         }
 
         return parent::__get($name);
     }
+
 }

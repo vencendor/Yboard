@@ -51,7 +51,7 @@ class RecoveryController extends Controller {
                             '{activation_url}' => $activation_url,
                         ));
 
-                        
+
                         Yii::app()->email->to = $user->email;
                         Yii::app()->email->subject = $subject;
                         Yii::app()->email->message = $message;

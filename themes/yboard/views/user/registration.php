@@ -108,6 +108,6 @@ $this->breadcrumbs = array(
             ?>
         </div>
 
-    <?php $this->endWidget(); ?>
+        <?php $this->endWidget(); ?>
     </div><!-- form -->
 <?php endif; ?>

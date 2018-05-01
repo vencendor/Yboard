@@ -1,15 +1,14 @@
 <?php
-$this->breadcrumbs=array(
-	'Cms'=>array('admin'),
-	'Create',
+$this->breadcrumbs = array(
+    'Cms' => array('admin'),
+    'Create',
 );
 
-$this->menu=array(
-	array('label'=>'Manage Cms', 'url'=>array('admin')),
+$this->menu = array(
+    array('label' => 'Manage Cms', 'url' => array('admin')),
 );
-
 ?>
 
-<h1>Create <?php echo $model->getPageType($_GET['type']);  ?></h1>
+<h1>Create <?php echo $model->getPageType($_GET['type']); ?></h1>
 
-<?php echo $this->renderPartial('forms/'.$this->getFormPartial(), array('model'=>$model)); ?>
+<?php echo $this->renderPartial('forms/' . $this->getFormPartial(), array('model' => $model)); ?>

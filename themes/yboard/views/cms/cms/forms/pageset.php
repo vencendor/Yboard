@@ -9,7 +9,7 @@
 
     <p class="note">Fields with <span class="required">*</span> are required.</p>
 
-        <?php echo $form->errorSummary($model); ?>
+    <?php echo $form->errorSummary($model); ?>
 
     <div class="row">
         <?php echo $form->labelEx($model, 'parent_id'); ?>
@@ -43,9 +43,11 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'overview_page', array('style' => 'display:inline;')); ?>
-        <?php echo $form->checkBox($model, 'overview_page', array(
-            'onclick' => 'js:jQuery("#tpls").toggle();', 
-            'style' => 'display:inline;')); ?>
+        <?php
+        echo $form->checkBox($model, 'overview_page', array(
+            'onclick' => 'js:jQuery("#tpls").toggle();',
+            'style' => 'display:inline;'));
+        ?>
         <?php echo $form->error($model, 'overview_page'); ?>
     </div>
 
@@ -55,20 +57,20 @@
             <tr>
                 <td>
                     <?php echo $form->labelEx($model, 'layout'); ?>
-                    <?php echo $form->dropDownList($model, 'layout', 
-                            $model->layouts, array('empty' => '')); ?>
+                    <?php echo $form->dropDownList($model, 'layout', $model->layouts, array('empty' => ''));
+                    ?>
                     <?php echo $form->error($model, 'layout'); ?>
                 </td>
                 <td>                 
                     <?php echo $form->labelEx($model, 'section'); ?>
-                    <?php echo $form->dropDownList($model, 'section', 
-                            $model->sections, array('empty' => '')); ?>
+                    <?php echo $form->dropDownList($model, 'section', $model->sections, array('empty' => ''));
+                    ?>
                     <?php echo $form->error($model, 'section'); ?>
                 </td>
                 <td>                                                    
                     <?php echo $form->labelEx($model, 'subsection'); ?>
-                    <?php echo $form->dropDownList($model, 'subsection', 
-                            $model->subsections, array('empty' => '')); ?>
+                    <?php echo $form->dropDownList($model, 'subsection', $model->subsections, array('empty' => ''));
+                    ?>
                     <?php echo $form->error($model, 'subsection'); ?>
                 </td>
             </tr>
@@ -111,9 +113,9 @@
     </div>
 
     <div class="row buttons">
-    <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+        <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
     </div>
-<?php echo CHtml::hiddenField('type', Cms::PAGESET); ?>
-<?php $this->endWidget(); ?>
+    <?php echo CHtml::hiddenField('type', Cms::PAGESET); ?>
+    <?php $this->endWidget(); ?>
 
 </div><!-- form -->

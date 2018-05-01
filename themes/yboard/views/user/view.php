@@ -34,13 +34,15 @@ $attributes = array(
  */
 ?>
 <div class='userHead'>
-    <h4><? echo $model->username; ?></h4> <? if ($model->lastvisit_at) { 
-        echo "(".PeopleDate::format($model->lastvisit_at) .")"; 
-    } ?>
+    <h4><? echo $model->username; ?></h4> <?
+    if ($model->lastvisit_at) {
+        echo "(" . PeopleDate::format($model->lastvisit_at) . ")";
+    }
+    ?>
     <? if (Yii::app()->user->id == Yii::app()->request->getParam("id")) { ?>
         <a href='<? echo Yii::app()->createUrl('user/update', array('id' => $model->id)) ?>'> Редактировать </a>
     <? } ?>
-    <? if (Yii::app()->user->isAdmin() and Yii::app()->user->id != $model->id ) { ?>
+    <? if (Yii::app()->user->isAdmin() and Yii::app()->user->id != $model->id) { ?>
         <a href='<? echo Yii::app()->createUrl('user/ban', array('id' => $model->id)) ?>'> Заблокировать </a>
     <? } ?>
     <div> 

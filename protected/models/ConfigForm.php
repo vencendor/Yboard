@@ -33,21 +33,21 @@ class ConfigForm extends CFormModel {
 
     public function updateConfig($conf) {
         foreach ($conf as $n => $v) {
-            if(is_array($v)) {
+            if (is_array($v)) {
                 foreach ($v as $n1 => $v1) {
                     if (trim($v1) === "") {
                         unset($conf[$n][$n1]);
                     }
                 }
-            } 
+            }
 
             if (sizeof($this->_config[$n]) >= sizeof($conf[$n]))
                 $this->_config[$n] = $conf[$n];
         }
     }
-    
-    public function updateParam($param,$value){
-        $this->_config[$param]=$value;
+
+    public function updateParam($param, $value) {
+        $this->_config[$param] = $value;
     }
 
     public function saveToFile() {

@@ -1,13 +1,14 @@
 <?php
-$isLink = $model->type==Cms::LINK;
+
+$isLink = $model->type == Cms::LINK;
 $this->widget('zii.widgets.CDetailView', array(
-    'data'=>$model,
-    'attributes'=>array(
+    'data' => $model,
+    'attributes' => array(
         'name',
         'content:html',
         array(
-            'name'=>'Page access',
-            'value'=>$model->accessLevel,
+            'name' => 'Page access',
+            'value' => $model->accessLevel,
         ),
         'title',
         'keywords',
@@ -16,4 +17,5 @@ $this->widget('zii.widgets.CDetailView', array(
         'section',
         'subsection',
     ),
-)); ?>
+));
+?>

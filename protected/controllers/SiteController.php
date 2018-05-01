@@ -104,27 +104,27 @@ class SiteController extends Controller {
      * отличается наличием виджета категорий вверху
      */
     public function actionIndex() {
-        
+
         $roots = Category::model()->roots()->findAll();
-        
-        
+
+
         $IndexAdv = new CActiveDataProvider('Adverts', array(
             'criteria' => array(
                 'limit' => '10',
                 'order' => 'id DESC',
             ))
         );
-        
+
         /*
-        $criteria = new CDbCriteria();
-        $criteria->limit = 10;
-        $criteria->order = 'id desc';
-        $IndexAdv = Adverts::model()->findAll($criteria);
+          $criteria = new CDbCriteria();
+          $criteria->limit = 10;
+          $criteria->order = 'id desc';
+          $IndexAdv = Adverts::model()->findAll($criteria);
          * 
          */
-        
-        
-        
+
+
+
         $this->render('index', array(
             'roots' => $roots,
             'IndexAdv' => $IndexAdv,
@@ -138,34 +138,34 @@ class SiteController extends Controller {
         $error = false;
         $model = new InstallForm;
 
-        if ( is_file( dirname($CONFIG)."/install" ) ) {
+        if (is_file(dirname($CONFIG) . "/install")) {
 
             if (!is_writable($CONFIG)) {
                 $model->addError("site_name", "Файл " . $CONFIG . " должен быть доступен для записи");
             }
 
             if (!is_writable(Yii::getPathOfAlias('application.config.settings') . ".php")) {
-                $model->addError("site_name", "Файл " 
-                        .Yii::getPathOfAlias('application.config.settings') . ".php" 
+                $model->addError("site_name", "Файл "
+                        . Yii::getPathOfAlias('application.config.settings') . ".php"
                         . " должен быть доступен для записи");
             }
 
             if (!is_writable(Yii::getPathOfAlias('application.runtime'))) {
-                $model->addError("site_name", "папка " 
-                        .Yii::getPathOfAlias('application.runtime') 
+                $model->addError("site_name", "папка "
+                        . Yii::getPathOfAlias('application.runtime')
                         . " должена быть доступена для записи");
             }
 
             if (!is_writable(Yii::app()->basePath . "/../assets")) {
                 $model->addError("site_name", "папка /assets должена быть доступена для записи");
             }
-            
-            if( ini_get( "short_open_tag" ) === "Off" or !ini_get( "short_open_tag" ) ){
-                $error = t("Your configuration requires changes.").t("
+
+            if (ini_get("short_open_tag") === "Off" or ! ini_get("short_open_tag")) {
+                $error = t("Your configuration requires changes.") . t("
 short_open_tag option must be enabled in the php.ini or another method available");
             }
 
-            if (isset($_POST['InstallForm']) and !$error) {
+            if (isset($_POST['InstallForm']) and ! $error) {
                 $model->attributes = $_POST['InstallForm'];
 
                 // данные Mysql 
@@ -181,7 +181,7 @@ short_open_tag option must be enabled in the php.ini or another method available
 
                 if (!$model->errors) {
                     $db_con = mysqli_connect($server, $username, $password) or $db_error = mysqli_error();
-					mysqli_set_charset($db_con, "utf8");
+                    mysqli_set_charset($db_con, "utf8");
                     mysqli_select_db($db_con, $db_name) or $db_error = mysqli_error($db_con);
                 }
 
@@ -189,11 +189,11 @@ short_open_tag option must be enabled in the php.ini or another method available
                     $config_data = require $CONFIG;
 
                     $dump_file = file_get_contents(Yii::getPathOfAlias('application.data.install') . '.sql');
-					
-					$dump_file=preg_replace("~/\*.*\*/;~Uis","",$dump_file);
+
+                    $dump_file = preg_replace("~/\*.*\*/;~Uis", "", $dump_file);
 
                     // Сохранение данных о пользователе 
-                    $dump_file.=" INSERT INTO `users` 
+                    $dump_file .= " INSERT INTO `users` 
                                     (`username`, `password`, `email`, `activkey`, `superuser`, `status`)     VALUES "
                             . "('" . $model->username . "', '" . Yii::app()->user->crypt($model->userpass) . "', "
                             . "'" . $model->useremail . "', '" . Yii::app()->user->crypt(microtime() . $model->userpass) . "',"
@@ -223,8 +223,8 @@ short_open_tag option must be enabled in the php.ini or another method available
                         $settings = new ConfigForm(Yii::getPathOfAlias('application.config.settings') . ".php");
                         $settings->updateParam('adminEmail', $model->useremail);
                         $settings->saveToFile();
-                        
-                        unlink( dirname($CONFIG)."/install" );
+
+                        unlink(dirname($CONFIG) . "/install");
 
                         $this->redirect(array('site/index'));
                     }
@@ -258,7 +258,6 @@ short_open_tag option must be enabled in the php.ini or another method available
      * Displays the contact page
      * @param int $id User's id
      */
-
     public function actionView($id) {
         $model = $this->loadAdvert($id);
         $model->views++;
@@ -339,5 +338,3 @@ short_open_tag option must be enabled in the php.ini or another method available
     }
 
 }
-
-

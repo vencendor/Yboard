@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TbAlert class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
@@ -11,134 +12,135 @@
  * Bootstrap alert widget.
  * @see http://twitter.github.com/bootstrap/javascript.html#alerts
  */
-class TbAlert extends CWidget
-{
-	// Alert types.
-	const TYPE_SUCCESS = 'success';
-	const TYPE_INFO = 'info';
-	const TYPE_WARNING = 'warning';
-	const TYPE_ERROR = 'error';
-	const TYPE_DANGER = 'danger'; // same as error
+class TbAlert extends CWidget {
 
-	/**
-	 * @var array the alerts configurations.
-	 */
-	public $alerts;
-	/**
-	 * @var string|boolean the close link text. If this is set false, no close link will be displayed.
-	 */
-	public $closeText = '&times;';
-	/**
-	 * @var boolean indicates whether the alert should be an alert block. Defaults to 'true'.
-	 */
-	public $block = true;
-	/**
-	 * @var boolean indicates whether alerts should use transitions. Defaults to 'true'.
-	 */
-	public $fade = true;
-	/**
-	 * @var string[] the Javascript event handlers.
-	 */
-	public $events = array();
-	/**
-	 * @var array the HTML attributes for the widget container.
-	 */
-	public $htmlOptions = array();
+    // Alert types.
+    const TYPE_SUCCESS = 'success';
+    const TYPE_INFO = 'info';
+    const TYPE_WARNING = 'warning';
+    const TYPE_ERROR = 'error';
+    const TYPE_DANGER = 'danger'; // same as error
 
-	/**
-	 * Initializes the widget.
-	 */
-	public function init()
-	{
-		if (!isset($this->htmlOptions['id']))
-			$this->htmlOptions['id'] = $this->getId();
+    /**
+     * @var array the alerts configurations.
+     */
 
-		if (is_string($this->alerts))
-			$this->alerts = array($this->alerts);
+    public $alerts;
 
-		// Display all alert types by default.
-		if (!isset($this->alerts))
-			$this->alerts = array(self::TYPE_SUCCESS, self::TYPE_INFO, self::TYPE_WARNING, self::TYPE_ERROR, self::TYPE_DANGER);
-	}
+    /**
+     * @var string|boolean the close link text. If this is set false, no close link will be displayed.
+     */
+    public $closeText = '&times;';
 
-	/**
-	 * Runs the widget.
-	 */
-	public function run()
-	{
-		$id = $this->htmlOptions['id'];
+    /**
+     * @var boolean indicates whether the alert should be an alert block. Defaults to 'true'.
+     */
+    public $block = true;
 
-		echo CHtml::openTag('div', $this->htmlOptions);
+    /**
+     * @var boolean indicates whether alerts should use transitions. Defaults to 'true'.
+     */
+    public $fade = true;
 
-		foreach ($this->alerts as $type => $alert)
-		{
-			if (is_string($alert))
-			{
-				$type = $alert;
-				$alert = array();
-			}
+    /**
+     * @var string[] the Javascript event handlers.
+     */
+    public $events = array();
 
-			if (isset($alert['visible']) && $alert['visible'] === false)
-				continue;
+    /**
+     * @var array the HTML attributes for the widget container.
+     */
+    public $htmlOptions = array();
 
-			if (Yii::app()->user->hasFlash($type))
-			{
-				$classes = array('alert in');
+    /**
+     * Initializes the widget.
+     */
+    public function init() {
+        if (!isset($this->htmlOptions['id']))
+            $this->htmlOptions['id'] = $this->getId();
 
-				if (!isset($alert['block']))
-					$alert['block'] = $this->block;
+        if (is_string($this->alerts))
+            $this->alerts = array($this->alerts);
 
-				if ($alert['block'] === true)
-					$classes[] = 'alert-block';
+        // Display all alert types by default.
+        if (!isset($this->alerts))
+            $this->alerts = array(self::TYPE_SUCCESS, self::TYPE_INFO, self::TYPE_WARNING, self::TYPE_ERROR, self::TYPE_DANGER);
+    }
 
-				if (!isset($alert['fade']))
-					$alert['fade'] = $this->fade;
+    /**
+     * Runs the widget.
+     */
+    public function run() {
+        $id = $this->htmlOptions['id'];
 
-				if ($alert['fade'] === true)
-					$classes[] = 'fade';
+        echo CHtml::openTag('div', $this->htmlOptions);
 
-				$validTypes = array(self::TYPE_SUCCESS, self::TYPE_INFO, self::TYPE_WARNING, self::TYPE_ERROR, self::TYPE_DANGER);
+        foreach ($this->alerts as $type => $alert) {
+            if (is_string($alert)) {
+                $type = $alert;
+                $alert = array();
+            }
 
-				if (in_array($type, $validTypes))
-					$classes[] = 'alert-'.$type;
+            if (isset($alert['visible']) && $alert['visible'] === false)
+                continue;
 
-				if (!isset($alert['htmlOptions']))
-					$alert['htmlOptions'] = array();
+            if (Yii::app()->user->hasFlash($type)) {
+                $classes = array('alert in');
 
-				$classes = implode(' ', $classes);
-				if (isset($alert['htmlOptions']['class']))
-					$alert['htmlOptions']['class'] .= ' '.$classes;
-				else
-					$alert['htmlOptions']['class'] = $classes;
+                if (!isset($alert['block']))
+                    $alert['block'] = $this->block;
 
-				echo CHtml::openTag('div', $alert['htmlOptions']);
+                if ($alert['block'] === true)
+                    $classes[] = 'alert-block';
 
-				if ($this->closeText !== false && !isset($alert['closeText']))
-					$alert['closeText'] = $this->closeText;
-				else
-					$alert['closeText'] = false;
+                if (!isset($alert['fade']))
+                    $alert['fade'] = $this->fade;
 
-				if ($alert['closeText'] !== false)
-					echo '<a class="close" data-dismiss="alert">'.$alert['closeText'].'</a>';
+                if ($alert['fade'] === true)
+                    $classes[] = 'fade';
 
-				echo Yii::app()->user->getFlash($type);
+                $validTypes = array(self::TYPE_SUCCESS, self::TYPE_INFO, self::TYPE_WARNING, self::TYPE_ERROR, self::TYPE_DANGER);
 
-				echo '</div>';
-			}
-		}
+                if (in_array($type, $validTypes))
+                    $classes[] = 'alert-' . $type;
 
-		echo '</div>';
+                if (!isset($alert['htmlOptions']))
+                    $alert['htmlOptions'] = array();
 
-		$selector = "#{$id} .alert";
+                $classes = implode(' ', $classes);
+                if (isset($alert['htmlOptions']['class']))
+                    $alert['htmlOptions']['class'] .= ' ' . $classes;
+                else
+                    $alert['htmlOptions']['class'] = $classes;
 
-		/** @var CClientScript $cs */
-		$cs = Yii::app()->getClientScript();
-		$cs->registerScript(__CLASS__.'#'.$id, "jQuery('{$selector}').alert();");
+                echo CHtml::openTag('div', $alert['htmlOptions']);
 
-		foreach ($this->events as $name => $handler)
-		{
-			$handler = CJavaScript::encode($handler);
-			$cs->registerScript(__CLASS__.'#'.$id.'_'.$name, "jQuery('{$selector}').on('{$name}', {$handler});");
-		}
-	}
+                if ($this->closeText !== false && !isset($alert['closeText']))
+                    $alert['closeText'] = $this->closeText;
+                else
+                    $alert['closeText'] = false;
+
+                if ($alert['closeText'] !== false)
+                    echo '<a class="close" data-dismiss="alert">' . $alert['closeText'] . '</a>';
+
+                echo Yii::app()->user->getFlash($type);
+
+                echo '</div>';
+            }
+        }
+
+        echo '</div>';
+
+        $selector = "#{$id} .alert";
+
+        /** @var CClientScript $cs */
+        $cs = Yii::app()->getClientScript();
+        $cs->registerScript(__CLASS__ . '#' . $id, "jQuery('{$selector}').alert();");
+
+        foreach ($this->events as $name => $handler) {
+            $handler = CJavaScript::encode($handler);
+            $cs->registerScript(__CLASS__ . '#' . $id . '_' . $name, "jQuery('{$selector}').on('{$name}', {$handler});");
+        }
+    }
+
 }

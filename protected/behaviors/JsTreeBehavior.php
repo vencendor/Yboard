@@ -1,4 +1,5 @@
 <?php
+
 /**
  * JsTreeBehavior class file.
  *
@@ -12,9 +13,7 @@
  * @license http://opensource.org/licenses/MIT  The MIT License (MIT)
  * @version 1.0.0
  */
-
-class JsTreeBehavior extends CBehavior
-{
+class JsTreeBehavior extends CBehavior {
 
     /**
      * @var string the model class name
@@ -41,12 +40,10 @@ class JsTreeBehavior extends CBehavior
      */
     public $rel_property = 'name';
 
-
     /**
      *  Renames the node,meaning updates the model property used as label.
      */
-    public function actionRename()
-    {
+    public function actionRename() {
         $new_name = $_POST['new_name'];
         $id = $_POST['id'];
         $renamed_cat = $this->loadModel($id);
@@ -63,8 +60,7 @@ class JsTreeBehavior extends CBehavior
     /**
      *  Deletes the node.
      */
-    public function actionRemove()
-    {
+    public function actionRemove() {
         $id = $_POST['id'];
         $deleted_cat = $this->loadModel($id);
         if ($deleted_cat->deleteNode()) {
@@ -76,25 +72,23 @@ class JsTreeBehavior extends CBehavior
         }
     }
 
-
     /**
      *  Creates a new root node
      */
-    public function actionCreateRoot()
-    {
+    public function actionCreateRoot() {
         if (isset($_POST[$this->modelClassName])) {
 
             $new_root = new $this->modelClassName;
             $new_root->attributes = $_POST[$this->modelClassName];
             if ($new_root->saveNode(false)) {
                 echo json_encode(array('success' => true,
-                        'id' => $new_root->primaryKey)
+                    'id' => $new_root->primaryKey)
                 );
                 exit;
             } else {
                 echo json_encode(array('success' => false,
-                        'message' => 'Error.Root ' . $this->modelClassName . ' was not created.'
-                    )
+                    'message' => 'Error.Root ' . $this->modelClassName . ' was not created.'
+                        )
                 );
                 exit;
             }
@@ -104,81 +98,73 @@ class JsTreeBehavior extends CBehavior
     /**
      *  Creates a new node
      */
-    public function actionCreateNode()
-    {
+    public function actionCreateNode() {
         if (isset($_POST[$this->modelClassName])) {
             $model = new $this->modelClassName;
             $model->attributes = $_POST[$this->modelClassName];
             $parent = $this->loadModel($_POST['parent_id']);
             if ($model->appendTo($parent)) {
                 echo json_encode(array('success' => true,
-                        'id' => $model->primaryKey)
+                    'id' => $model->primaryKey)
                 );
                 exit;
             } else {
                 echo json_encode(array('success' => false,
-                        'message' => 'Error.' . $this->modelClassName . ' was not created.'
-                    )
+                    'message' => 'Error.' . $this->modelClassName . ' was not created.'
+                        )
                 );
                 exit;
             }
         }
     }
 
-
     /**
      *  Renders details view in fancybox popup,must provide $view_alias_path  variable
      */
-    public function actionReturnView()
-    {
+    public function actionReturnView() {
         $this->excludeScripts();
         $model = $this->loadModel($_POST['id']);
         $this->owner->renderPartial($this->view_alias_path, array(
-                'model' => $model,
-            ),
-            false, true);
+            'model' => $model,
+                ), false, true);
     }
-
 
     /**
      *  Renders form in fancybox popup to create or update a node.
      */
-    public function actionReturnForm()
-    {
+    public function actionReturnForm() {
         $this->excludeScripts();
         //Figure out if we are updating a Model or creating a new one.
-        if (isset($_POST['update_id'])) $model = $this->loadModel($_POST['update_id']);
-        else $model = new $this->modelClassName;
+        if (isset($_POST['update_id']))
+            $model = $this->loadModel($_POST['update_id']);
+        else
+            $model = new $this->modelClassName;
 
         $this->owner->renderPartial($this->form_alias_path, array(
-                'model' => $model,
-                'parent_id' => !empty($_POST['parent_id']) ? $_POST['parent_id'] : '',
-                'modelClassName' => $this->modelClassName
-            ),
-            false, true);
+            'model' => $model,
+            'parent_id' => !empty($_POST['parent_id']) ? $_POST['parent_id'] : '',
+            'modelClassName' => $this->modelClassName
+                ), false, true);
     }
-
 
     /**
      *  Updates a node.
      */
-    public function actionUpdateNode()
-    {
+    public function actionUpdateNode() {
         if (isset($_POST[$this->modelClassName])) {
             $model = $this->loadModel($_POST['update_id']);
             $model->attributes = $_POST[$this->modelClassName];
             if ($model->saveNode(false)) {
                 echo json_encode(array('success' => true));
-            } else echo json_encode(array('success' => false));
+            } else
+                echo json_encode(array('success' => false));
         }
     }
-
 
     /**
      * Moves or makes a copy of  a node.
      */
-    public function actionMoveCopy()
-    {
+    public function actionMoveCopy() {
 
         $moved_node_id = $_POST['moved_node'];
         $new_parent_id = $_POST['new_parent'];
@@ -189,12 +175,10 @@ class JsTreeBehavior extends CBehavior
 
         //the following is additional info about the operation provided by
         // the jstree.It's there if you need it.See  jstree documentation .
-
         //  $old_parent_id=$_POST['old_parent'];
         //$pos=$_POST['pos'];
         //  $copied_node_id=$_POST['copied_node'];
         //  $replaced_node_id=$_POST['replaced_node'];
-
         //the  moved,copied  node
         $moved_node = $this->loadModel($moved_node_id);
 
@@ -244,8 +228,8 @@ class JsTreeBehavior extends CBehavior
                 $copied_node->primaryKey = null;
                 if ($copied_node->appendTo($new_parent)) {
                     echo json_encode(array('success' => true,
-                            'id' => $copied_node->primaryKey
-                        )
+                        'id' => $copied_node->primaryKey
+                            )
                     );
                     exit;
                 }
@@ -271,26 +255,21 @@ class JsTreeBehavior extends CBehavior
     /**
      * Returns the unordered  list which jstree acts upon.
      */
-    public function actionFetchTree()
-    {
+    public function actionFetchTree() {
         self::printULTree();
     }
 
-
-    public function loadModel($id)
-    {
+    public function loadModel($id) {
         $model = CActiveRecord::model($this->modelClassName)->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
     }
 
-
     /**
      * Prints  the unordered  list which jstree acts upon.
      */
-    public function printULTree()
-    {
+    public function printULTree() {
         $categories = CActiveRecord::model($this->modelClassName)->findAll(array('order' => 'root,lft'));
         $level = 0;
         foreach ($categories as $n => $category) {
@@ -312,9 +291,8 @@ class JsTreeBehavior extends CBehavior
             echo CHtml::openTag('a', array('href' => '#'));
             echo CHtml::encode($category->getAttribute($this->label_property));
             echo CHtml::closeTag('a');
-			echo "<div class='catActions'><a class='js_go' href='".Yii::app()->createAbsoluteUrl("/admin/category/update",
-                                array('id'=>$category->primaryKey)
-                        )."'><i class='fa fa-pencil'></i></a></div>";
+            echo "<div class='catActions'><a class='js_go' href='" . Yii::app()->createAbsoluteUrl("/admin/category/update", array('id' => $category->primaryKey)
+            ) . "'><i class='fa fa-pencil'></i></a></div>";
 
 
             $level = $category->level;
@@ -324,15 +302,12 @@ class JsTreeBehavior extends CBehavior
             echo CHtml::closeTag('li') . "\n";
             echo CHtml::closeTag('ul') . "\n";
         }
-
     }
-
 
     /**
      * Prints  the unordered list of nodes with no anchors.
      */
-    public function printULTree_noAnchors()
-    {
+    public function printULTree_noAnchors() {
         $categories = CActiveRecord::model($this->modelClassName)->findAll(array('order' => 'lft'));
         $level = 0;
 
@@ -341,8 +316,7 @@ class JsTreeBehavior extends CBehavior
                 echo CHtml::closeTag('li') . "\n";
             else if ($category->level > $level)
                 echo CHtml::openTag('ul') . "\n";
-            else //if $category->level<$level
-            {
+            else { //if $category->level<$level
                 echo CHtml::closeTag('li') . "\n";
 
                 for ($i = $level - $category->level; $i; $i--) {
@@ -360,16 +334,13 @@ class JsTreeBehavior extends CBehavior
             echo CHtml::closeTag('li') . "\n";
             echo CHtml::closeTag('ul') . "\n";
         }
-
     }
 
     /**
      *  don't reload these scripts or they will mess up the page
      */
-    private function excludeScripts()
-    {
+    private function excludeScripts() {
         Yii::app()->clientScript->scriptMap['*.js'] = false;
     }
 
 }
-

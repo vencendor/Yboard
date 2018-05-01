@@ -28,9 +28,9 @@
         if (!opts.hasName) {
             if (!opts.hasDesc) {
                 $gallery.addClass('no-name-no-desc');
-                $('.edit_selected',$gallery).hide();
-            }
-            else $gallery.addClass('no-name');
+                $('.edit_selected', $gallery).hide();
+            } else
+                $gallery.addClass('no-name');
 
         } else if (!opts.hasDesc)
             $gallery.addClass('no-desc');
@@ -44,37 +44,40 @@
 
         function htmlEscape(str) {
             return String(str)
-                .replace(/&/g, '&amp;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#39;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;');
+                    .replace(/&/g, '&amp;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
         }
 
         function createEditorElement(id, src, name, description) {
             var html = '<div class="photo-editor">' +
-                '<div class="preview"><img src="' + htmlEscape(src) + '" alt=""/></div>' +
-                '<div>' +
-                (opts.hasName
-                    ? '<label for="photo_name_' + id + '">' + opts.nameLabel + ':</label>' +
-                    '<input type="text" name="photo[' + id + '][name]" class="input-xlarge" value="' + htmlEscape(name) + '" id="photo_name_' + id + '"/>'
-                    : '') +
-                (opts.hasDesc
-                    ? '<label for="photo_description_' + id + '">' + opts.descriptionLabel + ':</label>' +
-                    '<textarea name="photo[' + id + '][description]" rows="3" cols="40" class="input-xlarge" id="photo_description_' + id + '">' + htmlEscape(description) + '</textarea>'
-                    : '') +
-                '</div>' +
-                '</div>';
+                    '<div class="preview"><img src="' + htmlEscape(src) + '" alt=""/></div>' +
+                    '<div>' +
+                    (opts.hasName
+                            ? '<label for="photo_name_' + id + '">' + opts.nameLabel + ':</label>' +
+                            '<input type="text" name="photo[' + id + '][name]" class="input-xlarge" value="' + htmlEscape(name) + '" id="photo_name_' + id + '"/>'
+                            : '') +
+                    (opts.hasDesc
+                            ? '<label for="photo_description_' + id + '">' + opts.descriptionLabel + ':</label>' +
+                            '<textarea name="photo[' + id + '][description]" rows="3" cols="40" class="input-xlarge" id="photo_description_' + id + '">' + htmlEscape(description) + '</textarea>'
+                            : '') +
+                    '</div>' +
+                    '</div>';
             return $(html);
         }
 
         var photoTemplate = '<div class="photo">' + '<div class="image-preview"><img src=""/></div><div class="caption">';
-        if (opts.hasName)photoTemplate += '<h5></h5>';
-        if (opts.hasDesc)photoTemplate += '<p></p>';
+        if (opts.hasName)
+            photoTemplate += '<h5></h5>';
+        if (opts.hasDesc)
+            photoTemplate += '<p></p>';
         photoTemplate += '</div><div class="actions">';
-        if (opts.hasName || opts.hasDesc)photoTemplate += '<span class="editPhoto btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i></span> ';
+        if (opts.hasName || opts.hasDesc)
+            photoTemplate += '<span class="editPhoto btn btn-primary btn-mini"><i class="icon-pencil icon-white"></i></span> ';
         photoTemplate += '<span class="deletePhoto btn btn-danger btn-mini"><i class="icon-remove icon-white"></i></span>' +
-            '</div><input type="checkbox" class="photo-select"/></div>';
+                '</div><input type="checkbox" class="photo-select"/></div>';
 
 
         function addPhoto(id, src, name, description, rank) {
@@ -84,8 +87,10 @@
             photo.data('rank', rank);
 
             $('img', photo).attr('src', src);
-            if (opts.hasName) $('.caption h5', photo).text(name);
-            if (opts.hasDesc) $('.caption p', photo).text(description);
+            if (opts.hasName)
+                $('.caption h5', photo).text(name);
+            if (opts.hasDesc)
+                $('.caption p', photo).text(description);
 
             $images.append(photo);
             return photo;
@@ -98,12 +103,13 @@
             for (var i = 0; i < l; i++) {
                 var id = ids[i];
                 var photo = photos[id],
-                    src = $('img', photo).attr('src'),
-                    name = $('.caption h5', photo).text(),
-                    description = $('.caption p', photo).text();
+                        src = $('img', photo).attr('src'),
+                        name = $('.caption h5', photo).text(),
+                        description = $('.caption p', photo).text();
                 form.append(createEditorElement(id, src, name, description));
             }
-            if (l > 0)$editorModal.modal('show');
+            if (l > 0)
+                $editorModal.modal('show');
         }
 
         function removePhotos(ids) {
@@ -117,7 +123,8 @@
                             photos[ids[i]].remove();
                             delete photos[ids[i]];
                         }
-                    } else alert(t);
+                    } else
+                        alert(t);
                 }});
         }
 
@@ -160,12 +167,12 @@
         }
 
         $images
-            .on('click', '.photo .deletePhoto', deleteClick)
-            .on('click', '.photo .editPhoto', editClick)
-            .on('click', '.photo .photo-select', selectChanged);
+                .on('click', '.photo .deletePhoto', deleteClick)
+                .on('click', '.photo .editPhoto', editClick)
+                .on('click', '.photo .photo-select', selectChanged);
 
 
-        $('.images', $sorter).sortable({ tolerance: "pointer" }).disableSelection().bind("sortstop", function () {
+        $('.images', $sorter).sortable({tolerance: "pointer"}).disableSelection().bind("sortstop", function () {
             var data = [];
             $('.photo', $sorter).each(function () {
                 var t = $(this);
@@ -177,12 +184,12 @@
                 data: data.join('&') + csrfParams,
                 dataType: "json"
             }).done(function (data) {
-                    for (var id in data[id]) {
-                        photos[id].data('rank', data[id]);
-                    }
-                    // order saved!
-                    // we can inform user that order saved
-                });
+                for (var id in data[id]) {
+                    photos[id].data('rank', data[id]);
+                }
+                // order saved!
+                // we can inform user that order saved
+            });
         });
 
         if (window.FormData !== undefined) { // if XHR2 available
@@ -217,7 +224,8 @@
                         if (uploadedCount === filesCount) {
                             $uploadProgress.css('width', '100%');
                             $progressOverlay.hide();
-                            if (opts.hasName || opts.hasDesc) editPhotos(ids);
+                            if (opts.hasName || opts.hasDesc)
+                                editPhotos(ids);
                         }
                     };
                     xhr.send(fd);
@@ -232,8 +240,10 @@
 
                 setInterval(function () {
                     if (isOver != lastIsOver) {
-                        if (isOver) el.classList.add('over');
-                        else el.classList.remove('over');
+                        if (isOver)
+                            el.classList.add('over');
+                        else
+                            el.classList.remove('over');
                         lastIsOver = isOver
                     }
                 }, 30);
@@ -295,12 +305,13 @@
                     processData: false,
                     dataType: "json"
                 }).done(function (resp) {
-                        addPhoto(resp['id'], resp['preview'], resp['name'], resp['description'], resp['rank']);
-                        ids.push(resp['id']);
-                        $uploadProgress.css('width', '100%');
-                        $progressOverlay.hide();
-                        if (opts.hasName || opts.hasDesc) editPhotos(ids);
-                    });
+                    addPhoto(resp['id'], resp['preview'], resp['name'], resp['description'], resp['rank']);
+                    ids.push(resp['id']);
+                    $uploadProgress.css('width', '100%');
+                    $progressOverlay.hide();
+                    if (opts.hasName || opts.hasDesc)
+                        editPhotos(ids);
+                });
             });
         }
 

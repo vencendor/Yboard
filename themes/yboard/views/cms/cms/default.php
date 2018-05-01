@@ -1,5 +1,5 @@
-<?php 
-	$this->breadcrumbs = $page->breadcrumbs;
+<?php
+$this->breadcrumbs = $page->breadcrumbs;
 ?>
 
 <h1><?php echo $page->name; ?></h1>

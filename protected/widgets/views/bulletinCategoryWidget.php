@@ -11,9 +11,9 @@
 ?>
 
 <?php
+
 echo $form->labelEx($model, 'category_id');
-echo CHtml::activeDropDownList($model, 'category_id', $categories, 
-     array('empty' => Yii::t('bulletin', 'Choose category'),
+echo CHtml::activeDropDownList($model, 'category_id', $categories, array('empty' => Yii::t('bulletin', 'Choose category'),
     'onchange' => 'loadFields(this)'));
 echo $form->error($model, 'category_id');
 ?>

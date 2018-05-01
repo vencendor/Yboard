@@ -17,8 +17,7 @@ Yii::import('ext.image.Image_Driver');
  * @copyright  (c) 2007-2008 Kohana Team
  * @license    http://kohanaphp.com/license.html
  */
-class Image
-{
+class Image {
 
     // Master Dimension
     const NONE = 1;
@@ -31,23 +30,20 @@ class Image
 
     // Allowed image types
     public static $allowed_types = array
-    (
+        (
         IMAGETYPE_GIF => 'gif',
         IMAGETYPE_JPEG => 'jpg',
         IMAGETYPE_PNG => 'png',
         IMAGETYPE_TIFF_II => 'tiff',
         IMAGETYPE_TIFF_MM => 'tiff',
     );
-
     // Driver instance
     /**
      * @var Image_Driver
      */
     protected $driver;
-
     // Driver actions
     protected $actions = array();
-
     // Reference to the current image filename
     protected $image = '';
 
@@ -58,8 +54,7 @@ class Image
      * @param   $config array    non-default configurations
      * @return  Image
      */
-    public static function factory($image, $config = NULL)
-    {
+    public static function factory($image, $config = NULL) {
         return new Image($image, $config);
     }
 
@@ -72,8 +67,7 @@ class Image
      * @throws CException
      * @return Image
      */
-    public function __construct($image, $config = NULL)
-    {
+    public function __construct($image, $config = NULL) {
         static $check;
 
         // Make the check exactly once
@@ -105,7 +99,7 @@ class Image
 
         // Image has been validated, load it
         $this->image = array
-        (
+            (
             'file' => str_replace('\\', '/', realpath($image)),
             'width' => $image_info[0],
             'height' => $image_info[1],
@@ -145,8 +139,7 @@ class Image
      * @throws CException
      * @return  mixed
      */
-    public function __get($property)
-    {
+    public function __get($property) {
         if (isset($this->image[$property])) {
             return $this->image[$property];
         } else {
@@ -166,8 +159,7 @@ class Image
      * @param   $master integer  one of: Image::NONE, Image::AUTO, Image::WIDTH, Image::HEIGHT
      * @return  Image
      */
-    public function resize($width, $height, $master = NULL)
-    {
+    public function resize($width, $height, $master = NULL) {
         if (!$this->valid_size('width', $width))
             throw new CException('image invalid width');
 
@@ -184,7 +176,7 @@ class Image
             throw new CException('image invalid master');
 
         $this->actions['resize'] = array
-        (
+            (
             'width' => $width,
             'height' => $height,
             'master' => $master,
@@ -206,8 +198,7 @@ class Image
      * @throws  CException
      * @return  Image
      */
-    public function crop($width, $height, $top = 'center', $left = 'center')
-    {
+    public function crop($width, $height, $top = 'center', $left = 'center') {
         if (!$this->valid_size('width', $width))
             throw new CException('image invalid width', $width);
 
@@ -224,7 +215,7 @@ class Image
             throw new CException('image invalid dimensions');
 
         $this->actions['crop'] = array
-        (
+            (
             'width' => $width,
             'height' => $height,
             'top' => $top,
@@ -240,9 +231,8 @@ class Image
      * @param   $degrees int
      * @return  Image
      */
-    public function rotate($degrees)
-    {
-        $degrees = (int)$degrees;
+    public function rotate($degrees) {
+        $degrees = (int) $degrees;
 
         if ($degrees > 180) {
             do {
@@ -270,8 +260,7 @@ class Image
      * @param   $direction int direction
      * @return  Image
      */
-    public function flip($direction)
-    {
+    public function flip($direction) {
         if ($direction !== self::HORIZONTAL AND $direction !== self::VERTICAL)
             throw new CException('image invalid flip');
 
@@ -286,8 +275,7 @@ class Image
      * @param $amount int quality as a percentage
      * @return  Image
      */
-    public function quality($amount)
-    {
+    public function quality($amount) {
         $this->actions['quality'] = max(1, min($amount, 100));
         return $this;
     }
@@ -298,8 +286,7 @@ class Image
      * @param   $amount int amount to sharpen, usually ~20 is ideal
      * @return  Image
      */
-    public function sharpen($amount = 20)
-    {
+    public function sharpen($amount = 20) {
         $this->actions['sharpen'] = max(1, min($amount, 100));
 
         return $this;
@@ -310,14 +297,12 @@ class Image
      *
      * @return Image
      */
-    public function grayscale()
-    {
+    public function grayscale() {
         $this->actions['grayscale'] = true;
         return $this;
     }
 
-    public function colorize($r, $g, $b, $a)
-    {
+    public function colorize($r, $g, $b, $a) {
         $this->actions['colorize'] = array(
             'r' => $r,
             'g' => $g,
@@ -333,8 +318,7 @@ class Image
      * @param  $radius int [0..1] only for imagemagick
      * @return Image
      */
-    public function emboss($radius = 1)
-    {
+    public function emboss($radius = 1) {
         $this->actions['emboss'] = max(1, min($radius, 0));
         return $this;
     }
@@ -345,8 +329,7 @@ class Image
      * @author parcouss
      * @return Image
      */
-    public function negate()
-    {
+    public function negate() {
         $this->actions['negate'] = true;
         return $this;
     }
@@ -361,8 +344,7 @@ class Image
      * @throws CException
      * @return  Image
      */
-    public function save($new_image = false, $chmod = 0644, $keep_actions = false)
-    {
+    public function save($new_image = false, $chmod = 0644, $keep_actions = false) {
         // If no new image is defined, use the current image
         empty($new_image) and $new_image = $this->image['file'];
 
@@ -396,8 +378,7 @@ class Image
      * @param   $keep_actions bool  keep or discard image process actions
      * @return  Image
      */
-    public function render($keep_actions = FALSE)
-    {
+    public function render($keep_actions = FALSE) {
         $new_image = $this->image['file'];
 
         // Separate the directory and filename
@@ -424,8 +405,7 @@ class Image
      * @param   $value mixed    property value
      * @return  boolean
      */
-    protected function valid_size($type, & $value)
-    {
+    protected function valid_size($type, & $value) {
         if (is_null($value))
             return TRUE;
 
@@ -435,35 +415,35 @@ class Image
         switch ($type) {
             case 'width':
             case 'height':
-                if (is_string($value) AND !ctype_digit($value)) {
+                if (is_string($value) AND ! ctype_digit($value)) {
                     // Only numbers and percent signs
                     if (!preg_match('/^[0-9]++%$/D', $value))
                         return FALSE;
                 } else {
-                    $value = (int)$value;
+                    $value = (int) $value;
                 }
                 break;
             case 'top':
-                if (is_string($value) AND !ctype_digit($value)) {
+                if (is_string($value) AND ! ctype_digit($value)) {
                     if (!in_array($value, array('top', 'bottom', 'center')))
                         return FALSE;
                 } else {
-                    $value = (int)$value;
+                    $value = (int) $value;
                 }
                 break;
             case 'left':
-                if (is_string($value) AND !ctype_digit($value)) {
+                if (is_string($value) AND ! ctype_digit($value)) {
                     if (!in_array($value, array('left', 'right', 'center')))
                         return FALSE;
                 } else {
-                    $value = (int)$value;
+                    $value = (int) $value;
                 }
                 break;
             case 'master':
                 if ($value !== Image::NONE AND
-                    $value !== Image::AUTO AND
+                        $value !== Image::AUTO AND
                         $value !== Image::WIDTH AND
-                            $value !== Image::HEIGHT
+                        $value !== Image::HEIGHT
                 )
                     return FALSE;
                 break;
@@ -472,8 +452,7 @@ class Image
         return TRUE;
     }
 
-    public function centeredpreview($width, $height)
-    {
+    public function centeredpreview($width, $height) {
         if ($this->width / $this->height > $width / $height) {
             $res = $this->resize(null, $height);
         } else {
@@ -482,8 +461,7 @@ class Image
         return $res->crop($width, $height, 'center');
     }
 
-    public function fit($width, $height)
-    {
+    public function fit($width, $height) {
         if ($this->width / $this->height > $width / $height) {
             $res = $this->resize($width, null);
         } else {
@@ -504,8 +482,7 @@ class Image
      * @param   $master integer  one of: Image::NONE, Image::AUTO, Image::WIDTH, Image::HEIGHT
      * @return  Image
      */
-    public function cresize($width, $height, $master = NULL)
-    {
+    public function cresize($width, $height, $master = NULL) {
         if (!$this->valid_size('width', $width))
             throw new CException('image invalid width');
 
@@ -520,9 +497,9 @@ class Image
             $master = Image::AUTO;
         } elseif (!$this->valid_size('master', $master))
             throw new CException('image invalid master');
-        if ((int)$this->width > (int)$width && (int)$this->height > (int)$height)
+        if ((int) $this->width > (int) $width && (int) $this->height > (int) $height)
             $this->actions['resize'] = array
-            (
+                (
                 'width' => $width,
                 'height' => $height,
                 'master' => $master,
@@ -531,10 +508,13 @@ class Image
         return $this;
     }
 
-    public function watermark($path, $x, $y){
+    public function watermark($path, $x, $y) {
         $this->actions['watermark'] = array
-        (
-            'path'=>$path, 'x'=>$x, 'y'=>$y,
+            (
+            'path' => $path, 'x' => $x, 'y' => $y,
         );
     }
-} // End Image
+
+}
+
+// End Image

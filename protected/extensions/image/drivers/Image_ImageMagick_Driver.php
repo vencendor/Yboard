@@ -10,18 +10,14 @@
  * @copyright  (c) 2007-2008 Kohana Team
  * @license    http://kohanaphp.com/license.html
  */
-class Image_ImageMagick_Driver extends Image_Driver
-{
+class Image_ImageMagick_Driver extends Image_Driver {
 
     // Directory that IM is installed in
     protected $dir = '';
-
     // Command extension (exe for windows)
     protected $ext = '';
-
     // Temporary image filename
     protected $tmp_image;
-
     protected $_args = array();
 
     /**
@@ -32,8 +28,7 @@ class Image_ImageMagick_Driver extends Image_Driver
      * @throws CException
      * @return Image_ImageMagick_Driver
      */
-    public function __construct($config)
-    {
+    public function __construct($config) {
         if (empty($config['directory'])) {
             // Attempt to locate IM by using "which" (only works for *nix!)
             if (!is_file($path = exec('which convert')))
@@ -57,8 +52,7 @@ class Image_ImageMagick_Driver extends Image_Driver
      * Creates a temporary image and executes the given actions. By creating a
      * temporary copy of the image before manipulating it, this process is atomic.
      */
-    public function process($image, $actions, $dir, $file, $render = FALSE)
-    {
+    public function process($image, $actions, $dir, $file, $render = FALSE) {
         // We only need the filename
         $image = $image['file'];
         $this->tmp_image = $image;
@@ -66,7 +60,7 @@ class Image_ImageMagick_Driver extends Image_Driver
         // Quality change is done last
         $quality = NULL;
         if (array_key_exists('quality', $actions)) {
-            $quality = (int)$actions['quality'];
+            $quality = (int) $actions['quality'];
             unset($actions['quality']);
         }
 
@@ -111,8 +105,7 @@ class Image_ImageMagick_Driver extends Image_Driver
         return $status;
     }
 
-    public function crop($prop)
-    {
+    public function crop($prop) {
         // Sanitize and normalize the properties into geometry
         $this->sanitize_geometry($prop);
 
@@ -124,16 +117,14 @@ class Image_ImageMagick_Driver extends Image_Driver
         return true;
     }
 
-    public function flip($dir)
-    {
+    public function flip($dir) {
         // Convert the direction into a IM command
         $this->_args[] = ($dir === Image::HORIZONTAL) ? '-flop' : '-flip';
 
         return true;
     }
 
-    public function resize($prop)
-    {
+    public function resize($prop) {
         switch ($prop['master']) {
             case Image::WIDTH: // Wx
                 $dim = escapeshellarg($prop['width'] . 'x');
@@ -155,15 +146,13 @@ class Image_ImageMagick_Driver extends Image_Driver
         return true;
     }
 
-    public function rotate($amt)
-    {
+    public function rotate($amt) {
         $this->_args[] = '-rotate ' . escapeshellarg($amt) . ' -background transparent';
 
         return true;
     }
 
-    public function sharpen($amount)
-    {
+    public function sharpen($amount) {
         // Set the sigma, radius, and amount. The amount formula allows a nice
         // spread between 1 and 100 without pixelizing the image badly.
         $sigma = 0.5;
@@ -178,31 +167,28 @@ class Image_ImageMagick_Driver extends Image_Driver
         return true;
     }
 
-    public function grayscale($unused)
-    {
+    public function grayscale($unused) {
         $this->_args[] = '-colorspace Gray';
         return true;
     }
 
-    public function colorize($params)
-    {
+    public function colorize($params) {
         //todo: implement this as in GD driver
         throw new Exception('Unimplemented');
     }
 
-    public function emboss($radius)
-    {
+    public function emboss($radius) {
         $this->_args[] = '-emboss ' . $radius;
     }
 
-    public function negate($unused)
-    {
+    public function negate($unused) {
         $this->_args[] = '-negate';
     }
 
-    protected function properties()
-    {
+    protected function properties() {
         return array_slice(getimagesize($this->tmp_image), 0, 2, FALSE);
     }
 
-} // End Image ImageMagick Driver
+}
+
+// End Image ImageMagick Driver

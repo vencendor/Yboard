@@ -12,10 +12,10 @@
   * @license http://opensource.org/licenses/MIT  The MIT License (MIT)
   * @version 1.0.0
   */
-  -->
+-->
 <div class="">
     <div class="row">
         <!--The tree will be rendered in this div-->
-        <div class="well" style="margin-top: 20px" class="row" id="<?php echo $this->jstree_container_ID;?>"></div>
+        <div class="well" style="margin-top: 20px" class="row" id="<?php echo $this->jstree_container_ID; ?>"></div>
     </div>
 </div>

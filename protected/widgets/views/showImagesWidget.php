@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright 2013 Victor Demin <mail@vdemin.com>.
  */
@@ -11,10 +10,10 @@
     <?php
     $this->widget('application.extensions.fancybox.AlFancyBox', array(
         'config' => array(),
-        )
+            )
     );
     ?>
-    <?php foreach($bulletin->gallery->galleryPhotos as $model): ?>
+    <?php foreach ($bulletin->gallery->galleryPhotos as $model): ?>
         <a href="<?php echo $model->getUrl(); ?>" class="fancybox" rel="<?php echo CHtml::encode($bulletin->id) ?>">
             <img src="<?php echo $model->getPreview(); ?>" width="150" alt="<?php echo CHtml::encode($bulletin->name) ?>" />
         </a>

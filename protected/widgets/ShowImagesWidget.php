@@ -9,15 +9,14 @@
  *
  * @author Victor Demin <mail@vdemin.com>
  */
-class ShowImagesWidget extends CWidget
-{
+class ShowImagesWidget extends CWidget {
+
     /**
      * @var Bulletin
      */
     public $bulletin;
 
-    public function run()
-    {
+    public function run() {
         $this->render('showImagesWidget', array('bulletin' => $this->bulletin));
     }
 

@@ -1,10 +1,10 @@
 <?php
+
 /**
  * YiiDebugToolbarPanelSql class file.
  *
  * @author Sergey Malyshev <malyshev.php@gmail.com>
  */
-
 
 /**
  * YiiDebugToolbarPanelSql class.
@@ -16,31 +16,24 @@
  * @package YiiDebugToolbar
  * @since 1.1.7
  */
-class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
-{
-	public $i = 'i';
-	
+class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel {
+
+    public $i = 'i';
+
     /**
      * If true, the sql query in the list will use syntax highlighting.
      * 
      * @var boolean
      */
     public $highlightSql = true;
-
     private $_countLimit = 1;
-
     private $_timeLimit = 0.01;
-
     private $_groupByToken = true;
-
     private $_dbConnections;
-
     private $_dbConnectionsCount;
-
     private $_textHighlighter;
 
-    public function  __construct($owner = null)
-    {
+    public function __construct($owner = null) {
         parent::__construct($owner);
 
         try {
@@ -50,45 +43,34 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
         }
     }
 
-    public function getCountLimit()
-    {
+    public function getCountLimit() {
         return $this->_countLimit;
     }
 
-    public function setCountLimit($value)
-    {
+    public function setCountLimit($value) {
         $this->_countLimit = CPropertyValue::ensureInteger($value);
     }
 
-    public function getTimeLimit()
-    {
+    public function getTimeLimit() {
         return $this->_timeLimit;
     }
 
-    public function setTimeLimit($value)
-    {
+    public function setTimeLimit($value) {
         $this->_timeLimit = CPropertyValue::ensureFloat($value);
     }
 
-    public function getDbConnectionsCount()
-    {
-        if (null === $this->_dbConnectionsCount)
-        {
+    public function getDbConnectionsCount() {
+        if (null === $this->_dbConnectionsCount) {
             $this->_dbConnectionsCount = count($this->getDbConnections());
         }
         return $this->_dbConnectionsCount;
     }
 
-    public function getDbConnections()
-    {
-        if (null === $this->_dbConnections)
-        {
+    public function getDbConnections() {
+        if (null === $this->_dbConnections) {
             $this->_dbConnections = array();
-            foreach (Yii::app()->components as $id=>$component)
-            {
-                if (false !== is_object($component)
-                        && false !== ($component instanceof CDbConnection))
-                {
+            foreach (Yii::app()->components as $id => $component) {
+                if (false !== is_object($component) && false !== ($component instanceof CDbConnection)) {
                     $this->_dbConnections[$id] = $component;
                 }
             }
@@ -99,19 +81,17 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
     /**
      * {@inheritdoc}
      */
-    public function getMenuTitle()
-    {
+    public function getMenuTitle() {
         return YiiDebug::t('SQL');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getMenuSubTitle($f=4)
-    {
+    public function getMenuSubTitle($f = 4) {
         if (false !== $this->_dbConnections) {
-        	list ($count, $time) = Yii::app()->db->getStats();
-        	return $count . ($count > 0 ? ('/'. vsprintf('%0.'.$f.'F', $time) . 's') : '');
+            list ($count, $time) = Yii::app()->db->getStats();
+            return $count . ($count > 0 ? ('/' . vsprintf('%0.' . $f . 'F', $time) . 's') : '');
         }
         return YiiDebug::t('No active connections');
     }
@@ -119,11 +99,9 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
     /**
      * {@inheritdoc}
      */
-    public function getTitle()
-    {
-        if (false !== $this->_dbConnections)
-        {
-            $conn=$this->getDbConnectionsCount();
+    public function getTitle() {
+        if (false !== $this->_dbConnections) {
+            $conn = $this->getDbConnectionsCount();
             return YiiDebug::t('SQL Queries from {n} connection|SQL Queries from {n} connections', array($conn));
         }
         return YiiDebug::t('No active connections');
@@ -132,41 +110,35 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
     /**
      * {@inheritdoc}
      */
-    public function getSubTitle()
-    {
-        return  false !== $this->_dbConnections
-                ?  ('(' . self::getMenuSubTitle(6) . ')')
-                : null;
+    public function getSubTitle() {
+        return false !== $this->_dbConnections ? ('(' . self::getMenuSubTitle(6) . ')') : null;
     }
 
     /**
      * Initialize panel
      */
-    public function init()
-    {
-
+    public function init() {
+        
     }
 
     /**
      * {@inheritdoc}
      */
-    public function run()
-    {
+    public function run() {
         if (false === $this->_dbConnections) {
             return;
         }
 
         $logs = $this->filterLogs();
         $this->render('sql', array(
-            'connections'       => $this->getDbConnections(),
-            'connectionsCount'  => $this->getDbConnectionsCount(),
-            'summary'           => $this->processSummary($logs),
-            'callstack'         => $this->processCallstack($logs)
+            'connections' => $this->getDbConnections(),
+            'connectionsCount' => $this->getDbConnectionsCount(),
+            'summary' => $this->processSummary($logs),
+            'callstack' => $this->processCallstack($logs)
         ));
     }
 
-    private function duration($secs)
-    {
+    private function duration($secs) {
         $vals = array(
             'w' => (int) ($secs / 86400 / 7),
             'd' => $secs / 86400 % 7,
@@ -176,10 +148,8 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
         );
         $result = array();
         $added = false;
-        foreach ($vals as $k => $v)
-        {
-            if ($v > 0 || false !== $added)
-            {
+        foreach ($vals as $k => $v) {
+            if ($v > 0 || false !== $added) {
                 $added = true;
                 $result[] = $v . $k;
             }
@@ -192,28 +162,23 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
      * @param string $connectionId
      * @return mixed
      */
-    public function getServerInfo($connectionId)
-    {
-        if (null !== ($connection = Yii::app()->getComponent($connectionId))
-            && false !== ($connection instanceof CDbConnection)
-            && !in_array($connection->driverName, array('sqlite', 'oci', 'dblib'))
-            && '' !== ($serverInfo = $connection->getServerInfo()))
-        {
+    public function getServerInfo($connectionId) {
+        if (null !== ($connection = Yii::app()->getComponent($connectionId)) && false !== ($connection instanceof CDbConnection) && !in_array($connection->driverName, array('sqlite', 'oci', 'dblib')) && '' !== ($serverInfo = $connection->getServerInfo())) {
             $info = array(
                 YiiDebug::t('Driver') => $connection->getDriverName(),
                 YiiDebug::t('Server Version') => $connection->getServerVersion()
             );
-            
+
             $lines = explode('  ', $serverInfo);
-            foreach($lines as $line) {
+            foreach ($lines as $line) {
                 list($key, $value) = explode(': ', $line, 2);
                 $info[YiiDebug::t($key)] = $value;
             }
-            
-            if(!empty($info[YiiDebug::t('Uptime')])) {
+
+            if (!empty($info[YiiDebug::t('Uptime')])) {
                 $info[YiiDebug::t('Uptime')] = $this->duration($info[YiiDebug::t('Uptime')]);
             }
-            
+
             return $info;
         }
         return null;
@@ -225,54 +190,44 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
      * @param array $logs Logs.
      * @return array
      */
-    protected function processCallstack(array $logs)
-    {
-        if (empty($logs))
-        {
+    protected function processCallstack(array $logs) {
+        if (empty($logs)) {
             return $logs;
         }
 
-        $stack   = array();
+        $stack = array();
         $results = array();
-        $n       = 0;
+        $n = 0;
 
-        foreach ($logs as $log)
-        {
-            if(CLogger::LEVEL_PROFILE !== $log[1])
+        foreach ($logs as $log) {
+            if (CLogger::LEVEL_PROFILE !== $log[1])
                 continue;
 
             $message = $log[0];
 
-            if (0 === strncasecmp($message,'begin:',6))
-            {
-                $log[0]  = substr($message,6);
-                $log[4]  = $n;
+            if (0 === strncasecmp($message, 'begin:', 6)) {
+                $log[0] = substr($message, 6);
+                $log[4] = $n;
                 $stack[] = $log;
                 $n++;
-            }
-            else if (0 === strncasecmp($message, 'end:', 4))
-            {
-                $token = substr($message,4);
-                if(null !== ($last = array_pop($stack)) && $last[0] === $token)
-                {
+            } else if (0 === strncasecmp($message, 'end:', 4)) {
+                $token = substr($message, 4);
+                if (null !== ($last = array_pop($stack)) && $last[0] === $token) {
                     $delta = $log[3] - $last[3];
                     $results[$last[4]] = array($token, $delta, count($stack));
-                }
-                else
-                    throw new CException(Yii::t('yii-debug-toolbar',
-                            'Mismatching code block "{token}". Make sure the calls to Yii::beginProfile() and Yii::endProfile() be properly nested.',
-                            array('{token}' => $token)
-                        ));
+                } else
+                    throw new CException(Yii::t('yii-debug-toolbar', 'Mismatching code block "{token}". Make sure the calls to Yii::beginProfile() and Yii::endProfile() be properly nested.', array('{token}' => $token)
+                    ));
             }
         }
         // remaining entries should be closed here
         $now = microtime(true);
-        while (null !== ($last = array_pop($stack))){
+        while (null !== ($last = array_pop($stack))) {
             $results[$last[4]] = array($last[0], $now - $last[3], count($stack));
         }
 
         ksort($results);
-        return  array_map(array($this, 'formatLogEntry'), $results);
+        return array_map(array($this, 'formatLogEntry'), $results);
     }
 
     /**
@@ -281,56 +236,45 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
      * @param array $logs Logs.
      * @return array
      */
-    protected function processSummary(array $logs)
-    {
-        if (empty($logs))
-        {
+    protected function processSummary(array $logs) {
+        if (empty($logs)) {
             return $logs;
         }
         $stack = array();
-        foreach($logs as $log)
-        {
+        foreach ($logs as $log) {
             $message = $log[0];
-            if(0 === strncasecmp($message, 'begin:', 6))
-            {
-                $log[0]  =substr($message, 6);
-                $stack[] =$log;
-            }
-            else if(0 === strncasecmp($message,'end:',4))
-            {
-                $token = substr($message,4);
-                if(null !== ($last = array_pop($stack)) && $last[0] === $token)
-                {
+            if (0 === strncasecmp($message, 'begin:', 6)) {
+                $log[0] = substr($message, 6);
+                $stack[] = $log;
+            } else if (0 === strncasecmp($message, 'end:', 4)) {
+                $token = substr($message, 4);
+                if (null !== ($last = array_pop($stack)) && $last[0] === $token) {
                     $delta = $log[3] - $last[3];
 
-                    if(isset($results[$token]))
+                    if (isset($results[$token]))
                         $results[$token] = $this->aggregateResult($results[$token], $delta);
-                    else{
+                    else {
                         $results[$token] = array($token, 1, $delta, $delta, $delta);
                     }
-                }
-                else
-                    throw new CException(Yii::t('yii-debug-toolbar',
-                        'Mismatching code block "{token}". Make sure the calls to Yii::beginProfile() and Yii::endProfile() be properly nested.',
-                        array('{token}' => $token)));
+                } else
+                    throw new CException(Yii::t('yii-debug-toolbar', 'Mismatching code block "{token}". Make sure the calls to Yii::beginProfile() and Yii::endProfile() be properly nested.', array('{token}' => $token)));
             }
         }
 
         $now = microtime(true);
-        while(null !== ($last = array_pop($stack)))
-        {
+        while (null !== ($last = array_pop($stack))) {
             $delta = $now - $last[3];
             $token = $last[0];
 
-            if(isset($results[$token]))
+            if (isset($results[$token]))
                 $results[$token] = $this->aggregateResult($results[$token], $delta);
-            else{
+            else {
                 $results[$token] = array($token, 1, $delta, $delta, $delta);
             }
         }
 
         $entries = array_values($results);
-        $func    = create_function('$a,$b','return $a[4]<$b[4]?1:0;');
+        $func = create_function('$a,$b', 'return $a[4]<$b[4]?1:0;');
 
         usort($entries, $func);
 
@@ -343,39 +287,35 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
      * @param array $entry
      * @return array
      */
-    public function formatLogEntry(array $entry)
-    {
+    public function formatLogEntry(array $entry) {
         // extract query from the entry
         $queryString = $entry[0];
         $sqlStart = strpos($queryString, '(') + 1;
-        $sqlEnd = strrpos($queryString , ')');
+        $sqlEnd = strrpos($queryString, ')');
         $sqlLength = $sqlEnd - $sqlStart;
-        
+
         $queryString = substr($queryString, $sqlStart, $sqlLength);
 
-        if (false !== strpos($queryString, '. Bound with '))
-        {
+        if (false !== strpos($queryString, '. Bound with ')) {
             list($query, $params) = explode('. Bound with ', $queryString);
 
-	        $binds  = array();
-	        $matchResult = preg_match_all("/(?<key>[a-z0-9\.\_\-\:]+)=(?<value>[\d\.e\-\+]+|''|'.+?(?<!\\\)')/ims", $params, $paramsMatched, PREG_SET_ORDER);
+            $binds = array();
+            $matchResult = preg_match_all("/(?<key>[a-z0-9\.\_\-\:]+)=(?<value>[\d\.e\-\+]+|''|'.+?(?<!\\\)')/ims", $params, $paramsMatched, PREG_SET_ORDER);
 
             if ($matchResult) {
                 foreach ($paramsMatched as $paramsMatch)
-	                if (isset($paramsMatch['key'], $paramsMatch['value']))                        
-                        $binds[':' . trim($paramsMatch['key'],': ')] = trim($paramsMatch['value']);
+                    if (isset($paramsMatch['key'], $paramsMatch['value']))
+                        $binds[':' . trim($paramsMatch['key'], ': ')] = trim($paramsMatch['value']);
             }
 
 
             $entry[0] = strtr($query, $binds);
         }
-        else
-        {
+        else {
             $entry[0] = $queryString;
         }
 
-        if(false !== CPropertyValue::ensureBoolean($this->highlightSql))
-        {
+        if (false !== CPropertyValue::ensureBoolean($this->highlightSql)) {
             $entry[0] = $this->getTextHighlighter()->highlight($entry[0]);
         }
 
@@ -383,23 +323,19 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
         return $entry;
     }
 
-
     /**
      * @return CTextHighlighter the text highlighter
      */
-    private function getTextHighlighter()
-    {
-        if (null === $this->_textHighlighter)
-        {
+    private function getTextHighlighter() {
+        if (null === $this->_textHighlighter) {
             $this->_textHighlighter = Yii::createComponent(array(
-                'class' => 'CTextHighlighter',
-                'language' => 'sql',
-                'showLineNumbers' => false,
+                        'class' => 'CTextHighlighter',
+                        'language' => 'sql',
+                        'showLineNumbers' => false,
             ));
         }
         return $this->_textHighlighter;
     }
-
 
     /**
      * Aggregates the report result.
@@ -408,12 +344,10 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
      * @param float $delta time spent for this code block
      * @return array
      */
-    protected function aggregateResult($result, $delta)
-    {
+    protected function aggregateResult($result, $delta) {
         list($token, $calls, $min, $max, $total) = $result;
 
-        switch (true)
-        {
+        switch (true) {
             case ($delta < $min):
                 $min = $delta;
                 break;
@@ -436,13 +370,10 @@ class YiiDebugToolbarPanelSql extends YiiDebugToolbarPanel
      *
      * @return array
      */
-    protected function filterLogs()
-    {
+    protected function filterLogs() {
         $logs = array();
-        foreach ($this->owner->getLogs() as $entry)
-        {
-            if (CLogger::LEVEL_PROFILE === $entry[1] && 0 === strpos($entry[2], 'system.db.CDbCommand'))
-            {
+        foreach ($this->owner->getLogs() as $entry) {
+            if (CLogger::LEVEL_PROFILE === $entry[1] && 0 === strpos($entry[2], 'system.db.CDbCommand')) {
                 $logs[] = $entry;
             }
         }

@@ -9,8 +9,8 @@
  *
  * @author Victor Demin <mail@vdemin.com>
  */
-class ShowAdvertisementWidget extends CWidget
-{
+class ShowAdvertisementWidget extends CWidget {
+
     /**
      * @var int
      */
@@ -21,21 +21,19 @@ class ShowAdvertisementWidget extends CWidget
      */
     public $limit = 10;
 
-    public function run()
-    {
+    public function run() {
         $this->render('showAdvertisementWidget', array('data' => $this->loadAdvertisement()));
     }
 
     /**
      * @return Advertisement[]
      */
-    protected function loadAdvertisement()
-    {
-        $dataProvider=new CActiveDataProvider('Advertisement', array(
-            'criteria'=>array(
-                'order'=>'`order` ASC, id ASC',
-                'offset'=>$this->offset,
-                'limit'=>$this->limit,
+    protected function loadAdvertisement() {
+        $dataProvider = new CActiveDataProvider('Advertisement', array(
+            'criteria' => array(
+                'order' => '`order` ASC, id ASC',
+                'offset' => $this->offset,
+                'limit' => $this->limit,
             ),
         ));
         $dataProvider->setPagination(false);

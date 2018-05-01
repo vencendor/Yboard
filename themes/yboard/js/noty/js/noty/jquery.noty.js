@@ -23,7 +23,7 @@ if (typeof Object.create !== 'function') {
 
     var NotyObject = {
 
-        init:function (options) {
+        init: function (options) {
 
             // Mix in the passed in options with the default options
             this.options = $.extend({}, $.noty.defaults, options);
@@ -46,7 +46,7 @@ if (typeof Object.create !== 'function') {
             return this;
         }, // end init
 
-        _build:function () {
+        _build: function () {
 
             // Generating noty bar
             var $bar = $('<div class="noty_bar"></div>').attr('id', this.options.id);
@@ -69,12 +69,12 @@ if (typeof Object.create !== 'function') {
 
                 $.each(this.options.buttons, function (i, button) {
                     var $button = $('<button/>').addClass((button.addClass) ? button.addClass : 'gray').html(button.text)
-                        .appendTo(self.$bar.find('.noty_buttons'))
-                        .bind('click', function () {
-                            if ($.isFunction(button.onClick)) {
-                                button.onClick.call($button, self);
-                            }
-                        });
+                            .appendTo(self.$bar.find('.noty_buttons'))
+                            .bind('click', function () {
+                                if ($.isFunction(button.onClick)) {
+                                    button.onClick.call($button, self);
+                                }
+                            });
                 });
             }
 
@@ -87,7 +87,7 @@ if (typeof Object.create !== 'function') {
 
         }, // end _build
 
-        show:function () {
+        show: function () {
 
             var self = this;
 
@@ -125,13 +125,14 @@ if (typeof Object.create !== 'function') {
                 self.options.callback.onShow.apply(self);
 
             self.$bar.animate(
-                self.options.animation.open,
-                self.options.animation.speed,
-                self.options.animation.easing,
-                function () {
-                    if (self.options.callback.afterShow) self.options.callback.afterShow.apply(self);
-                    self.shown = true;
-                });
+                    self.options.animation.open,
+                    self.options.animation.speed,
+                    self.options.animation.easing,
+                    function () {
+                        if (self.options.callback.afterShow)
+                            self.options.callback.afterShow.apply(self);
+                        self.shown = true;
+                    });
 
             // If noty is have a timeout option
             if (self.options.timeout)
@@ -143,9 +144,10 @@ if (typeof Object.create !== 'function') {
 
         }, // end show
 
-        close:function () {
+        close: function () {
 
-            if (this.closed) return;
+            if (this.closed)
+                return;
 
             var self = this;
 
@@ -167,49 +169,52 @@ if (typeof Object.create !== 'function') {
             }
 
             self.$bar.clearQueue().stop().animate(
-                self.options.animation.close,
-                self.options.animation.speed,
-                self.options.animation.easing,
-                function () {
-                    if (self.options.callback.afterClose) self.options.callback.afterClose.apply(self);
-                })
-                .promise().done(function () {
+                    self.options.animation.close,
+                    self.options.animation.speed,
+                    self.options.animation.easing,
+                    function () {
+                        if (self.options.callback.afterClose)
+                            self.options.callback.afterClose.apply(self);
+                    })
+                    .promise().done(function () {
 
-                    // Modal Cleaning
-                    if (self.options.modal) {
-                        $.notyRenderer.setModalCount(-1);
-                        if ($.notyRenderer.getModalCount() == 0) $('.noty_modal').fadeOut('fast', function () {
+                // Modal Cleaning
+                if (self.options.modal) {
+                    $.notyRenderer.setModalCount(-1);
+                    if ($.notyRenderer.getModalCount() == 0)
+                        $('.noty_modal').fadeOut('fast', function () {
                             $(this).remove();
                         });
-                    }
+                }
 
-                    // Layout Cleaning
-                    $.notyRenderer.setLayoutCountFor(self, -1);
-                    if ($.notyRenderer.getLayoutCountFor(self) == 0) $(self.options.layout.container.selector).remove();
+                // Layout Cleaning
+                $.notyRenderer.setLayoutCountFor(self, -1);
+                if ($.notyRenderer.getLayoutCountFor(self) == 0)
+                    $(self.options.layout.container.selector).remove();
 
-                    // Make sure self.$bar has not been removed before attempting to remove it
-                    if (typeof self.$bar !== 'undefined' && self.$bar !== null ) {
-                        self.$bar.remove();
-                        self.$bar = null;
-                        self.closed = true;
-                    }
+                // Make sure self.$bar has not been removed before attempting to remove it
+                if (typeof self.$bar !== 'undefined' && self.$bar !== null) {
+                    self.$bar.remove();
+                    self.$bar = null;
+                    self.closed = true;
+                }
 
-                    delete $.noty.store[self.options.id]; // deleting noty from store
+                delete $.noty.store[self.options.id]; // deleting noty from store
 
-                    self.options.theme.callback.onClose.apply(self);
+                self.options.theme.callback.onClose.apply(self);
 
-                    if (!self.options.dismissQueue) {
-                        // Queue render
-                        $.noty.ontap = true;
+                if (!self.options.dismissQueue) {
+                    // Queue render
+                    $.noty.ontap = true;
 
-                        $.notyRenderer.render();
-                    }
+                    $.notyRenderer.render();
+                }
 
-                });
+            });
 
         }, // end close
 
-        setText:function (text) {
+        setText: function (text) {
             if (!this.closed) {
                 this.options.text = text;
                 this.$bar.find('.noty_text').html(text);
@@ -217,7 +222,7 @@ if (typeof Object.create !== 'function') {
             return this;
         },
 
-        setType:function (type) {
+        setType: function (type) {
             if (!this.closed) {
                 this.options.type = type;
                 this.options.theme.style.apply(this);
@@ -226,7 +231,7 @@ if (typeof Object.create !== 'function') {
             return this;
         },
 
-        setTimeout:function (time) {
+        setTimeout: function (time) {
             if (!this.closed) {
                 var self = this;
                 this.options.timeout = time;
@@ -237,8 +242,8 @@ if (typeof Object.create !== 'function') {
             return this;
         },
 
-        closed:false,
-        shown:false
+        closed: false,
+        shown: false
 
     }; // end NotyObject
 
@@ -367,7 +372,7 @@ if (typeof Object.create !== 'function') {
             if (options)
                 options.text = text;
             else
-                options = {text:text};
+                options = {text: text};
 
             $.notyRenderer.init(options);
         };
@@ -378,33 +383,33 @@ if (typeof Object.create !== 'function') {
     };
 
     $.noty.defaults = {
-        layout:'top',
-        theme:'defaultTheme',
-        type:'alert',
-        text:'',
-        dismissQueue:true,
-        template:'<div class="noty_message"><span class="noty_text"></span><div class="noty_close"></div></div>',
-        animation:{
-            open:{height:'toggle'},
-            close:{height:'toggle'},
-            easing:'swing',
-            speed:500
+        layout: 'top',
+        theme: 'defaultTheme',
+        type: 'alert',
+        text: '',
+        dismissQueue: true,
+        template: '<div class="noty_message"><span class="noty_text"></span><div class="noty_close"></div></div>',
+        animation: {
+            open: {height: 'toggle'},
+            close: {height: 'toggle'},
+            easing: 'swing',
+            speed: 500
         },
-        timeout:false,
-        force:false,
-        modal:false,
-        closeWith:['click'],
-        callback:{
-            onShow:function () {
+        timeout: false,
+        force: false,
+        modal: false,
+        closeWith: ['click'],
+        callback: {
+            onShow: function () {
             },
-            afterShow:function () {
+            afterShow: function () {
             },
-            onClose:function () {
+            onClose: function () {
             },
-            afterClose:function () {
+            afterClose: function () {
             }
         },
-        buttons:false
+        buttons: false
     };
 
     $(window).resize(function () {
@@ -420,23 +425,24 @@ function noty(options) {
 
     // This is for BC  -  Will be deleted on v2.2.0
     var using_old = 0
-        , old_to_new = {
-            'animateOpen':'animation.open',
-            'animateClose':'animation.close',
-            'easing':'animation.easing',
-            'speed':'animation.speed',
-            'onShow':'callback.onShow',
-            'onShown':'callback.afterShow',
-            'onClose':'callback.onClose',
-            'onClosed':'callback.afterClose'
-        };
+            , old_to_new = {
+                'animateOpen': 'animation.open',
+                'animateClose': 'animation.close',
+                'easing': 'animation.easing',
+                'speed': 'animation.speed',
+                'onShow': 'callback.onShow',
+                'onShown': 'callback.afterShow',
+                'onClose': 'callback.onClose',
+                'onClosed': 'callback.afterClose'
+            };
 
     jQuery.each(options, function (key, value) {
         if (old_to_new[key]) {
             using_old++;
             var _new = old_to_new[key].split('.');
 
-            if (!options[_new[0]]) options[_new[0]] = {};
+            if (!options[_new[0]])
+                options[_new[0]] = {};
 
             options[_new[0]][_new[1]] = (value) ? value : function () {
             };
@@ -450,25 +456,29 @@ function noty(options) {
 
     if (options.hasOwnProperty('closeButton')) {
         using_old++;
-        if (options.closeButton) options.closeWith.push('button');
+        if (options.closeButton)
+            options.closeWith.push('button');
         delete options.closeButton;
     }
 
     if (options.hasOwnProperty('closeOnSelfClick')) {
         using_old++;
-        if (options.closeOnSelfClick) options.closeWith.push('click');
+        if (options.closeOnSelfClick)
+            options.closeWith.push('click');
         delete options.closeOnSelfClick;
     }
 
     if (options.hasOwnProperty('closeOnSelfOver')) {
         using_old++;
-        if (options.closeOnSelfOver) options.closeWith.push('hover');
+        if (options.closeOnSelfOver)
+            options.closeWith.push('hover');
         delete options.closeOnSelfOver;
     }
 
     if (options.hasOwnProperty('custom')) {
         using_old++;
-        if (options.custom.container != 'null') options.custom = options.custom.container;
+        if (options.custom.container != 'null')
+            options.custom = options.custom.container;
     }
 
     if (options.hasOwnProperty('cssPrefix')) {
@@ -483,9 +493,9 @@ function noty(options) {
 
     if (!options.hasOwnProperty('dismissQueue')) {
         if (options.layout == 'topLeft'
-            || options.layout == 'topRight'
-            || options.layout == 'bottomLeft'
-            || options.layout == 'bottomRight') {
+                || options.layout == 'topRight'
+                || options.layout == 'bottomLeft'
+                || options.layout == 'bottomRight') {
             options.dismissQueue = true;
         } else {
             options.dismissQueue = false;

@@ -42,7 +42,6 @@ class Category extends CActiveRecord {
             // Please remove those attributes that should not be searched.
             array('id, name, icon, fields, level', 'safe', 'on' => 'search'),
             array('meta_title, meta_descr, meta_key', 'application.components.textValidator', 'format' => 'text'),
-            
         );
     }
 
@@ -67,11 +66,11 @@ class Category extends CActiveRecord {
                     array(
                         'condition' =>
                         "level='1' "
-                        . "or (lft<'" . $curent_cat['lft'] . "' and root='" 
+                        . "or (lft<'" . $curent_cat['lft'] . "' and root='"
                         . $curent_cat['root'] . "' and level<'" . $curent_cat['level'] . "' )  "
                         . "or id='" . $curent_cat['id'] . "' "
                         . "or (root='" . $curent_cat['root'] . "' and level='" . $curent_cat['level'] . "') "
-                        . "or ( lft>'" . $curent_cat['lft'] . "' and rgt<'" . $curent_cat['rgt'] 
+                        . "or ( lft>'" . $curent_cat['lft'] . "' and rgt<'" . $curent_cat['rgt']
                         . "' and root='" . $curent_cat['root'] . "' and level='" . ($curent_cat['level'] + 1) . "')"
                         ,
                         'order' => 'root, lft',
@@ -90,8 +89,8 @@ class Category extends CActiveRecord {
     public function catRecursive($root = 0, $level = 1, $lft = 0, $rgt = 0) {
         $ret_cats = array();
         $catItem = Array();
-        foreach ($this->catTree as $cat){ 
-            if (($cat->level == $level and $cat->lft > $lft 
+        foreach ($this->catTree as $cat) {
+            if (($cat->level == $level and $cat->lft > $lft
                     and $cat->rgt < $rgt and $cat->root == $root)
                     or ( $root == 0 and $cat->level == 1)) {
                 $catItem['label'] = $cat->name;
@@ -119,10 +118,10 @@ class Category extends CActiveRecord {
         foreach ($categories as $n => $cat) {
             $ret_cat[$cat['id']] = $cat;
             $ret_cat[$cat['id']]['fields'] = json_decode($cat['fields'], true);
-            if(is_array($ret_cat[$cat['id']]['fields'])){
-                foreach($ret_cat[$cat['id']]['fields'] as $f_n=>$field) {
-                    if($field['type']==2){
-                        $ret_cat[$cat['id']]['fields'][$f_n]['atr']=explode(",",$field['atr']);
+            if (is_array($ret_cat[$cat['id']]['fields'])) {
+                foreach ($ret_cat[$cat['id']]['fields'] as $f_n => $field) {
+                    if ($field['type'] == 2) {
+                        $ret_cat[$cat['id']]['fields'][$f_n]['atr'] = explode(",", $field['atr']);
                     }
                 }
             }
@@ -133,7 +132,8 @@ class Category extends CActiveRecord {
                 ->from(Adverts::model()->tableName())
                 ->group('category_id')
                 ->query();
-        foreach ($cat_count as $row) $ret_cat[$row['category_id']]['count'] = $row['count'];
+        foreach ($cat_count as $row)
+            $ret_cat[$row['category_id']]['count'] = $row['count'];
 
         return $ret_cat;
     }
@@ -143,13 +143,13 @@ class Category extends CActiveRecord {
      */
     public function attributeLabels() {
         return array(
-            'id'          => 'ID',
-            'name'        => t('Category name'),
-            'icon'        => t('Icon'),
-            'fields'      => t('Aditionl fields'),
-            'meta_title'  => t('Meta title'),
-            'meta_descr'  => t('Meta description'),
-            'meta_key'    => t('Meta keywords'),
+            'id' => 'ID',
+            'name' => t('Category name'),
+            'icon' => t('Icon'),
+            'fields' => t('Aditionl fields'),
+            'meta_title' => t('Meta title'),
+            'meta_descr' => t('Meta description'),
+            'meta_key' => t('Meta keywords'),
             'description' => t('Description'),
         );
     }
@@ -175,11 +175,10 @@ class Category extends CActiveRecord {
             'criteria' => $criteria,
         ));
     }
-    
-    public function scopes()
-    {
+
+    public function scopes() {
         return array(
-            'sitemap'=>array('select'=>'id',  'order'=>'id ASC'),
+            'sitemap' => array('select' => 'id', 'order' => 'id ASC'),
         );
     }
 

@@ -1,36 +1,34 @@
 <?php
 
-class UloginUserIdentity implements IUserIdentity
-{
+class UloginUserIdentity implements IUserIdentity {
 
     private $id;
     private $username;
     private $isAuthenticated = false;
     private $states = array();
 
-    public function __construct()
-    {
+    public function __construct() {
+        
     }
 
-    public function authenticate($uloginModel = null)
-    {
+    public function authenticate($uloginModel = null) {
 
         $criteria = new CDbCriteria;
         $criteria->condition = 'identity=:identity AND network=:network';
         $criteria->params = array(
             ':identity' => $uloginModel->identity
-        , ':network' => $uloginModel->network
+            , ':network' => $uloginModel->network
         );
         $user = User::model()->find($criteria);
-        
-        
+
+
         //die ("fffffffffff");
 
         if (null !== $user) {
             $this->id = $user->id;
-            if($user->full_name)
+            if ($user->full_name)
                 $this->username = $user->full_name;
-            elseif($user->username)
+            elseif ($user->username)
                 $this->username = $user->username;
         }
         else {
@@ -42,9 +40,9 @@ class UloginUserIdentity implements IUserIdentity
             $user->username = $uloginModel->full_name;
             $user->password = md5($uloginModel->identity);
             $user->create_at = date("Y-m-d H:i:s");
-            
+
             $user->save();
-                        
+
             $this->id = $user->id;
             $this->name = $user->full_name;
         }
@@ -52,23 +50,20 @@ class UloginUserIdentity implements IUserIdentity
         return true;
     }
 
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    public function getIsAuthenticated()
-    {
+    public function getIsAuthenticated() {
         return $this->isAuthenticated;
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function getPersistentStates()
-    {
+    public function getPersistentStates() {
         return $this->states;
     }
+
 }

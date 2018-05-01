@@ -1,6 +1,4 @@
-<?php
-
-?>
+<?php ?>
 
 
 <?php echo $content ?>

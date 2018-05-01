@@ -60,7 +60,7 @@
 
 #ydtb-toolbar [data-ydtb-panel-content] table.phpinfo{}
 #ydtb-toolbar [data-ydtb-panel-content] table.phpinfo th{
-	text-align:left; color:black; font-size:14px; border-bottom:1px solid #CCCCCC; background:#F5F5F5;
+    text-align:left; color:black; font-size:14px; border-bottom:1px solid #CCCCCC; background:#F5F5F5;
 }
 
 #ydtb-toolbar [data-ydtb-panel-content] .odd{
@@ -77,7 +77,7 @@
 
 
 #ydtb-toolbar .text-right {
-	text-align:right;
+    text-align:right;
 }
 
 #ydtb-toolbar pre, #ydtb-toolbar pre code{
@@ -86,7 +86,7 @@
 
 #ydtb-toolbar-sql-callstack tbody td,
 #ydtb-toolbar-sql-summary tbody td {
-	font-family:monospace;
+    font-family:monospace;
 }
 
 #ydtb-toolbar div.col{ width:49%; }
@@ -107,7 +107,7 @@
 }
 .sql-hl-comment {
     color:#808080 !important;
-	font-style:italic !important;
+    font-style:italic !important;
 }
 .sql-hl-quotes {
     color:red !important;
@@ -143,8 +143,8 @@
     color:Blue !important;
 }
 .sql-hl-main {
-	font-family:'Courier New', Courier, monospace !important;
-	font-weight:normal !important;
+    font-family:'Courier New', Courier, monospace !important;
+    font-weight:normal !important;
 }
 .sql-hl-gutter {
     background-color:#cccccc !important;
@@ -160,18 +160,18 @@
 
 .source .copycode
 {
-	text-align:right !important;
-	float:right !important;
+    text-align:right !important;
+    float:right !important;
 }
 
 .source .copycode a
 {
-	cursor:pointer !important;
-	color:blue !important;
+    cursor:pointer !important;
+    color:blue !important;
 }
 
 .source .copycode_hover a
 {
-	color:red !important;
+    color:red !important;
 }
 

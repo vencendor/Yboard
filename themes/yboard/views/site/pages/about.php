@@ -1,7 +1,7 @@
 <?php
 /* @var $this SiteController */
 
-$this->pageTitle=Yii::app()->name . ' - Правила работы';
+$this->pageTitle = Yii::app()->name . ' - Правила работы';
 $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
     'links' => array('', 'Правила работы'),
 ));

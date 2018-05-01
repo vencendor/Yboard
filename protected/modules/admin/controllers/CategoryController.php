@@ -81,10 +81,10 @@ class CategoryController extends BackendController {
     public function actionImport() {
 
         $cats_file_path = "cats_list.txt";
-        
+
         die("Отключен");
-        
-        if( !is_file($cats_file_path) ) {
+
+        if (!is_file($cats_file_path)) {
             echo "file it's empty";
             return false;
         }

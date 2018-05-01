@@ -1,7 +1,6 @@
 <?php echo $page->content; ?>
 
 
-<?php 
-
+<?php
 ?>
 

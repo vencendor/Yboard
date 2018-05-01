@@ -1,10 +1,10 @@
 <?php
+
 /**
  * YiiDebugToolbarPanelLogging class file.
  *
  * @author Sergey Malyshev <malyshev.php@gmail.com>
  */
-
 
 /**
  * YiiDebugToolbarPanelLogging represents an ...
@@ -17,10 +17,10 @@
  * @package YiiDebugToolbar
  * @since 1.1.7
  */
-class YiiDebugToolbarPanelLogging extends YiiDebugToolbarPanel
-{
-	public $i = 'j';
-	
+class YiiDebugToolbarPanelLogging extends YiiDebugToolbarPanel {
+
+    public $i = 'j';
+
     /**
      * Message count.
      *
@@ -38,24 +38,21 @@ class YiiDebugToolbarPanelLogging extends YiiDebugToolbarPanel
     /**
      * {@inheritdoc}
      */
-    public function getMenuTitle()
-    {
+    public function getMenuTitle() {
         return YiiDebug::t('Logging');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getMenuSubTitle()
-    {
+    public function getMenuSubTitle() {
         return $this->countMessages;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return YiiDebug::t('Log Messages');
     }
 
@@ -64,10 +61,8 @@ class YiiDebugToolbarPanelLogging extends YiiDebugToolbarPanel
      *
      * @return array
      */
-    public function getLogs()
-    {
-        if (null === $this->_logs)
-        {
+    public function getLogs() {
+        if (null === $this->_logs) {
             $this->_logs = $this->filterLogs();
         }
         return $this->_logs;
@@ -78,10 +73,8 @@ class YiiDebugToolbarPanelLogging extends YiiDebugToolbarPanel
      *
      * @return integer
      */
-    public function getCountMessages()
-    {
-        if (null === $this->_countMessages)
-        {
+    public function getCountMessages() {
+        if (null === $this->_countMessages) {
             $this->_countMessages = count($this->logs);
         }
         return $this->_countMessages;
@@ -90,8 +83,7 @@ class YiiDebugToolbarPanelLogging extends YiiDebugToolbarPanel
     /**
      * {@inheritdoc}
      */
-    public function run()
-    {
+    public function run() {
         $this->render('logging', array(
             'logs' => $this->logs
         ));
@@ -102,16 +94,14 @@ class YiiDebugToolbarPanelLogging extends YiiDebugToolbarPanel
      *
      * @return array
      */
-    protected function filterLogs()
-    {
+    protected function filterLogs() {
         $logs = array();
-        foreach ($this->owner->getLogs() as $entry)
-        {            
-            if (CLogger::LEVEL_PROFILE !== $entry[1] &&  false === strpos($entry[2], 'system.db.CDbCommand'))
-            {
+        foreach ($this->owner->getLogs() as $entry) {
+            if (CLogger::LEVEL_PROFILE !== $entry[1] && false === strpos($entry[2], 'system.db.CDbCommand')) {
                 $logs[] = $entry;
             }
         }
         return $logs;
     }
+
 }

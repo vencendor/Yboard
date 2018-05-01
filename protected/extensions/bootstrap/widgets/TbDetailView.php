@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TbDetailView class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
@@ -6,63 +7,59 @@
  * @license http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @package bootstrap.widgets
  */
-
 Yii::import('zii.widgets.CDetailView');
 
 /**
  * Bootstrap Zii detail view.
  */
-class TbDetailView extends CDetailView
-{
-	// Table types.
-	const TYPE_STRIPED = 'striped';
-	const TYPE_BORDERED = 'bordered';
-	const TYPE_CONDENSED = 'condensed';
+class TbDetailView extends CDetailView {
 
-	/**
-	 * @var string|array the table type.
-	 * Valid values are 'striped', 'bordered' and/or 'condensed'.
-	 */
-	public $type = array(self::TYPE_STRIPED, self::TYPE_CONDENSED);
-	/**
-	 * @var string the URL of the CSS file used by this detail view.
-	 * Defaults to false, meaning that no CSS will be included.
-	 */
-	public $cssFile = false;
+    // Table types.
+    const TYPE_STRIPED = 'striped';
+    const TYPE_BORDERED = 'bordered';
+    const TYPE_CONDENSED = 'condensed';
 
-	/**
-	 * Initializes the widget.
-	 */
-	public function init()
-	{
-		parent::init();
+    /**
+     * @var string|array the table type.
+     * Valid values are 'striped', 'bordered' and/or 'condensed'.
+     */
+    public $type = array(self::TYPE_STRIPED, self::TYPE_CONDENSED);
 
-		$classes = array('table');
+    /**
+     * @var string the URL of the CSS file used by this detail view.
+     * Defaults to false, meaning that no CSS will be included.
+     */
+    public $cssFile = false;
 
-		if (isset($this->type))
-		{
-			if (is_string($this->type))
-				$this->type = explode(' ', $this->type);
+    /**
+     * Initializes the widget.
+     */
+    public function init() {
+        parent::init();
 
-			$validTypes = array(self::TYPE_STRIPED, self::TYPE_BORDERED, self::TYPE_CONDENSED);
+        $classes = array('table');
 
-			if (!empty($this->type))
-			{
-				foreach ($this->type as $type)
-				{
-					if (in_array($type, $validTypes))
-						$classes[] = 'table-'.$type;
-				}
-			}
-		}
+        if (isset($this->type)) {
+            if (is_string($this->type))
+                $this->type = explode(' ', $this->type);
 
-		if (!empty($classes))
-		{
-			$classes = implode(' ', $classes);
-			if (isset($this->htmlOptions['class']))
-				$this->htmlOptions['class'] .= ' '.$classes;
-			else
-				$this->htmlOptions['class'] = $classes;
-		}
-	}
+            $validTypes = array(self::TYPE_STRIPED, self::TYPE_BORDERED, self::TYPE_CONDENSED);
+
+            if (!empty($this->type)) {
+                foreach ($this->type as $type) {
+                    if (in_array($type, $validTypes))
+                        $classes[] = 'table-' . $type;
+                }
+            }
+        }
+
+        if (!empty($classes)) {
+            $classes = implode(' ', $classes);
+            if (isset($this->htmlOptions['class']))
+                $this->htmlOptions['class'] .= ' ' . $classes;
+            else
+                $this->htmlOptions['class'] = $classes;
+        }
+    }
+
 }

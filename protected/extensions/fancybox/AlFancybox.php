@@ -12,8 +12,8 @@
  * @version: 1.0
  */
 
-class AlFancybox extends CWidget
-{
+class AlFancybox extends CWidget {
+
     /**
      * @var string Widget unique identifier
      */
@@ -67,7 +67,7 @@ class AlFancybox extends CWidget
             $config = array(
                 'openEffect' => 'none',
                 'closeEffect' => 'none',
-                'padding'   => 0,
+                'padding' => 0,
             );
         } else {
             $config = array(
@@ -75,7 +75,7 @@ class AlFancybox extends CWidget
                 'openSpeed' => 150,
                 'closeEffect' => 'elastic',
                 'closeSpeed' => 150,
-                'padding'   => 3,
+                'padding' => 3,
                 'helpers' => array(
                     'type' => 'over',
                 ),
@@ -86,8 +86,8 @@ class AlFancybox extends CWidget
         $config = CJavaScript::encode($this->config);
 
         Yii::app()->clientScript->registerScript($this->id, '
-            if ("'.$this->hideDOM.'") $("'.$this->hideDOM.'").hide();
-			$("'.$this->targetDOM.'").fancybox('.$config.');
+            if ("' . $this->hideDOM . '") $("' . $this->hideDOM . '").hide();
+			$("' . $this->targetDOM . '").fancybox(' . $config . ');
 		', CClientScript::POS_END);
     }
 
@@ -121,4 +121,5 @@ class AlFancybox extends CWidget
             throw new Exception('ALFancyBox error: Folder with fancybox assets not exists.');
         }
     }
+
 }

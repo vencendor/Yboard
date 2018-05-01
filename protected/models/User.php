@@ -7,11 +7,11 @@ class User extends CActiveRecord {
     const STATUS_BANNED = -1;
     //TODO: Delete for next version (backward compatibility)
     const STATUS_BANED = -1;
-    
+
     public $full_name;
     public $skype;
-    
-    const USERS_PROCESSING=10;
+
+    const USERS_PROCESSING = 10;
 
     /**
      * The followings are the available columns in table 'users':
@@ -49,7 +49,7 @@ class User extends CActiveRecord {
     public function rules() {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.CConsoleApplication
-               
+
         return array(
             array('username', 'length', 'max' => 20, 'min' => 3,
                 'message' => t("Incorrect username (length between 3 and 20 characters).")),
@@ -67,17 +67,14 @@ class User extends CActiveRecord {
                 'setOnEmpty' => true, 'on' => 'insert'),
             array('username, email, superuser, status', 'required'),
             array('superuser, status', 'numerical', 'integerOnly' => true),
-            array('location, contacts, skype', 'type', 'type'=>'string'),
-            array('lastvisit_at, birthday, create_at', 'date','format'=>array('yyyy-MM-dd','yyyy-MM-dd hh:mm:ss')),
-            array('phone', 'match','pattern'=>'/^[-\+0-9 ]+$/'),
-            
+            array('location, contacts, skype', 'type', 'type' => 'string'),
+            array('lastvisit_at, birthday, create_at', 'date', 'format' => array('yyyy-MM-dd', 'yyyy-MM-dd hh:mm:ss')),
+            array('phone', 'match', 'pattern' => '/^[-\+0-9 ]+$/'),
             array('id, username, password, email, activkey, '
                 . 'create_at, birthday, location, phone, skype, '
-                . 'contacts, lastvisit_at, superuser, status', 'safe', 'on'=>'search'),
+                . 'contacts, lastvisit_at, superuser, status', 'safe', 'on' => 'search'),
         );
     }
-
-    
 
     /**
      * @return array relational rules.
@@ -92,12 +89,12 @@ class User extends CActiveRecord {
          */
         return array();
     }
-    
-    static function usersPage($page=0){
-        $criteria=new CDbCriteria();
-        $criteria->compare('status',USER::STATUS_ACTIVE);
+
+    static function usersPage($page = 0) {
+        $criteria = new CDbCriteria();
+        $criteria->compare('status', USER::STATUS_ACTIVE);
         $criteria->limit = self::USERS_PROCESSING;
-        $criteria->offset = self::USERS_PROCESSING*$users_pagem;
+        $criteria->offset = self::USERS_PROCESSING * $users_pagem;
 
         return self::model()->findAll($criteria);
     }
@@ -148,9 +145,8 @@ class User extends CActiveRecord {
     }
 
     public function defaultScope() {
-        return CMap::mergeArray(Yii::app()->getModule('user')->defaultScope, 
-            array(
-            'alias' => 'user',
+        return CMap::mergeArray(Yii::app()->getModule('user')->defaultScope, array(
+                    'alias' => 'user',
         ));
     }
 
@@ -199,18 +195,18 @@ class User extends CActiveRecord {
             ),
         ));
     }
-    
+
     public static function getAdmins() {
         $admins = self::model()->active()->superuser()->findAll();
         $return_name = array();
-        foreach ($admins as $admin) 
+        foreach ($admins as $admin)
             array_push($return_name, $admin->username);
-        
+
         return $return_name;
     }
-    
+
     public static function getUserByName($username) {
-        return self::model()->findByAttributes(array('username' => $username) );
+        return self::model()->findByAttributes(array('username' => $username));
     }
 
     public function getCreatetime() {

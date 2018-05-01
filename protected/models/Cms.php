@@ -140,8 +140,8 @@ class Cms extends CActiveRecord {
             ),
         ));
     }
-    
-    public function getPageList($limit=5) {
+
+    public function getPageList($limit = 5) {
         return self::model()->findAll(array('condition' => " type = '1' "));
     }
 

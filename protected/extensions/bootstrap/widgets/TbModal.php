@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TbModal class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
@@ -12,76 +13,77 @@
  * Bootstrap modal widget.
  * @see http://twitter.github.com/bootstrap/javascript.html#modals
  */
-class TbModal extends CWidget
-{
-	/**
-	 * @var boolean indicates whether to automatically open the modal. Defaults to 'false'.
-	 */
-	public $autoOpen = false;
-	/**
-	 * @var boolean indicates whether the modal should use transitions. Defaults to 'true'.
-	 */
-	public $fade = true;
-	/**
-	 * @var array the options for the Bootstrap Javascript plugin.
-	 */
-	public $options = array();
-	/**
-	 * @var string[] the Javascript event handlers.
-	 */
-	public $events = array();
-	/**
-	 * @var array the HTML attributes for the widget container.
-	 */
-	public $htmlOptions = array();
+class TbModal extends CWidget {
 
-	/**
-	 * Initializes the widget.
-	 */
-	public function init()
-	{
-		if (!isset($this->htmlOptions['id']))
-			$this->htmlOptions['id'] = $this->getId();
+    /**
+     * @var boolean indicates whether to automatically open the modal. Defaults to 'false'.
+     */
+    public $autoOpen = false;
 
-		if ($this->autoOpen === false && !isset($this->options['show']))
-			$this->options['show'] = false;
+    /**
+     * @var boolean indicates whether the modal should use transitions. Defaults to 'true'.
+     */
+    public $fade = true;
 
-		$classes = array('modal hide');
+    /**
+     * @var array the options for the Bootstrap Javascript plugin.
+     */
+    public $options = array();
 
-		if ($this->fade === true)
-			$classes[] = 'fade';
+    /**
+     * @var string[] the Javascript event handlers.
+     */
+    public $events = array();
 
-		if (!empty($classes))
-		{
-			$classes = implode(' ', $classes);
-			if (isset($this->htmlOptions['class']))
-				$this->htmlOptions['class'] .= ' '.$classes;
-			else
-				$this->htmlOptions['class'] = $classes;
-		}
+    /**
+     * @var array the HTML attributes for the widget container.
+     */
+    public $htmlOptions = array();
 
-		echo CHtml::openTag('div', $this->htmlOptions);
-	}
+    /**
+     * Initializes the widget.
+     */
+    public function init() {
+        if (!isset($this->htmlOptions['id']))
+            $this->htmlOptions['id'] = $this->getId();
 
-	/**
-	 * Runs the widget.
-	 */
-	public function run()
-	{
-		$id = $this->htmlOptions['id'];
+        if ($this->autoOpen === false && !isset($this->options['show']))
+            $this->options['show'] = false;
 
-		echo '</div>';
+        $classes = array('modal hide');
 
-		/** @var CClientScript $cs */
-		$cs = Yii::app()->getClientScript();
+        if ($this->fade === true)
+            $classes[] = 'fade';
 
-		$options = !empty($this->options) ? CJavaScript::encode($this->options) : '';
-		$cs->registerScript(__CLASS__.'#'.$id, "jQuery('#{$id}').modal({$options});");
+        if (!empty($classes)) {
+            $classes = implode(' ', $classes);
+            if (isset($this->htmlOptions['class']))
+                $this->htmlOptions['class'] .= ' ' . $classes;
+            else
+                $this->htmlOptions['class'] = $classes;
+        }
 
-		foreach ($this->events as $name => $handler)
-		{
-			$handler = CJavaScript::encode($handler);
-			$cs->registerScript(__CLASS__.'#'.$id.'_'.$name, "jQuery('#{$id}').on('{$name}', {$handler});");
-		}
-	}
+        echo CHtml::openTag('div', $this->htmlOptions);
+    }
+
+    /**
+     * Runs the widget.
+     */
+    public function run() {
+        $id = $this->htmlOptions['id'];
+
+        echo '</div>';
+
+        /** @var CClientScript $cs */
+        $cs = Yii::app()->getClientScript();
+
+        $options = !empty($this->options) ? CJavaScript::encode($this->options) : '';
+        $cs->registerScript(__CLASS__ . '#' . $id, "jQuery('#{$id}').modal({$options});");
+
+        foreach ($this->events as $name => $handler) {
+            $handler = CJavaScript::encode($handler);
+            $cs->registerScript(__CLASS__ . '#' . $id . '_' . $name, "jQuery('#{$id}').on('{$name}', {$handler});");
+        }
+    }
+
 }

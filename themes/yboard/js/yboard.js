@@ -30,8 +30,8 @@ function loadFields(t) {
 }
 
 
-function show_converter(){
-    if($('.price_converter').css('display')=='none'){
+function show_converter() {
+    if ($('.price_converter').css('display') == 'none') {
         $('.price_converter').show('slow');
     } else {
         $('.price_converter').hide('slow');
@@ -51,7 +51,7 @@ function addOption(t, name) {
     var opt = parseInt($(optList[optList.length - 1]).find('input').attr('atr_id'));
 
     $("<div><input type='text' atr_id='" + (opt + 1) + "' name='config[" + name + "][" + (opt + 1) + "]'  value='' />"
-    + " <a class='icon-remove' href='javascript:void(0)' onclick='removeOption(this)' ></a></div>").insertBefore(t);
+            + " <a class='icon-remove' href='javascript:void(0)' onclick='removeOption(this)' ></a></div>").insertBefore(t);
 
 }
 function removeOption(t) {
@@ -62,8 +62,8 @@ function removeOption(t) {
 }
 
 
-function open_search(){
-    if( $(".advanced_search").css('display') == 'none' )
+function open_search() {
+    if ($(".advanced_search").css('display') == 'none')
         $(".advanced_search").show();
     else
         $(".advanced_search").hide();

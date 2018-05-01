@@ -9,8 +9,8 @@
  *
  * @author Victor Demin <mail@vdemin.com>
  */
-class ImageFileUploadWidget extends CWidget
-{
+class ImageFileUploadWidget extends CWidget {
+
     /**
      * @var CActiveForm form
      */
@@ -31,8 +31,7 @@ class ImageFileUploadWidget extends CWidget
      */
     public $preview;
 
-    public function run()
-    {
+    public function run() {
         $this->render('imageFileUploadWidget', array(
             'model' => $this->model,
             'form' => $this->form,

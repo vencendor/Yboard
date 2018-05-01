@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Image API driver.
  *
@@ -9,15 +10,12 @@
  * @copyright  (c) 2007-2008 Kohana Team
  * @license    http://kohanaphp.com/license.html
  */
-abstract class Image_Driver
-{
+abstract class Image_Driver {
 
     // Reference to the current image
     protected $image;
-
     // Reference to the temporary processing image
     protected $tmp_image;
-
     // Processing errors
     protected $errors = array();
 
@@ -27,8 +25,7 @@ abstract class Image_Driver
      * @param   $actions array actions
      * @return  boolean
      */
-    public function execute($actions)
-    {
+    public function execute($actions) {
         foreach ($actions as $func => $args) {
             if (!$this->$func($args))
                 return FALSE;
@@ -44,8 +41,7 @@ abstract class Image_Driver
      * @param   $geometry array  geometry properties
      * @return  void
      */
-    protected function sanitize_geometry(& $geometry)
-    {
+    protected function sanitize_geometry(& $geometry) {
         list($width, $height) = $this->properties();
 
         // Turn off error reporting
@@ -60,8 +56,7 @@ abstract class Image_Driver
             $geometry['top'] = floor(($height / 2) - ($geometry['height'] / 2));
         } elseif ($geometry['top'] === 'top') {
             $geometry['top'] = 0;
-        }
-        elseif ($geometry['top'] === 'bottom') {
+        } elseif ($geometry['top'] === 'bottom') {
             $geometry['top'] = $height - $geometry['height'];
         }
 
@@ -70,8 +65,7 @@ abstract class Image_Driver
             $geometry['left'] = floor(($width / 2) - ($geometry['width'] / 2));
         } elseif ($geometry['left'] === 'left') {
             $geometry['left'] = 0;
-        }
-        elseif ($geometry['left'] === 'right') {
+        } elseif ($geometry['left'] === 'right') {
             $geometry['left'] = $width - $geometry['height'];
         }
 
@@ -165,4 +159,6 @@ abstract class Image_Driver
     abstract public function negate($unused);
 
     abstract public function watermark($params);
-} // End Image Driver
+}
+
+// End Image Driver

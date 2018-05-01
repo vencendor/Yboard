@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Backend controller for GalleryManager widget.
  * Provides following features:
@@ -9,11 +10,9 @@
  *
  * @author Bogdan Savluk <savluk.bogdan@gmail.com>
  */
+class GalleryController extends CController {
 
-class GalleryController extends CController
-{
-    public function filters()
-    {
+    public function filters() {
         return array(
             'postOnly + delete, ajaxUpload, order, changeData',
         );
@@ -23,14 +22,15 @@ class GalleryController extends CController
      * Removes image with ids specified in post request.
      * On success returns 'OK'
      */
-    public function actionDelete()
-    {
+    public function actionDelete() {
         $id = $_POST['id'];
         /** @var $photos GalleryPhoto[] */
         $photos = GalleryPhoto::model()->findAllByPk($id);
         foreach ($photos as $photo) {
-            if ($photo !== null) $photo->delete();
-            else throw new CHttpException(400, 'Photo, not found');
+            if ($photo !== null)
+                $photo->delete();
+            else
+                throw new CHttpException(400, 'Photo, not found');
         }
         echo 'OK';
     }
@@ -41,8 +41,7 @@ class GalleryController extends CController
      * @param $gallery_id string Gallery Id to upload images
      * @throws CHttpException
      */
-    public function actionAjaxUpload($gallery_id = null)
-    {
+    public function actionAjaxUpload($gallery_id = null) {
         $model = new GalleryPhoto();
         $model->gallery_id = $gallery_id;
         $imageFile = CUploadedFile::getInstanceByName('image');
@@ -54,13 +53,13 @@ class GalleryController extends CController
         $model->setImage($imageFile->getTempName());
         header("Content-Type: application/json");
         echo CJSON::encode(
-            array(
-                'id' => $model->id,
-                'rank' => $model->rank,
-                'name' => (string)$model->name,
-                'description' => (string)$model->description,
-                'preview' => $model->getPreview(),
-            ));
+                array(
+                    'id' => $model->id,
+                    'rank' => $model->rank,
+                    'name' => (string) $model->name,
+                    'description' => (string) $model->description,
+                    'preview' => $model->getPreview(),
+        ));
     }
 
     /**
@@ -68,14 +67,15 @@ class GalleryController extends CController
      * Variable $_POST['order'] - new arrange of image ids, to be saved
      * @throws CHttpException
      */
-    public function actionOrder()
-    {
-        if (!isset($_POST['order'])) throw new CHttpException(400, 'No data, to save');
+    public function actionOrder() {
+        if (!isset($_POST['order']))
+            throw new CHttpException(400, 'No data, to save');
         $gp = $_POST['order'];
         $orders = array();
         $i = 0;
         foreach ($gp as $k => $v) {
-            if (!$v) $gp[$k] = $k;
+            if (!$v)
+                $gp[$k] = $k;
             $orders[] = $gp[$k];
             $i++;
         }
@@ -86,13 +86,12 @@ class GalleryController extends CController
             /** @var $p GalleryPhoto */
             $p = GalleryPhoto::model()->findByPk($k);
             $p->rank = $orders[$i];
-            $res[$k]=$orders[$i];
+            $res[$k] = $orders[$i];
             $p->save(false);
             $i++;
         }
 
         echo CJSON::encode($res);
-
     }
 
     /**
@@ -100,9 +99,9 @@ class GalleryController extends CController
      * On success returns JSON array od objects with new image info.
      * @throws CHttpException
      */
-    public function actionChangeData()
-    {
-        if (!isset($_POST['photo'])) throw new CHttpException(400, 'Nothing, to save');
+    public function actionChangeData() {
+        if (!isset($_POST['photo']))
+            throw new CHttpException(400, 'Nothing, to save');
         $data = $_POST['photo'];
         $criteria = new CDbCriteria();
         $criteria->index = 'id';
@@ -121,11 +120,12 @@ class GalleryController extends CController
             $resp[] = array(
                 'id' => $model->id,
                 'rank' => $model->rank,
-                'name' => (string)$model->name,
-                'description' => (string)$model->description,
+                'name' => (string) $model->name,
+                'description' => (string) $model->description,
                 'preview' => $model->getPreview(),
             );
         }
         echo CJSON::encode($resp);
     }
+
 }

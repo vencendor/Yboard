@@ -13,7 +13,7 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
     </div>
     <div class='date'>
         <span><a href='<? echo Yii::app()->createUrl('user/view', array('id' => $model->user->id))
-            ?>'>
+?>'>
                 <i class='fa fa-user'></i><?= $model->user->username ?>
             </a></span>  
         <span><i class='fa fa-clock-o'></i><?= PeopleDate::format($model->created_at) ?></span> 
@@ -77,9 +77,9 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
             <?= $model->user->email ?> <br/>
             <?= $model->user->skype ?> 
         </div>
-		
-		
-        <? if (Yii::app()->user->id != $model->user->id and isset($model->user->id) ) { ?>
+
+
+        <? if (Yii::app()->user->id != $model->user->id and isset($model->user->id)) { ?>
             <div>
                 <?php
                 echo $this->renderPartial('/messages/_form', array(

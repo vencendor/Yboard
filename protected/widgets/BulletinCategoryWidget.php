@@ -13,8 +13,7 @@
  * 
  * 
  */
-class BulletinCategoryWidget extends CWidget
-{
+class BulletinCategoryWidget extends CWidget {
 
     /**
      * @var CActiveForm form
@@ -26,19 +25,16 @@ class BulletinCategoryWidget extends CWidget
      */
     public $model;
 
-    public function run()
-    {
+    public function run() {
         $this->render('bulletinCategoryWidget', array('model' => $this->model, 'form' => $this->form, 'categories' => $this->categoriesListData()));
     }
 
-    public function categoriesListData()
-    {
+    public function categoriesListData() {
         $categoriesTree = Category::model()->roots()->findAll();
         $categories = array();
-        foreach ($categoriesTree as $category)
-        {
+        foreach ($categoriesTree as $category) {
             //$categories[$category->name] = CHtml::listData($category->children()->findAll(), 'id', 'name');
-			$categories[$category->id] = $category->name;
+            $categories[$category->id] = $category->name;
         }
         return $categories;
     }

@@ -28,8 +28,6 @@ class ConfigForm extends CFormModel {
         );
     }
 
-
-
 }
 
 ?>

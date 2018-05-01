@@ -9,18 +9,16 @@
  *
  * @author Victor Demin <mail@vdemin.com>
  */
-class ImagesHelper
-{
+class ImagesHelper {
+
     /**
      * Process uploaded images.
      * Save to gallery.
      * @param Bulletin $model
      * @param CUploadedFile[] $images
      */
-    public static function processImages($model, $images)
-    {
-        if (isset($images) && count($images) > 0)
-        {
+    public static function processImages($model, $images) {
+        if (isset($images) && count($images) > 0) {
             // configure and save gallery model
             $gallery = new Gallery();
             $gallery->name = false;
@@ -39,8 +37,7 @@ class ImagesHelper
             $model->save();
 
             // go through each uploaded image
-            foreach ($images as $imageFile)
-            {
+            foreach ($images as $imageFile) {
                 $galleryPhoto = new GalleryPhoto();
                 $galleryPhoto->gallery_id = $gallery->id;
                 $galleryPhoto->name = '';
@@ -59,10 +56,8 @@ class ImagesHelper
      * @param Advertisement $model
      * @param CUploadedFile $banner
      */
-    public static function processAdvertisement($model, $banner)
-    {
-        if (!empty($banner))
-        {
+    public static function processAdvertisement($model, $banner) {
+        if (!empty($banner)) {
             //delete old file
             if ($model->banner && file_exists($model->bannersDir . $model->banner))
                 unlink($model->bannersDir . $model->banner);
@@ -70,7 +65,7 @@ class ImagesHelper
                 $banner = current($banner);
             $model->banner = $banner;
             Yii::app()->image->load($model->banner->getTempName())
-                ->save($model->bannersDir . $model->banner);
+                    ->save($model->bannersDir . $model->banner);
         }
     }
 

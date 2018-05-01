@@ -9,12 +9,12 @@
  * Вудалить
 
  *  */
-
 ?>
 
-		<?php echo $form->labelEx($model,'type'); ?>
-        <?php echo CHtml::activeRadioButtonList($model,'type',
-            array(Yii::t('bulletin','Demand'), Yii::t('bulletin','Offer')),
-            array('labelOptions'=>array('style'=>'display:inline'), 'separator'=>' ')
-            ); ?>
-		<?php echo $form->error($model,'type'); ?>
+<?php echo $form->labelEx($model, 'type'); ?>
+<?php
+
+echo CHtml::activeRadioButtonList($model, 'type', array(Yii::t('bulletin', 'Demand'), Yii::t('bulletin', 'Offer')), array('labelOptions' => array('style' => 'display:inline'), 'separator' => ' ')
+);
+?>
+<?php echo $form->error($model, 'type'); ?>

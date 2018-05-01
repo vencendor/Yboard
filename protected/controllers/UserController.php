@@ -1,158 +1,147 @@
 <?php
 
-class UserController extends Controller
-{
-	/**
-	 * @var CActiveRecord the currently loaded data model instance.
-	 */
-	private $_model;
+class UserController extends Controller {
 
-	/**
-	 * @return array action filters
-	 */
-	public function filters()
-	{
-		return CMap::mergeArray(parent::filters(),array(
-			'accessControl', // perform access control for CRUD operations
-		));
-	}
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
-	 */
-	public function accessRules()
-	{
-		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-                        array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('update'),
-				'expression'=>'Yii::app()->user->id == Yii::app()->request->getParam("id")',
-			),
-                        array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('*'),
-				'expression'=>'Yii::app()->user->isAdmin()',
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-		);
-	}
+    /**
+     * @var CActiveRecord the currently loaded data model instance.
+     */
+    private $_model;
 
-	/**
-	 * Displays a particular model.
-	 */
-	public function actionView($id)
-	{   
-            $mes_model=new Messages();
-            
-            //$model=User::model()->findByPk($id);
-            
-            //echo Yii::app()->request->getParam('id');
-            
-		$model = $this->loadUser($id);
-		$this->render('view',array(
-			'model'=>$model,
-                        'mes_model'=>$mes_model,
-		));
-	}
+    /**
+     * @return array action filters
+     */
+    public function filters() {
+        return CMap::mergeArray(parent::filters(), array(
+                    'accessControl', // perform access control for CRUD operations
+        ));
+    }
 
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('User', array(
-			'criteria'=>array(
-		        'condition'=>'status>'.User::STATUS_BANNED,
-		    ),
-				
-			'pagination'=>array(
-				'pageSize'=>Yii::app()->controller->module->user_page_size,
-			),
-		));
+    /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
+    public function accessRules() {
+        return array(
+            array('allow', // allow all users to perform 'index' and 'view' actions
+                'actions' => array('index', 'view'),
+                'users' => array('*'),
+            ),
+            array('allow', // allow all users to perform 'index' and 'view' actions
+                'actions' => array('update'),
+                'expression' => 'Yii::app()->user->id == Yii::app()->request->getParam("id")',
+            ),
+            array('allow', // allow all users to perform 'index' and 'view' actions
+                'actions' => array('*'),
+                'expression' => 'Yii::app()->user->isAdmin()',
+            ),
+            array('deny', // deny all users
+                'users' => array('*'),
+            ),
+        );
+    }
 
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
+    /**
+     * Displays a particular model.
+     */
+    public function actionView($id) {
+        $mes_model = new Messages();
 
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 */
-	public function loadModel()
-	{
-		if($this->_model===null)
-		{
-			if(isset($_GET['id']))
-				$this->_model=User::model()->findbyPk($_GET['id']);
-			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
-		}
-		return $this->_model;
-	}
-        
-        public function actionUpdate($id)
-	{
-		$model=$this->loadModel($id);
+        //$model=User::model()->findByPk($id);
+        //echo Yii::app()->request->getParam('id');
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+        $model = $this->loadUser($id);
+        $this->render('view', array(
+            'model' => $model,
+            'mes_model' => $mes_model,
+        ));
+    }
 
-		if(isset($_POST['User']))
-		{
-			$model->attributes=$_POST['User'];
-                        if(!$model->status)
-                            $model->status=1;
-                        if(!$model->superuser)
-                            $model->superuser=0;
-                        
-                        $model->validate();
-                        
-			if($model->save()) {
-                            $this->redirect(array('view','id'=>$model->id));
-                        } else {
-                            var_dump($model->getErrors());
-                        }
-		}
+    /**
+     * Lists all models.
+     */
+    public function actionIndex() {
+        $dataProvider = new CActiveDataProvider('User', array(
+            'criteria' => array(
+                'condition' => 'status>' . User::STATUS_BANNED,
+            ),
+            'pagination' => array(
+                'pageSize' => Yii::app()->controller->module->user_page_size,
+            ),
+        ));
 
-		$this->render('update',array(
-			'model'=>$model,
-		));
-	}
-        
-        public function actionBan($id){
-            $model=$this->loadModel($id);
-            $model->status=USER::STATUS_BANNED;
-            $model->update(array('status'));
-            
-            //$adv_model = new Adverts();
-            $adv_model = Adverts::model()->find("user_id = :id ",array(':id'=>intval($id)));
-            if($adv_model){
-                $adv_model->delete();
+        $this->render('index', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
+
+    /**
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     */
+    public function loadModel() {
+        if ($this->_model === null) {
+            if (isset($_GET['id']))
+                $this->_model = User::model()->findbyPk($_GET['id']);
+            if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        return $this->_model;
+    }
+
+    public function actionUpdate($id) {
+        $model = $this->loadModel($id);
+
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+
+        if (isset($_POST['User'])) {
+            $model->attributes = $_POST['User'];
+            if (!$model->status)
+                $model->status = 1;
+            if (!$model->superuser)
+                $model->superuser = 0;
+
+            $model->validate();
+
+            if ($model->save()) {
+                $this->redirect(array('view', 'id' => $model->id));
+            } else {
+                var_dump($model->getErrors());
             }
-            $this->redirect(array('/'));
         }
 
+        $this->render('update', array(
+            'model' => $model,
+        ));
+    }
 
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the primary key value. Defaults to null, meaning using the 'id' GET variable
-	 */
-	public function loadUser($id=null)
-	{
-		if($this->_model===null)
-		{
-			if($id!==null || isset($_GET['id']))
-				$this->_model=User::model()->findbyPk($id!==null ? $id : $_GET['id']);
-			if($this->_model===null)
-				throw new CHttpException(404,'The requested page does not exist.');
-		}
-		return $this->_model;
-	}
+    public function actionBan($id) {
+        $model = $this->loadModel($id);
+        $model->status = USER::STATUS_BANNED;
+        $model->update(array('status'));
+
+        //$adv_model = new Adverts();
+        $adv_model = Adverts::model()->find("user_id = :id ", array(':id' => intval($id)));
+        if ($adv_model) {
+            $adv_model->delete();
+        }
+        $this->redirect(array('/'));
+    }
+
+    /**
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     * @param integer the primary key value. Defaults to null, meaning using the 'id' GET variable
+     */
+    public function loadUser($id = null) {
+        if ($this->_model === null) {
+            if ($id !== null || isset($_GET['id']))
+                $this->_model = User::model()->findbyPk($id !== null ? $id : $_GET['id']);
+            if ($this->_model === null)
+                throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        return $this->_model;
+    }
+
 }

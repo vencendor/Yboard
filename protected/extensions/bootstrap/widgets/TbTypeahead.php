@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TbTypeahead class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
@@ -12,43 +13,42 @@
  * Bootstrap typeahead widget.
  * @see http://twitter.github.com/bootstrap/javascript.html#typeahead
  */
-class TbTypeahead extends CInputWidget
-{
-	/**
-	 * @var array the options for the Bootstrap Javascript plugin.
-	 */
-	public $options = array();
+class TbTypeahead extends CInputWidget {
 
-	/**
-	 * Initializes the widget.
-	 */
-	public function init()
-	{
-		$this->htmlOptions['type'] = 'text';
-		$this->htmlOptions['data-provide'] = 'typeahead';
-	}
+    /**
+     * @var array the options for the Bootstrap Javascript plugin.
+     */
+    public $options = array();
 
-	/**
-	 * Runs the widget.
-	 */
-	public function run()
-	{
-		list($name, $id) = $this->resolveNameID();
+    /**
+     * Initializes the widget.
+     */
+    public function init() {
+        $this->htmlOptions['type'] = 'text';
+        $this->htmlOptions['data-provide'] = 'typeahead';
+    }
 
-		if (isset($this->htmlOptions['id']))
-			$id = $this->htmlOptions['id'];
-		else
-			$this->htmlOptions['id'] = $id;
+    /**
+     * Runs the widget.
+     */
+    public function run() {
+        list($name, $id) = $this->resolveNameID();
 
-		if (isset($this->htmlOptions['name']))
-			$name = $this->htmlOptions['name'];
+        if (isset($this->htmlOptions['id']))
+            $id = $this->htmlOptions['id'];
+        else
+            $this->htmlOptions['id'] = $id;
 
-		if ($this->hasModel())
-			echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
-		else
-			echo CHtml::textField($name, $this->value, $this->htmlOptions);
+        if (isset($this->htmlOptions['name']))
+            $name = $this->htmlOptions['name'];
 
-		$options = !empty($this->options) ? CJavaScript::encode($this->options) : '';
-		Yii::app()->clientScript->registerScript(__CLASS__.'#'.$id, "jQuery('#{$id}').typeahead({$options});");
-	}
+        if ($this->hasModel())
+            echo CHtml::activeTextField($this->model, $this->attribute, $this->htmlOptions);
+        else
+            echo CHtml::textField($name, $this->value, $this->htmlOptions);
+
+        $options = !empty($this->options) ? CJavaScript::encode($this->options) : '';
+        Yii::app()->clientScript->registerScript(__CLASS__ . '#' . $id, "jQuery('#{$id}').typeahead({$options});");
+    }
+
 }

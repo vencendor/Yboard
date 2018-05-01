@@ -48,7 +48,7 @@ class Controller extends CController {
     public function __construct($id, $module = null) {
 
         global $CONFIG;
-        
+
         parent::__construct($id, $module);
 
         if (!is_file(dirname($CONFIG) . "/install")) {
@@ -171,15 +171,15 @@ class Controller extends CController {
     public function meta_title() {
 
         echo $this->meta['title'];
-        
+
         $title = $this->subMetaVars($this->meta['title']);
         return $title;
     }
 
     public function meta_description() {
-        
+
         echo $this->meta['description'];
-        
+
         $description = $this->subMetaVars($this->meta['description']);
         return $description;
     }

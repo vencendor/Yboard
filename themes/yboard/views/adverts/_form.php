@@ -17,7 +17,7 @@
     <?php echo $form->errorSummary($model); ?>
 
     <div >
-        <?php if (isset($_POST['Adverts']['name']) or $model->name ) { ?>
+        <?php if (isset($_POST['Adverts']['name']) or $model->name) { ?>
             <div >
                 <?php echo $form->labelEx($model, 'category_id'); ?>
                 <?php echo CHtml::dropDownList('category_id', $model->category_id, CHtml::listData(Category::model()->findAll(), "id", "name"), array('empty' => t('Choose category')));
@@ -25,7 +25,7 @@
                 <?php echo $form->error($model, 'category_id'); ?>
             </div>
         <?php } else { ?>
-            <?php echo  CHtml::activeHiddenField($model, 'category_id'); ?>
+            <?php echo CHtml::activeHiddenField($model, 'category_id'); ?>
             <?php echo $form->labelEx($model, 'category_id'); ?>
             <?php
             echo CHtml::dropDownList('category_id', 0, CHtml::listData(Category::model()->roots()->findAll(), "id", "name"), array('empty' => t('Choose category'), 'onchange' => 'loadFields(this)'));
@@ -35,8 +35,8 @@
         <?php echo $form->error($model, 'category_id'); ?>
         <div class='ajax-div'></div>
     </div>
-    
-    <div id='bulletin_form'  <?php echo (isset($_POST['Adverts']['name']) or $model->name )?"":"style='display:none;'" ?> >
+
+    <div id='bulletin_form'  <?php echo (isset($_POST['Adverts']['name']) or $model->name ) ? "" : "style='display:none;'" ?> >
 
         <div >
             <?php echo $form->labelEx($model, 'name'); ?>
@@ -67,12 +67,12 @@
          */
         ?>
         <div>
-            <?php echo CHtml::checkBox('no_price', $model->price==0?true:false, array('onclick' => 'hide_price()') ); ?>
+            <?php echo CHtml::checkBox('no_price', $model->price == 0 ? true : false, array('onclick' => 'hide_price()')); ?>
             <?php echo CHtml::label(t('no price'), 'no_price'); ?>
         </div>
         <div class='price'>
-            <?php echo $form->labelEx($model, 'price', array( 'disabled' => $model->price==0?'disabled':"" )); ?>
-            <?php echo $form->textField($model, 'price', array( 'disabled' => $model->price==0?'disabled':"" )); ?>
+            <?php echo $form->labelEx($model, 'price', array('disabled' => $model->price == 0 ? 'disabled' : "")); ?>
+            <?php echo $form->textField($model, 'price', array('disabled' => $model->price == 0 ? 'disabled' : "")); ?>
             <?php echo $form->dropDownList($model, 'currency', $this->settings['currency']); ?>
             <?php echo $form->error($model, 'price'); ?>
         </div>

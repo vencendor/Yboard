@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ESitemapXMLAction.php File
  *
@@ -6,25 +7,25 @@
  *
  * @package ESitemap
  */
-
 Yii::import('ext.sitemap.*');
+
 /**
  * Description of ESitemapXMLAction 
  *
  * Usage:
  * <pre>
- *	public function actions()
+ * 	public function actions()
  * 	{
- *		return array(
- *			'sitemap'=>array(
- *				'class'=>'ext.sitemap.ESitemapAction',
- *			),
+ * 		return array(
+ * 			'sitemap'=>array(
+ * 				'class'=>'ext.sitemap.ESitemapAction',
+ * 			),
  * 			'sitemapxml'=>array(
- *				'class'=>'ext.sitemap.ESitemapXMLAction',
- *				//'bypassLogs'=>true,
- *			),			
- *		);
- *	}
+ * 				'class'=>'ext.sitemap.ESitemapXMLAction',
+ * 				//'bypassLogs'=>true,
+ * 			),			
+ * 		);
+ * 	}
  * </pre>
  *
  * @author Dana Luther <dluther@internationalstudent.com>
@@ -32,32 +33,32 @@ Yii::import('ext.sitemap.*');
  */
 class ESitemapXMLAction extends ESitemapAction {
 
-	/**
-	 * @var string The view to be rendered. The view file should be stored in
-	 * the standard controller views subdirectory
-	 */
-	public $sitemapView = 'sitemapxml';
+    /**
+     * @var string The view to be rendered. The view file should be stored in
+     * the standard controller views subdirectory
+     */
+    public $sitemapView = 'sitemapxml';
 
-	/**
-	 * @var boolean Whether to exit directly from the action. This is necessary
-	 * when using some of the UI based web toolbars etc
-	 */
-	public $bypassLogs;
+    /**
+     * @var boolean Whether to exit directly from the action. This is necessary
+     * when using some of the UI based web toolbars etc
+     */
+    public $bypassLogs;
 
-	/**
-	 * Execute the action
-	 */
-	public function run()
-	{
-		$this->initializeList();
+    /**
+     * Execute the action
+     */
+    public function run() {
+        $this->initializeList();
         header('Content-Type: application/xml');
-        $this->controller->renderPartial( $this->sitemapView ,array('list'=>$this->list));
-		
-		// If running some UI log routes, it will break XML. In that case, set
-		// the bypassLogs param
-		if ($this->bypassLogs)
-			exit();
-	}
+        $this->controller->renderPartial($this->sitemapView, array('list' => $this->list));
+
+        // If running some UI log routes, it will break XML. In that case, set
+        // the bypassLogs param
+        if ($this->bypassLogs)
+            exit();
+    }
 
 }
+
 ?>

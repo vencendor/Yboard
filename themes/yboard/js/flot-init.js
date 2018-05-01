@@ -4,33 +4,33 @@ var InitiateFlotBarChart = function () {
     return {
         init: function () {
             var data2 = [{
-                color: themesecondary,
-                label: "Direct Visits",
-                data: [[3, 2], [4, 5], [5, 4], [6, 11], [7, 12], [8, 11], [9, 8], [10, 14], [11, 12], [12, 16], [13, 9],
-                [14, 10], [15, 14], [16, 15], [17, 9]],
+                    color: themesecondary,
+                    label: "Direct Visits",
+                    data: [[3, 2], [4, 5], [5, 4], [6, 11], [7, 12], [8, 11], [9, 8], [10, 14], [11, 12], [12, 16], [13, 9],
+                        [14, 10], [15, 14], [16, 15], [17, 9]],
 
-                lines: {
-                    show: true,
-                    fill: true,
-                    lineWidth: .1,
-                    fillColor: {
-                        colors: [{
-                            opacity: 0
-                        }, {
-                            opacity: 0.4
-                        }]
-                    }
+                    lines: {
+                        show: true,
+                        fill: true,
+                        lineWidth: .1,
+                        fillColor: {
+                            colors: [{
+                                    opacity: 0
+                                }, {
+                                    opacity: 0.4
+                                }]
+                        }
+                    },
+                    points: {
+                        show: false
+                    },
+                    shadowSize: 0
                 },
-                points: {
-                    show: false
-                },
-                shadowSize: 0
-            },
                 {
                     color: themeprimary,
                     label: "Referral Visits",
                     data: [[3, 10], [4, 13], [5, 12], [6, 16], [7, 19], [8, 19], [9, 24], [10, 19], [11, 18], [12, 21], [13, 17],
-                    [14, 14], [15, 12], [16, 14], [17, 15]],
+                        [14, 14], [15, 12], [16, 14], [17, 15]],
                     bars: {
                         order: 1,
                         show: true,
@@ -39,10 +39,10 @@ var InitiateFlotBarChart = function () {
                         lineWidth: .5,
                         fillColor: {
                             colors: [{
-                                opacity: 0.4
-                            }, {
-                                opacity: 1
-                            }]
+                                    opacity: 0.4
+                                }, {
+                                    opacity: 1
+                                }]
                         }
                     }
                 },
@@ -50,16 +50,16 @@ var InitiateFlotBarChart = function () {
                     color: themethirdcolor,
                     label: "Search Engines",
                     data: [[3, 14], [4, 11], [5, 10], [6, 9], [7, 5], [8, 8], [9, 5], [10, 6], [11, 4], [12, 7], [13, 4],
-                    [14, 3], [15, 4], [16, 6], [17, 4]],
+                        [14, 3], [15, 4], [16, 6], [17, 4]],
                     lines: {
                         show: true,
                         fill: false,
                         fillColor: {
                             colors: [{
-                                opacity: 0.3
-                            }, {
-                                opacity: 0
-                            }]
+                                    opacity: 0.3
+                                }, {
+                                    opacity: 0
+                                }]
                         }
                     },
                     points: {
@@ -108,24 +108,24 @@ var InitiateFlotSelectableChart = function () {
         init: function () {
 
             var data = [{
-                color: themeprimary,
-                label: "Windows",
-                data: [[1990, 18.9], [1991, 18.7], [1992, 18.4], [1993, 19.3], [1994, 19.5], [1995, 19.3], [1996, 19.4], [1997, 20.2], [1998, 19.8], [1999, 19.9], [2000, 20.4], [2001, 20.1], [2002, 20.0], [2003, 19.8], [2004, 20.4]]
-            }
-            , {
-                color: themethirdcolor,
-                label: "Linux",
-                data: [[1990, 10.0], [1991, 11.3], [1992, 9.9], [1993, 9.6], [1994, 9.5], [1995, 9.5], [1996, 9.9], [1997, 9.3], [1998, 9.2], [1999, 9.2], [2000, 9.5], [2001, 9.6], [2002, 9.3], [2003, 9.4], [2004, 9.79]]
-            }
-            , {
-                color: themesecondary,
-                label: "Mac OS",
-                data: [[1990, 5.8], [1991, 6.0], [1992, 5.9], [1993, 5.5], [1994, 5.7], [1995, 5.3], [1996, 6.1], [1997, 5.4], [1998, 5.4], [1999, 5.1], [2000, 5.2], [2001, 5.4], [2002, 6.2], [2003, 5.9], [2004, 5.89]]
-            }, {
-                color: themefourthcolor,
-                label: "DOS",
-                data: [[1990, 8.3], [1991, 8.3], [1992, 7.8], [1993, 8.3], [1994, 8.4], [1995, 5.9], [1996, 6.4], [1997, 6.7], [1998, 6.9], [1999, 7.6], [2000, 7.4], [2001, 8.1], [2002, 12.5], [2003, 9.9], [2004, 19.0]]
-            }];
+                    color: themeprimary,
+                    label: "Windows",
+                    data: [[1990, 18.9], [1991, 18.7], [1992, 18.4], [1993, 19.3], [1994, 19.5], [1995, 19.3], [1996, 19.4], [1997, 20.2], [1998, 19.8], [1999, 19.9], [2000, 20.4], [2001, 20.1], [2002, 20.0], [2003, 19.8], [2004, 20.4]]
+                }
+                , {
+                    color: themethirdcolor,
+                    label: "Linux",
+                    data: [[1990, 10.0], [1991, 11.3], [1992, 9.9], [1993, 9.6], [1994, 9.5], [1995, 9.5], [1996, 9.9], [1997, 9.3], [1998, 9.2], [1999, 9.2], [2000, 9.5], [2001, 9.6], [2002, 9.3], [2003, 9.4], [2004, 9.79]]
+                }
+                , {
+                    color: themesecondary,
+                    label: "Mac OS",
+                    data: [[1990, 5.8], [1991, 6.0], [1992, 5.9], [1993, 5.5], [1994, 5.7], [1995, 5.3], [1996, 6.1], [1997, 5.4], [1998, 5.4], [1999, 5.1], [2000, 5.2], [2001, 5.4], [2002, 6.2], [2003, 5.9], [2004, 5.89]]
+                }, {
+                    color: themefourthcolor,
+                    label: "DOS",
+                    data: [[1990, 8.3], [1991, 8.3], [1992, 7.8], [1993, 8.3], [1994, 8.4], [1995, 5.9], [1996, 6.4], [1997, 6.7], [1998, 6.9], [1999, 7.6], [2000, 7.4], [2001, 8.1], [2002, 12.5], [2003, 9.9], [2004, 19.0]]
+                }];
 
             var options = {
                 series: {
@@ -211,7 +211,7 @@ var InitiateRealTimeChart = function () {
             // be fetched from a server
 
             var data = [],
-                totalPoints = 300;
+                    totalPoints = 300;
 
             function getRandomData() {
 
@@ -223,7 +223,7 @@ var InitiateRealTimeChart = function () {
                 while (data.length < totalPoints) {
 
                     var prev = data.length > 0 ? data[data.length - 1] : 50,
-                        y = prev + Math.random() * 10 - 5;
+                            y = prev + Math.random() * 10 - 5;
 
                     if (y < 0) {
                         y = 0;
@@ -266,10 +266,10 @@ var InitiateRealTimeChart = function () {
                         fill: true,
                         fillColor: {
                             colors: [{
-                                opacity: 0.4
-                            }, {
-                                opacity: 0
-                            }]
+                                    opacity: 0.4
+                                }, {
+                                    opacity: 0
+                                }]
                         },
                         steps: false
                     },
@@ -331,9 +331,9 @@ var InitiateStackedChart = function () {
             ];
 
             var stack = 0,
-                bars = false,
-                lines = true,
-                steps = false;
+                    bars = false,
+                    lines = true,
+                    steps = false;
 
             function plotWithOptions() {
                 $.plot($("#stacked-chart"), data1, {
@@ -405,7 +405,7 @@ var InitiateVisitorChart = function () {
             function weekendAreas(axes) {
 
                 var markings = [],
-                    d = new Date(axes.xaxis.min);
+                        d = new Date(axes.xaxis.min);
 
                 // go to the first Saturday
 
@@ -420,7 +420,7 @@ var InitiateVisitorChart = function () {
                 // extends to infinity upwards and downwards
 
                 do {
-                    markings.push({ xaxis: { from: i, to: i + 2 * 24 * 60 * 60 * 1000 } });
+                    markings.push({xaxis: {from: i, to: i + 2 * 24 * 60 * 60 * 1000}});
                     i += 7 * 24 * 60 * 60 * 1000;
                 } while (i < axes.xaxis.max);
 
@@ -450,19 +450,19 @@ var InitiateVisitorChart = function () {
                         fill: true,
                         fillColor: {
                             colors: [{
-                                opacity: 0.1
-                            }, {
-                                opacity: 0.15
-                            }]
+                                    opacity: 0.1
+                                }, {
+                                    opacity: 0.15
+                                }]
                         }
                     },
                     shadowSize: 0
                 }
             };
 
-            var plot = $.plot("#visitors-chart", [{ data: d, color: themefourthcolor }], options);
+            var plot = $.plot("#visitors-chart", [{data: d, color: themefourthcolor}], options);
 
-            var overview = $.plot("#visitors-chart-overview", [{ data: d, color: themefourthcolor }], {
+            var overview = $.plot("#visitors-chart-overview", [{data: d, color: themefourthcolor}], {
                 series: {
                     lines: {
                         show: true,
@@ -494,7 +494,7 @@ var InitiateVisitorChart = function () {
 
                 // do the zooming
 
-                plot = $.plot("#visitors-chart", [{ data: d, color: themeprimary }], $.extend(true, {}, options, {
+                plot = $.plot("#visitors-chart", [{data: d, color: themeprimary}], $.extend(true, {}, options, {
                     xaxis: {
                         min: ranges.xaxis.from,
                         max: ranges.xaxis.to
@@ -522,37 +522,37 @@ var InitiateAnnotationChart = function () {
             }
 
             var data = [{
-                data: d1, bars: {
-                    show: true,
-                    order: 1,
-                    fillColor: { colors: [{ color: themeprimary }, { color: themeprimary }] }
-                },
-                color: themeprimary
-            }];
+                    data: d1, bars: {
+                        show: true,
+                        order: 1,
+                        fillColor: {colors: [{color: themeprimary}, {color: themeprimary}]}
+                    },
+                    color: themeprimary
+                }];
 
             var markings = [
-                { color: "#f5f5f5", yaxis: { from: 1 } },
-                { color: "#f5f5f5", yaxis: { to: -1 } },
-                { color: themethirdcolor, lineWidth: 1, xaxis: { from: 2, to: 2 } },
-                { color: themefourthcolor, lineWidth: 1, xaxis: { from: 8, to: 8 } }
+                {color: "#f5f5f5", yaxis: {from: 1}},
+                {color: "#f5f5f5", yaxis: {to: -1}},
+                {color: themethirdcolor, lineWidth: 1, xaxis: {from: 2, to: 2}},
+                {color: themefourthcolor, lineWidth: 1, xaxis: {from: 8, to: 8}}
             ];
 
             var placeholder = $("#annotation-chart");
 
             var plot = $.plot(placeholder, data, {
-                bars: { show: true, barWidth: 0.5, fillColor: { colors: [{ opacity: 0.7 }, { opacity: 1 }] } },
-                xaxis: { ticks: [], autoscaleMargin: 0.02, color: gridbordercolor },
-                yaxis: { min: -1.5, max: 1.5, color: gridbordercolor },
-                grid: { markings: markings, borderWidth: 0, aboveData: false }
+                bars: {show: true, barWidth: 0.5, fillColor: {colors: [{opacity: 0.7}, {opacity: 1}]}},
+                xaxis: {ticks: [], autoscaleMargin: 0.02, color: gridbordercolor},
+                yaxis: {min: -1.5, max: 1.5, color: gridbordercolor},
+                grid: {markings: markings, borderWidth: 0, aboveData: false}
             });
 
-            var o = plot.pointOffset({ x: 2, y: -1.2 });
+            var o = plot.pointOffset({x: 2, y: -1.2});
 
             // Append it to the placeholder that Flot already uses for positioning
 
             placeholder.append("<div style='position:absolute;left:" + (o.left + 4) + "px;top:" + o.top + "px;color:" + themethirdcolor + ";font-size:smaller'>Warming up</div>");
 
-            o = plot.pointOffset({ x: 8, y: -1.2 });
+            o = plot.pointOffset({x: 8, y: -1.2});
             placeholder.append("<div style='position:absolute;left:" + (o.left + 4) + "px;top:" + o.top + "px;color:" + themefourthcolor + ";font-size:smaller'>Actual measurements</div>");
 
             // Draw a little arrow on top of the last label to demonstrate canvas
@@ -588,11 +588,11 @@ var InitiatePieChart = function () {
             //];
 
             var data = [
-            	{ label: "Windows", data: [[1, 10]], color: themefifthcolor },
-            	{ label: "Linux", data: [[1, 30]], color: themesecondary },
-            	{ label: "Mac OS X", data: [[1, 90]], color: themethirdcolor },
-            	{ label: "Android", data: [[1, 70]], color: themefourthcolor },
-            	{ label: "Unix", data: [[1, 80]], color: themeprimary }
+                {label: "Windows", data: [[1, 10]], color: themefifthcolor},
+                {label: "Linux", data: [[1, 30]], color: themesecondary},
+                {label: "Mac OS X", data: [[1, 90]], color: themethirdcolor},
+                {label: "Android", data: [[1, 70]], color: themefourthcolor},
+                {label: "Unix", data: [[1, 80]], color: themeprimary}
             ];
 
             //var data = [
@@ -626,8 +626,8 @@ var InitiatePieChart = function () {
                             gradient: {
                                 radial: true,
                                 colors: [
-                                  { opacity: 0.5 },
-                                  { opacity: 1.0 }
+                                    {opacity: 0.5},
+                                    {opacity: 1.0}
                                 ]
                             }
                         }
@@ -878,11 +878,11 @@ var InitiatePieChart = function () {
                             gradient: {
                                 radial: true,
                                 colors: [
-                                  { opacity: 1.0 },
-                                  { opacity: 1.0 },
-                                  { opacity: 1.0 },
-                                  { opacity: 0.5 },
-                                  { opacity: 1.0 }
+                                    {opacity: 1.0},
+                                    {opacity: 1.0},
+                                    {opacity: 1.0},
+                                    {opacity: 0.5},
+                                    {opacity: 1.0}
                                 ]
                             }
                         }
@@ -957,34 +957,34 @@ var InitiateHorizonalChart = function () {
             var tickLabels = [[0, 'Yes'], [1, 'No'], [2, 'Maybe'], [3, 'Sometimes'], [4, 'Never']];
 
             $.plot($("#horizonal-chart"), [
-            {
-                data: my_data,
-                bars: {
-                    show: true,
-                    horizontal: true
+                {
+                    data: my_data,
+                    bars: {
+                        show: true,
+                        horizontal: true
+                    }
                 }
-            }
             ],
-            {
-                bars: {
-                    fillColor: { colors: [{ opacity: 0.8 }, { opacity: 1 }] },
-                    barWidth: 0.5,
-                    lineWidth: 1,
-                    borderWidth: 0
-                },
-                colors: [themeprimary],
-                yaxis: {
-                    ticks: tickLabels
-                },
-                grid: {
-                    show: true,
-                    hoverable: true,
-                    clickable: true,
-                    tickColor: gridbordercolor,
-                    borderWidth: 0,
-                    borderColor: gridbordercolor,
-                },
-            }
+                    {
+                        bars: {
+                            fillColor: {colors: [{opacity: 0.8}, {opacity: 1}]},
+                            barWidth: 0.5,
+                            lineWidth: 1,
+                            borderWidth: 0
+                        },
+                        colors: [themeprimary],
+                        yaxis: {
+                            ticks: tickLabels
+                        },
+                        grid: {
+                            show: true,
+                            hoverable: true,
+                            clickable: true,
+                            tickColor: gridbordercolor,
+                            borderWidth: 0,
+                            borderColor: gridbordercolor,
+                        },
+                    }
             );
         }
     };

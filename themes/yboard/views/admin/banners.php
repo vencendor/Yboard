@@ -39,7 +39,7 @@
         opacity:1;
 
     }
-    
+
     .add_code_form input[type='text']{
         width:100px;
     }
@@ -56,17 +56,17 @@
         $(".banner_viewer").hide('fast');
         $('#banner_viewer_' + b_name).show('fast');
         /*
-        $.get("<?= Yii::app()->createUrl('admin/banners/show') ?>?b_name=" + b_name + "&b_id=" + b_id, 
-        function (data){
-            $('#banner_viewer_' + b_name).html(data);
-        });
-        /**/
+         $.get("<?= Yii::app()->createUrl('admin/banners/show') ?>?b_name=" + b_name + "&b_id=" + b_id, 
+         function (data){
+         $('#banner_viewer_' + b_name).html(data);
+         });
+         /**/
         $('#banner_viewer_' + b_name).html("<iframe width='100%' src='<?= Yii::app()->createUrl('/admin/banners/show') ?>?b_name=" + b_name + "&b_id=" + b_id + "'></iframe>");
     }
 
     function create_block() {
         var bl_name = prompt('Укажите id блока');
-        if(bl_name!=null) {
+        if (bl_name != null) {
             window.location = '<?= Yii::app()->createUrl('admin/banners') ?>?create_block=yes&new_name=' + bl_name;
         }
     }
@@ -101,31 +101,33 @@
 
     function add_atribute() {
         $("#code_atributes").append(
-            "Get параметр : <input type='text' name='conditions[" + atr_i + "][parameter]' size='10' />" +
-            " <input type='radio' name='conditions[" + atr_i + "][compare]' value='1' /> равен  " +
-            " <input type='radio' name='conditions[" + atr_i + "][compare]' value='0' /> не равен " +
-            " со значением <input type='text' name='conditions[" + atr_i + "][value]' size='10' /> <br/>");
+                "Get параметр : <input type='text' name='conditions[" + atr_i + "][parameter]' size='10' />" +
+                " <input type='radio' name='conditions[" + atr_i + "][compare]' value='1' /> равен  " +
+                " <input type='radio' name='conditions[" + atr_i + "][compare]' value='0' /> не равен " +
+                " со значением <input type='text' name='conditions[" + atr_i + "][value]' size='10' /> <br/>");
         atr_i++;
     }
 
 </script>
-<? if( $message ){ 
-	echo "<div style='color:#ff0000'> $message </div>";
-} ?>
+<?
+if ($message) {
+    echo "<div style='color:#ff0000'> $message </div>";
+}
+?>
 
 <div align='center' class='add_code_form'>
-    <a href='<?=Yii::app()->createUrl("/admin/default/help")?>#banners'> Инструкция </a>
-<form method='post' name='insert_ads_form' action='<?= Yii::app()->createUrl('admin/banners') ?>' 
-      style='display:none' id='ads_code_redactor' align='center'>
-    <h4>Добавление кода для блока</h4>
-    <textarea  name='ads_code' style='width:625px'></textarea>
-    <input type='hidden' name='block_name' />
-    <input type='hidden' name='insert_ads' value='yes'/> <br/>
-    <div id='code_atributes'></div>
-    <a href='javascript:void(0)' onclick='add_atribute()'> Добавить условие для вывода</a> <br/>
-    <input type='submit' value='Добавить код' />
-</form>
-    
+    <a href='<?= Yii::app()->createUrl("/admin/default/help") ?>#banners'> Инструкция </a>
+    <form method='post' name='insert_ads_form' action='<?= Yii::app()->createUrl('admin/banners') ?>' 
+          style='display:none' id='ads_code_redactor' align='center'>
+        <h4>Добавление кода для блока</h4>
+        <textarea  name='ads_code' style='width:625px'></textarea>
+        <input type='hidden' name='block_name' />
+        <input type='hidden' name='insert_ads' value='yes'/> <br/>
+        <div id='code_atributes'></div>
+        <a href='javascript:void(0)' onclick='add_atribute()'> Добавить условие для вывода</a> <br/>
+        <input type='submit' value='Добавить код' />
+    </form>
+
 </div>
 
 <a href='javascript:create_block()' style='margin-bottom:40px; display:block; '> Создать новый рекламный блок </a>
@@ -141,18 +143,18 @@ if (sizeof($this->banners) > 0)
         if (sizeof($banners) > 0) {
             foreach ($banners as $n => $v) {
                 echo "<div class='one_banner' >";
-                if(is_array($v['conditions'])) {
+                if (is_array($v['conditions'])) {
                     echo "<div style='font-size:12px;'> Условие вывода :  <i>";
-                    $cond_mess="";
-                foreach($v['conditions'] as $cond){
-                    if($cond_mess!=="")
-                        $cond_mess.=" and ";
-                    $cond_mess.="( \$_GET[".$cond['parameter']."] "
-                        .($cond['compare']?" = ":" != ")." \"".$cond['value']."\" )";
+                    $cond_mess = "";
+                    foreach ($v['conditions'] as $cond) {
+                        if ($cond_mess !== "")
+                            $cond_mess .= " and ";
+                        $cond_mess .= "( \$_GET[" . $cond['parameter'] . "] "
+                                . ($cond['compare'] ? " = " : " != ") . " \"" . $cond['value'] . "\" )";
+                    }
+                    echo $cond_mess . "</i></div>";
                 }
-                echo $cond_mess."</i></div>";
-                }
-                echo "<textarea name='{$b_name}[$n]' id='code_{$b_name}_$n' cols='70'>".$v['code']."</textarea>\n"
+                echo "<textarea name='{$b_name}[$n]' id='code_{$b_name}_$n' cols='70'>" . $v['code'] . "</textarea>\n"
                 . "<div class='button'><a href='javascript:show_banner(\"$b_name\",\"$n\")'> Показать </a>\n"
                 . "<a href='javascript:delete_ads(\"$b_name\",$n)' > Удалить </a>\n"
                 . "</div></div>";

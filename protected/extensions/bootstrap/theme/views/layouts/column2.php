@@ -8,16 +8,16 @@
     </div>
     <div class="span3">
         <div id="sidebar">
-        <?php
+            <?php
             $this->beginWidget('zii.widgets.CPortlet', array(
-                'title'=>'Operations',
+                'title' => 'Operations',
             ));
             $this->widget('bootstrap.widgets.TbMenu', array(
-                'items'=>$this->menu,
-                'htmlOptions'=>array('class'=>'operations'),
+                'items' => $this->menu,
+                'htmlOptions' => array('class' => 'operations'),
             ));
             $this->endWidget();
-        ?>
+            ?>
         </div><!-- sidebar -->
     </div>
 </div>

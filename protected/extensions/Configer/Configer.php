@@ -203,10 +203,10 @@ class Configer extends CWidget {
     }
 
     public function init() {
-        
+
         if (!is_file($this->configPath)) {
-                return false;
-        } 
+            return false;
+        }
 
         //create backup on first launch
         if (!is_file($this->configPath . ".bak"))
@@ -254,10 +254,10 @@ class Configer extends CWidget {
             }
         }
     }
-    
+
     function run() {
         // include 'views/form.php';
-        $this->render( 'form' );
+        $this->render('form');
     }
 
 }

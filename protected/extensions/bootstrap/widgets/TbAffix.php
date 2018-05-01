@@ -1,4 +1,5 @@
 <?php
+
 /**
  * TbAffix class file.
  * @author Christoffer Niska <ChristofferNiska@gmail.com>
@@ -12,55 +13,54 @@
  * Bootstrap affix widget.
  * @see http://twitter.github.com/bootstrap/javascript.html#affix
  */
-class TbAffix extends CWidget
-{
-	const CONTAINER_PREFIX = 'yii_bootstrap_affix_';
+class TbAffix extends CWidget {
 
-	/**
-	 * @var string the name of the affix element. Defaults to 'div'.
-	 */
-	public $tagName = 'div';
-	/**
-	 * @var array the options for the Bootstrap Javascript plugin.
-	 */
-	public $options = array();
-	/**
-	 * @var array the HTML attributes for the widget container.
-	 */
-	public $htmlOptions = array();
+    const CONTAINER_PREFIX = 'yii_bootstrap_affix_';
 
-	private static $_containerId = 0;
+    /**
+     * @var string the name of the affix element. Defaults to 'div'.
+     */
+    public $tagName = 'div';
 
-	/**
-	 * Initializes the widget.
-	 */
-	public function init()
-	{
-		echo CHtml::openTag($this->tagName, $this->htmlOptions);
-	}
+    /**
+     * @var array the options for the Bootstrap Javascript plugin.
+     */
+    public $options = array();
 
-	/**
-	 * Runs the widget.
-	 */
-	public function run()
-	{
-		$id = $this->htmlOptions['id'];
+    /**
+     * @var array the HTML attributes for the widget container.
+     */
+    public $htmlOptions = array();
+    private static $_containerId = 0;
 
-		echo CHtml::closeTag($this->tagName);
+    /**
+     * Initializes the widget.
+     */
+    public function init() {
+        echo CHtml::openTag($this->tagName, $this->htmlOptions);
+    }
 
-		/** @var CClientScript $cs */
-		$cs = Yii::app()->getClientScript();
-		$options = !empty($this->options) ? CJavaScript::encode($this->options) : '';
-		$cs->registerScript(__CLASS__.'#'.$id, "jQuery('#{$id}').affix({$options});");
-	}
+    /**
+     * Runs the widget.
+     */
+    public function run() {
+        $id = $this->htmlOptions['id'];
 
-	/**
-	 * Returns the next affix container ID.
-	 * @return string the id
-	 * @static
-	 */
-	public static function getNextContainerId()
-	{
-		return self::CONTAINER_PREFIX.self::$_containerId++;
-	}
+        echo CHtml::closeTag($this->tagName);
+
+        /** @var CClientScript $cs */
+        $cs = Yii::app()->getClientScript();
+        $options = !empty($this->options) ? CJavaScript::encode($this->options) : '';
+        $cs->registerScript(__CLASS__ . '#' . $id, "jQuery('#{$id}').affix({$options});");
+    }
+
+    /**
+     * Returns the next affix container ID.
+     * @return string the id
+     * @static
+     */
+    public static function getNextContainerId() {
+        return self::CONTAINER_PREFIX . self::$_containerId++;
+    }
+
 }

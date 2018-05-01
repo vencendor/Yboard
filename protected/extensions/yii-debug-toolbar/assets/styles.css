@@ -2,129 +2,129 @@
 @charset "UTF-8";
 
 @font-face {
-  font-family: "yii-debug";
-  src:url("fonts/yii-debug.eot");
-  src:url("fonts/yii-debug.eot?#iefix") format("embedded-opentype"),
-    url("fonts/yii-debug.ttf") format("truetype"),
-    url("fonts/yii-debug.svg#yii-debug") format("svg"),
-    url("fonts/yii-debug.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "yii-debug";
+    src:url("fonts/yii-debug.eot");
+    src:url("fonts/yii-debug.eot?#iefix") format("embedded-opentype"),
+        url("fonts/yii-debug.ttf") format("truetype"),
+        url("fonts/yii-debug.svg#yii-debug") format("svg"),
+        url("fonts/yii-debug.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
 
 }
 
 [data-icon]:before {
-  font-family: "yii-debug" !important;
-  content: attr(data-icon);
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
-  speak: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: "yii-debug" !important;
+    content: attr(data-icon);
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
-  font-family: "yii-debug" !important;
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
-  speak: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: "yii-debug" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 
 .icon-arrow-cycle:before {
-  content: "c";
+    content: "c";
 }
 
 .icon-arrow-down:before {
-  content: "d";
+    content: "d";
 }
 
 .icon-arrow-right:before {
-  content: "f";
+    content: "f";
 }
 
 .icon-arrow-up-thin:before {
-  content: "g";
+    content: "g";
 }
 
 .icon-arrow-left-thin:before {
-  content: "e";
+    content: "e";
 }
 
 .icon-cross:before {
-  content: "h";
+    content: "h";
 }
 
 .icon-coins:before {
-  content: "i";
+    content: "i";
 }
 
 .icon-block-menu:before {
-  content: "j";
+    content: "j";
 }
 
 .icon-settings:before {
-  content: "k";
+    content: "k";
 }
 
 .icon-eye:before {
-  content: "l";
+    content: "l";
 }
 
 .icon-female-symbol:before {
-  content: "m";
+    content: "m";
 }
 
 .icon-hdd-raid:before {
-  content: "n";
+    content: "n";
 }
 
 .icon-bolt:before {
-  content: "o";
+    content: "o";
 }
 
 .icon-stopwatch:before {
-  content: "a";
+    content: "a";
 }
 
 .icon-gauge:before {
-  content: "b";
+    content: "b";
 }
 
 .icon-chart-line:before {
-  content: "p";
+    content: "p";
 }
 
 .icon-down-open-mini:before {
-  content: "q";
+    content: "q";
 }
 
 .icon-up-open-mini:before {
-  content: "r";
+    content: "r";
 }
 
 .icon-locked:before {
-  content: "z";
+    content: "z";
 }
 
 .icon-content-44:before {
-  content: "s";
+    content: "s";
 }
 
 .icon-right-open-mini:before {
-  content: "t";
+    content: "t";
 }
 
 .icon-left-open-mini:before {
-  content: "u";
+    content: "u";
 }
 

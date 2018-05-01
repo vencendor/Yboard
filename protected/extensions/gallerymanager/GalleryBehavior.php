@@ -1,13 +1,15 @@
 <?php
+
 /**
  * Behavior for adding gallery to any model.
  *
  * @author Bogdan Savluk <savluk.bogdan@gmail.com>
  */
-class GalleryBehavior extends CActiveRecordBehavior
-{
+class GalleryBehavior extends CActiveRecordBehavior {
+
     /** @var string Model attribute name to store created gallery id */
     public $idAttribute;
+
     /**
      * @var array Settings for image auto-generation
      * @example
@@ -21,15 +23,16 @@ class GalleryBehavior extends CActiveRecordBehavior
      *  );
      */
     public $versions;
+
     /** @var boolean does images in gallery need names */
     public $name;
+
     /** @var boolean does images in gallery need descriptions */
     public $description;
     private $_gallery;
 
     /** Will create new gallery after save if no associated gallery exists */
-    public function beforeSave($event)
-    {
+    public function beforeSave($event) {
         parent::beforeSave($event);
         if ($event->isValid) {
             if (empty($this->getOwner()->{$this->idAttribute})) {
@@ -45,8 +48,7 @@ class GalleryBehavior extends CActiveRecordBehavior
     }
 
     /** Will remove associated Gallery before object removal */
-    public function beforeDelete($event)
-    {
+    public function beforeDelete($event) {
         if (!empty($this->getOwner()->{$this->idAttribute})) {
             /** @var $gallery Gallery */
             $gallery = Gallery::model()->findByPk($this->getOwner()->{$this->idAttribute});
@@ -56,11 +58,11 @@ class GalleryBehavior extends CActiveRecordBehavior
     }
 
     /** Method for changing gallery configuration and regeneration of images versions */
-    public function changeConfig()
-    {
+    public function changeConfig() {
         /** @var $gallery Gallery */
         $gallery = Gallery::model()->findByPk($this->getOwner()->{$this->idAttribute});
-        if($gallery == null) return;
+        if ($gallery == null)
+            return;
         foreach ($gallery->galleryPhotos as $photo) {
             $photo->removeImages();
         }
@@ -79,8 +81,7 @@ class GalleryBehavior extends CActiveRecordBehavior
     }
 
     /** @return Gallery Returns gallery associated with model */
-    public function getGallery()
-    {
+    public function getGallery() {
         if (empty($this->_gallery)) {
             $this->_gallery = Gallery::model()->findByPk($this->getOwner()->{$this->idAttribute});
         }
@@ -88,12 +89,12 @@ class GalleryBehavior extends CActiveRecordBehavior
     }
 
     /** @return GalleryPhoto[] Photos from associated gallery */
-    public function getGalleryPhotos()
-    {
+    public function getGalleryPhotos() {
         $criteria = new CDbCriteria();
         $criteria->condition = 'gallery_id = :gallery_id';
         $criteria->params[':gallery_id'] = $this->getOwner()->{$this->idAttribute};
         $criteria->order = '`rank` asc';
         return GalleryPhoto::model()->findAll($criteria);
     }
+
 }

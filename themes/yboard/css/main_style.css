@@ -13,7 +13,7 @@ body {
     color: #3b80b7;
     margin: 0;
     padding: 0;
-	font-family: Cuprum;
+    font-family: Cuprum;
 }
 div, h1, h2, h3, h4, p, form, label, input, textarea, img, span {
     padding: 0;
@@ -36,8 +36,8 @@ h3{
 }
 
 h4{
-	text-align: center;
-	margin: 20px 10px 40px;
+    text-align: center;
+    margin: 20px 10px 40px;
 }
 
 ul, #yw0 {
@@ -60,7 +60,7 @@ textarea.wide{
 }
 
 p{
-	text-indent: 10px;
+    text-indent: 10px;
 }
 
 div.form div{
@@ -80,16 +80,16 @@ div.form div{
 }
 #header {
     background-image: url("../images/header_bg.png");
-	margin:0px;
-	font-weight:bold;
-	min-width: 1000px;
+    margin:0px;
+    font-weight:bold;
+    min-width: 1000px;
 }
 #content {
     background: #ffffff;
     clear: both;
-	border-top: 6px solid #3b80b7;
-	margin-bottom: 0px;
-	min-width: 1000px;
+    border-top: 6px solid #3b80b7;
+    margin-bottom: 0px;
+    min-width: 1000px;
 }
 .btn[type=submit]{
     padding: 10px 30px;
@@ -112,23 +112,23 @@ div.form div{
     width: 1000px;
 }
 table.roots td{
-	padding:5px;
-	vertical-align: top;
+    padding:5px;
+    vertical-align: top;
 }
 table.roots{
-	width:100%;
+    width:100%;
 }
 .logo {
-  background-image: url("../images/logo.png");
-  background-repeat: no-repeat;
-  float: left;
-  font-size: 18px;
-  font-weight: normal;
-  height: 90px;
-  line-height: 130px;
-  margin: 10px 0 0 20px;
-  padding: 0 0 0 70px;
-  width: 200px;
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    float: left;
+    font-size: 18px;
+    font-weight: normal;
+    height: 90px;
+    line-height: 130px;
+    margin: 10px 0 0 20px;
+    padding: 0 0 0 70px;
+    width: 200px;
 }
 .menu_area a span {
     display: block;
@@ -257,9 +257,9 @@ dt{
 }
 
 .install_blocks{
-	padding-left:20px; 
-	border: 1px solid #ccc;
-	margin-bottom: 30px;
+    padding-left:20px; 
+    border: 1px solid #ccc;
+    margin-bottom: 30px;
 }
 
 /* Меню */
@@ -275,12 +275,12 @@ dt{
     padding:4px 0;
 }
 .menu_area{
-	background: rgba(59, 127, 183, 0.26) none repeat scroll 0 0;
-	border-radius: 15px;
-	float: left;
-	margin: 15px 0 0 20px;
-	padding: 10px 20px 3px;
-        width: 630px;
+    background: rgba(59, 127, 183, 0.26) none repeat scroll 0 0;
+    border-radius: 15px;
+    float: left;
+    margin: 15px 0 0 20px;
+    padding: 10px 20px 3px;
+    width: 630px;
 }
 .menu_area a.menu_text {
     color: #ffffff;
@@ -293,23 +293,23 @@ dt{
     text-transform: none;
 }
 .menu_area > div{
-	background-repeat: no-repeat;
-	color: #5a5a5a;
-	float: left;
-	font-size: 31px;
-	font-weight: normal;
-	height: 35px;
-	margin: 0;
-	padding: 7px 0 0 40px;
-	text-decoration: none;
-	text-transform: lowercase;
-	width: 100px;
+    background-repeat: no-repeat;
+    color: #5a5a5a;
+    float: left;
+    font-size: 31px;
+    font-weight: normal;
+    height: 35px;
+    margin: 0;
+    padding: 7px 0 0 40px;
+    text-decoration: none;
+    text-transform: lowercase;
+    width: 100px;
 }
 .menu_area > div:hover > a{
-	text-decoration: underline;
+    text-decoration: underline;
 }
 .ideas {
-	background-image: url("../images/menu_01.png");
+    background-image: url("../images/menu_01.png");
 
 }
 .links {
@@ -348,7 +348,7 @@ dt{
     color: #fff;
     font-weight: bold;
     text-align: center;
-    
+
 }
 
 .searchForm input[type=text]{
@@ -358,9 +358,9 @@ dt{
 }
 
 #search_strip h3{
-	margin:0px;
-	font-weight:normal;
-	padding-left:220px;
+    margin:0px;
+    font-weight:normal;
+    padding-left:220px;
 }
 #search_strip {
     background-position: center center;
@@ -482,7 +482,7 @@ dt{
 }
 
 .left_menu_area  ul{
-	
+
 }
 .left_menu_area {
     float: left;
@@ -562,60 +562,60 @@ dt{
     text-transform: none;
 }
 .markdown-body > ul.list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
 }
 .markdown-body > ul:after {
-	content:'';
-	clear:both;
-	display: block;
+    content:'';
+    clear:both;
+    display: block;
 }
 .markdown-body > ul  > li{
-	width: 47%;
-	display: block;
-	float:left;
+    width: 47%;
+    display: block;
+    float:left;
 
 }
 .markdown-body > ul.list  > li{
-		margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .markdown-body > ul.list  > li > p{
-	text-align: center;
-	font-weight: bold;
+    text-align: center;
+    font-weight: bold;
 }
 
 .markdown-body > ul.list  > li > ul{
-	list-style-type: initial;
+    list-style-type: initial;
 }
 .sidebar-menu li{
-	padding-top: 10px;
+    padding-top: 10px;
 }
 .sidebar-menu > li{
-	padding: 5px 0px;
-        border-bottom: 1px dotted #ccc;
+    padding: 5px 0px;
+    border-bottom: 1px dotted #ccc;
 }
 .sidebar-menu > li > a{
     padding: 15px 5px;
 }
 
 li.users{
-	background: url("../images/users.png") no-repeat top center;
-	padding-top: 128px;
+    background: url("../images/users.png") no-repeat top center;
+    padding-top: 128px;
 }
 li.board{
-	background: url("../images/kblogger.png") no-repeat top center;
-	padding-top: 128px;
+    background: url("../images/kblogger.png") no-repeat top center;
+    padding-top: 128px;
 }
 li.panel{
-	background: url("../images/control_panel.png") no-repeat top center;
-	padding-top: 128px;
+    background: url("../images/control_panel.png") no-repeat top center;
+    padding-top: 128px;
 }
 li.other{
-	background: url("../images/applications-other.png") no-repeat top center;
-	padding-top: 128px;
+    background: url("../images/applications-other.png") no-repeat top center;
+    padding-top: 128px;
 }
 
 div.row{margin:0px;}
@@ -635,11 +635,11 @@ div.row{margin:0px;}
     width: 130px;
 }
 .midarea {
-	border-left: 1px dashed #b9d7d4;
-	border-right: 1px dashed #b9d7d4;
-	margin: 0 0 0 300px;
-	min-height: 600px;
-	padding: 0 10px 0 25px;
+    border-left: 1px dashed #b9d7d4;
+    border-right: 1px dashed #b9d7d4;
+    margin: 0 0 0 300px;
+    min-height: 600px;
+    padding: 0 10px 0 25px;
 }
 .midarea h4{
     text-align: left;
@@ -788,8 +788,8 @@ div div.rememberMe{
     width: 128px;
 }
 .ya-share2 {
-  margin: 30px auto;
-  width: 140px;
+    margin: 30px auto;
+    width: 140px;
 }
 .login {
     background-image: url("../images/login_button.png");
@@ -858,7 +858,7 @@ div div.rememberMe{
 }
 #fotter {
     background: #E1793A;
-	border-top: 6px solid #3b80b7;
+    border-top: 6px solid #3b80b7;
     background-position: center top;
     background-repeat: repeat-x;
     color: #fff;
@@ -890,7 +890,7 @@ div div.rememberMe{
     text-decoration: none;
     text-transform: none;
     width: 100%;
-	display:none;
+    display:none;
 }
 .fotter_copyrights {
     color: #fff;

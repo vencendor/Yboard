@@ -1,10 +1,10 @@
 <?php
+
 /**
  * YiiDebugToolbarPanelViews class file.
  *
  * @author Sergey Malyshev <malyshev.php@gmail.com>
  */
-
 Yii::import('yii-debug-toolbar.components.YiiDebugViewRenderer');
 
 /**
@@ -17,102 +17,87 @@ Yii::import('yii-debug-toolbar.components.YiiDebugViewRenderer');
  * @package
  * @since 1.1.7
  */
-class YiiDebugToolbarPanelViewsRendering extends YiiDebugToolbarPanel
-{
-    private $_viewsCount = 0;
+class YiiDebugToolbarPanelViewsRendering extends YiiDebugToolbarPanel {
 
+    private $_viewsCount = 0;
     private $_viewRenderer;
 
-    public function getViewsCount()
-    {
+    public function getViewsCount() {
         return count($this->_viewRenderer->debugStackTrace);
     }
 
-    public function init()
-    {
+    public function init() {
         parent::init();
 
         $this->_viewRenderer = Yii::app()->getComponent('viewRenderer');
     }
 
-    public function run()
-    {
+    public function run() {
         $data = array();
         $viewRenderer = $this->_viewRenderer;
 
-        if ($viewRenderer instanceof YiiDebugViewRenderer)
-        {
+        if ($viewRenderer instanceof YiiDebugViewRenderer) {
             $data = $this->_viewRenderer->debugStackTrace;
         }
 
-        $this->render('views_rendering', array('data'=>$data));
+        $this->render('views_rendering', array('data' => $data));
     }
 
-    public function getInheritance(ReflectionClass $class)
-    {
+    public function getInheritance(ReflectionClass $class) {
         $data = array();
 
-        while($class = $class->getParentClass())
-        {
+        while ($class = $class->getParentClass()) {
             $data[] = $class->name;
-            if('CBaseController' === $class->name)
+            if ('CBaseController' === $class->name)
                 break;
         }
 
         return implode('&nbsp;&raquo;&nbsp;', $data);
     }
 
-    public function getFilePath($file)
-    {
+    public function getFilePath($file) {
         return trim(str_replace(Yii::getPathOfAlias('webroot'), '', $file), '\\/');
     }
 
-    public function getFileAlias($file)
-    {
-        return str_replace(DIRECTORY_SEPARATOR, '.', 
-                dirname(trim(str_replace(Yii::getPathOfAlias('webroot'), '', $file), '\\/')) . '/'
+    public function getFileAlias($file) {
+        return str_replace(DIRECTORY_SEPARATOR, '.', dirname(trim(str_replace(Yii::getPathOfAlias('webroot'), '', $file), '\\/')) . '/'
                 . basename(trim(str_replace(Yii::getPathOfAlias('webroot'), '', $file), '\\/'), '.php'));
     }
 
-
-    public function getWidgetsData()
-    {
+    public function getWidgetsData() {
         
     }
 
-     /**
+    /**
      * {@inheritdoc}
      */
-    public function getMenuTitle()
-    {
+    public function getMenuTitle() {
         return YiiDebug::t('Views Rendering');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getMenuSubTitle()
-    {
+    public function getMenuSubTitle() {
         return YiiDebug::t('{count} views', array(
-            '{count}'=>$this->viewsCount
+                    '{count}' => $this->viewsCount
         ));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return YiiDebug::t('Views Rendering ({count} rendered)', array(
-            '{count}'=>$this->viewsCount
+                    '{count}' => $this->viewsCount
         ));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getSubTitle()
-    {
+    public function getSubTitle() {
         return false;
     }
+
 }

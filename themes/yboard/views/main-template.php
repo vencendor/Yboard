@@ -107,9 +107,9 @@
                                value='<?= Yii::app()->request->getParam("searchStr") ?>' />
                         <input type='submit' value='Поиск' class='btn' /> <br/>
                         <a href="javascript:void(0)" onclick="open_search()" ><?= t("Advanced search") ?></a>
-                        
-                        
-                        <div class='advanced_search' <? echo is_array(Yii::app()->request->getParam("Adverts"))?"":"style='display:none'"?> >
+
+
+                        <div class='advanced_search' <? echo is_array(Yii::app()->request->getParam("Adverts")) ? "" : "style='display:none'" ?> >
                             <? $this->widget('application.widgets.advancedSearch'); ?>
                         </div>
                     </form>

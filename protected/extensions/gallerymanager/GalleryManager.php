@@ -1,30 +1,28 @@
 <?php
+
 /**
  * Widget to manage gallery.
  * Requires Twitter Bootstrap styles to work.
  *
  * @author Bogdan Savluk <savluk.bogdan@gmail.com>
  */
-class GalleryManager extends CWidget
-{
+class GalleryManager extends CWidget {
+
     /** @var Gallery Model of gallery to manage */
     public $gallery;
+
     /** @var string Route to gallery controller */
     public $controllerRoute = false;
     public $assets;
 
-    public function init()
-    {
+    public function init() {
         $this->assets = Yii::app()->getAssetManager()->publish(dirname(__FILE__) . '/assets');
     }
 
-
     public $htmlOptions = array();
 
-
     /** Render widget */
-    public function run()
-    {
+    public function run() {
         /** @var $cs CClientScript */
         $cs = Yii::app()->clientScript;
         $cs->registerCssFile($this->assets . '/galleryManager.css');
@@ -48,8 +46,8 @@ class GalleryManager extends CWidget
             $photos[] = array(
                 'id' => $photo->id,
                 'rank' => $photo->rank,
-                'name' => (string)$photo->name,
-                'description' => (string)$photo->description,
+                'name' => (string) $photo->name,
+                'description' => (string) $photo->description,
                 'preview' => $photo->getPreview(),
             );
         }

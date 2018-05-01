@@ -10,16 +10,14 @@
  * @copyright  (c) 2007-2008 Kohana Team
  * @license    http://kohanaphp.com/license.html
  */
-class Image_GD_Driver extends Image_Driver
-{
+class Image_GD_Driver extends Image_Driver {
 
     // A transparent PNG as a string
     protected static $blank_png;
     protected static $blank_png_width;
     protected static $blank_png_height;
 
-    public function __construct()
-    {
+    public function __construct() {
         // Make sure that GD2 is available
         if (!function_exists('gd_info'))
             throw new CException('Image component requires GD');
@@ -32,8 +30,7 @@ class Image_GD_Driver extends Image_Driver
             throw new CException('Image component requires GD v2');
     }
 
-    public function process($image, $actions, $dir, $file, $render = FALSE)
-    {
+    public function process($image, $actions, $dir, $file, $render = FALSE) {
         // Set the "create" function
         switch ($image['type']) {
             case IMAGETYPE_JPEG:
@@ -65,11 +62,11 @@ class Image_GD_Driver extends Image_Driver
         }
 
         // Make sure the image type is supported for import
-        if (empty($create) or !function_exists($create))
+        if (empty($create) or ! function_exists($create))
             throw new CException('image type not allowed');
 
         // Make sure the image type is supported for saving
-        if (empty($save) or !function_exists($save))
+        if (empty($save) or ! function_exists($save))
             throw new CException('image type not allowed');
 
         // Load the image
@@ -108,9 +105,7 @@ class Image_GD_Driver extends Image_Driver
 
             if ($render === false) {
                 // Set the status to the save return value, saving with the quality requested
-                $status = isset($quality)
-                    ? $save($this->tmp_image, $dir . $file, $quality)
-                    : $save($this->tmp_image, $dir . $file);
+                $status = isset($quality) ? $save($this->tmp_image, $dir . $file, $quality) : $save($this->tmp_image, $dir . $file);
             } else {
                 // Output the image directly to the browser
                 switch ($save) {
@@ -125,9 +120,7 @@ class Image_GD_Driver extends Image_Driver
                         break;
                 }
 
-                $status = isset($quality)
-                    ? $save($this->tmp_image, NULL, $quality)
-                    : $save($this->tmp_image);
+                $status = isset($quality) ? $save($this->tmp_image, NULL, $quality) : $save($this->tmp_image);
             }
 
             // Destroy the temporary image
@@ -137,8 +130,7 @@ class Image_GD_Driver extends Image_Driver
         return $status;
     }
 
-    public function flip($direction)
-    {
+    public function flip($direction) {
         // Get the current width and height
         $width = imagesx($this->tmp_image);
         $height = imagesy($this->tmp_image);
@@ -170,8 +162,7 @@ class Image_GD_Driver extends Image_Driver
         return $status;
     }
 
-    public function crop($properties)
-    {
+    public function crop($properties) {
         // Sanitize the cropping settings
         $this->sanitize_geometry($properties);
 
@@ -192,8 +183,7 @@ class Image_GD_Driver extends Image_Driver
         return $status;
     }
 
-    public function resize($properties)
-    {
+    public function resize($properties) {
         // Get the current width and height
         $width = imagesx($this->tmp_image);
         $height = imagesy($this->tmp_image);
@@ -209,14 +199,12 @@ class Image_GD_Driver extends Image_Driver
         }
 
         // Recalculate the width and height, if they are missing
-        empty($properties['width'])  and $properties['width'] = round($width * $properties['height'] / $height);
+        empty($properties['width']) and $properties['width'] = round($width * $properties['height'] / $height);
         empty($properties['height']) and $properties['height'] = round($height * $properties['width'] / $width);
 
         if ($properties['master'] === Image::AUTO) {
             // Change an automatic master dim to the correct type
-            $properties['master'] = (($width / $properties['width']) > ($height / $properties['height']))
-                ? Image::WIDTH
-                : Image::HEIGHT;
+            $properties['master'] = (($width / $properties['width']) > ($height / $properties['height'])) ? Image::WIDTH : Image::HEIGHT;
         }
 
         if (empty($properties['height']) or $properties['master'] === Image::WIDTH) {
@@ -272,8 +260,7 @@ class Image_GD_Driver extends Image_Driver
         return $status;
     }
 
-    public function rotate($amount)
-    {
+    public function rotate($amount) {
         // Use current image to rotate
         $img = $this->tmp_image;
 
@@ -300,8 +287,7 @@ class Image_GD_Driver extends Image_Driver
         return $status;
     }
 
-    public function sharpen($amount)
-    {
+    public function sharpen($amount) {
         // Make sure that the sharpening function is available
         if (!function_exists('imageconvolution'))
             throw new CException('image unsupported method');
@@ -311,7 +297,7 @@ class Image_GD_Driver extends Image_Driver
 
         // Gaussian blur matrix
         $matrix = array
-        (
+            (
             array(-1, -1, -1),
             array(-1, $amount, -1),
             array(-1, -1, -1),
@@ -321,28 +307,23 @@ class Image_GD_Driver extends Image_Driver
         return imageconvolution($this->tmp_image, $matrix, $amount - 8, 0);
     }
 
-    public function grayscale($unused)
-    {
+    public function grayscale($unused) {
         return imagefilter($this->tmp_image, IMG_FILTER_GRAYSCALE);
     }
 
-    public function colorize($params)
-    {
+    public function colorize($params) {
         return imagefilter($this->tmp_image, IMG_FILTER_COLORIZE, $params['r'], $params['g'], $params['b'], $params['a']);
     }
 
-    public function emboss($unused)
-    {
+    public function emboss($unused) {
         return imagefilter($this->tmp_image, IMG_FILTER_EMBOSS);
     }
 
-    public function negate($unused)
-    {
+    public function negate($unused) {
         return imagefilter($this->tmp_image, IMG_FILTER_NEGATE);
     }
 
-    protected function properties()
-    {
+    protected function properties() {
         return array(imagesx($this->tmp_image), imagesy($this->tmp_image));
     }
 
@@ -354,18 +335,17 @@ class Image_GD_Driver extends Image_Driver
      * @param   integer  image height
      * @return  resource
      */
-    protected function imagecreatetransparent($width, $height)
-    {
+    protected function imagecreatetransparent($width, $height) {
         if (self::$blank_png === NULL) {
             // Decode the blank PNG if it has not been done already
             self::$blank_png = imagecreatefromstring(base64_decode
-            (
-                'iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29' .
-                    'mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAADqSURBVHjaYvz//z/DYAYAAcTEMMgBQAANegcCBN' .
-                    'CgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQ' .
-                    'AANegcCBNCgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB3IEAADXoH' .
-                    'AgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB' .
-                    '3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAgAEAMpcDTTQWJVEAAAAASUVORK5CYII='
+                            (
+                            'iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29' .
+                            'mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAADqSURBVHjaYvz//z/DYAYAAcTEMMgBQAANegcCBN' .
+                            'CgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQ' .
+                            'AANegcCBNCgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB3IEAADXoH' .
+                            'AgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAAA16BwIE0KB' .
+                            '3IEAADXoHAgTQoHcgQAANegcCBNCgdyBAgAEAMpcDTTQWJVEAAAAASUVORK5CYII='
             ));
 
             // Set the blank PNG width and height
@@ -385,8 +365,7 @@ class Image_GD_Driver extends Image_Driver
         return $img;
     }
 
-    public function watermark($params)
-    {
+    public function watermark($params) {
         $path = $params['path'];
         $x = $params['x'];
         $y = $params['y'];
@@ -397,4 +376,7 @@ class Image_GD_Driver extends Image_Driver
         imagedestroy($mark);
         return $this->tmp_image;
     }
-} // End Image GD Driver
+
+}
+
+// End Image GD Driver

@@ -3,13 +3,13 @@
 /* @var $model Category */
 
 $this->breadcrumbs = array(
-    Yii::t('lang','Categories') => array('index'),
-    Yii::t('lang','Manage'),
+    Yii::t('lang', 'Categories') => array('index'),
+    Yii::t('lang', 'Manage'),
 );
 
 $this->menu = array(
-    array('label' => Yii::t('lang','List Category'), 'icon' => 'icon-list', 'url' => array('index'), "itemOptions"=>array('class'=>'btn')),
-    array('label' => Yii::t('lang','Create Category'), 'icon' => 'icon-plus', 'url' => array('create'), "itemOptions"=>array('class'=>'btn')),
+    array('label' => Yii::t('lang', 'List Category'), 'icon' => 'icon-list', 'url' => array('index'), "itemOptions" => array('class' => 'btn')),
+    array('label' => Yii::t('lang', 'Create Category'), 'icon' => 'icon-plus', 'url' => array('create'), "itemOptions" => array('class' => 'btn')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

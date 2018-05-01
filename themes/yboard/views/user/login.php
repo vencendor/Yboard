@@ -17,7 +17,7 @@ $this->breadcrumbs = array(
 
 
 <div class="form well">
-     <h3><?=t('Authorisation for members:')?></h3>
+    <h3><?= t('Authorisation for members:') ?></h3>
 
     <?php echo CHtml::beginForm(); ?>
 
@@ -32,7 +32,7 @@ $this->breadcrumbs = array(
         <?php echo CHtml::activeLabel($model, 'password'); ?>
         <?php echo CHtml::activePasswordField($model, 'password') ?>
     </div>
-    
+
     <div class=" rememberMe">
         <?php echo CHtml::activeCheckBox($model, 'rememberMe'); ?>
         <?php echo CHtml::activeLabel($model, 'rememberMe'); ?>
@@ -44,7 +44,7 @@ $this->breadcrumbs = array(
         </p>
     </div>
 
-    
+
 
     <div class=" submit">
         <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'label' => 'Вход')); ?>

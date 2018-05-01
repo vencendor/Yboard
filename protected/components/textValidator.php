@@ -14,16 +14,16 @@ class textValidator extends CValidator {
     public $format = "iden";
 
     protected function validateAttribute($object, $attribute) {
-        
-        if( $this->format === "stopwords" ){
-            if( !$this->validateStopWords($object->$attribute) ){
+
+        if ($this->format === "stopwords") {
+            if (!$this->validateStopWords($object->$attribute)) {
                 $object->addError($attribute, t('Текст содержит недопустимые слова '));
             }
-            if( !$this->validate_str($object->$attribute, "text") ) {
+            if (!$this->validate_str($object->$attribute, "text")) {
                 $object->addError($attribute, t('Текст содержит недопустимые символы '));
             }
         }
-        
+
         if (!$this->validate_str($object->$attribute, $this->format)) {
             $attrLabels = $object->attributeLabels();
             $object->addError($attribute, t('Неподходящий формат текстовых данных. '));
@@ -48,12 +48,12 @@ class textValidator extends CValidator {
         }
         return true;
     }
-    
-    public function validateStopWords( $str ){
+
+    public function validateStopWords($str) {
         $ret = true;
-        foreach( Yii::app()->params->stop_words as $v ){
-            if(mb_strpos($str, $v) !== false )
-                    $ret = false;
+        foreach (Yii::app()->params->stop_words as $v) {
+            if (mb_strpos($str, $v) !== false)
+                $ret = false;
         }
         return $ret;
     }

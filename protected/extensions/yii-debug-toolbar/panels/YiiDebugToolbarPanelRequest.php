@@ -1,10 +1,10 @@
 <?php
+
 /**
  * YiiDebugToolbarPanelRequest class file.
  *
  * @author Sergey Malyshev <malyshev.php@gmail.com>
  */
-
 
 /**
  * YiiDebugToolbarPanelRequest class
@@ -17,37 +17,35 @@
  * @package YiiDebugToolbar
  * @since 1.1.7
  */
-class YiiDebugToolbarPanelRequest extends YiiDebugToolbarPanel
-{
-	public $i = 'o';
-	
+class YiiDebugToolbarPanelRequest extends YiiDebugToolbarPanel {
+
+    public $i = 'o';
+
     /**
      * {@inheritdoc}
      */
-    public function getMenuTitle()
-    {
+    public function getMenuTitle() {
         return YiiDebug::t('Request');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return YiiDebug::t('Request');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function init()
-    {}
+    public function init() {
+        
+    }
 
     /**
      * {@inheritdoc}
      */
-    public function run()
-    {
+    public function run() {
         $this->render('request', array(
             'server' => $_SERVER,
             'cookies' => $_COOKIE,
@@ -57,4 +55,5 @@ class YiiDebugToolbarPanelRequest extends YiiDebugToolbarPanel
             'files' => $_FILES,
         ));
     }
+
 }

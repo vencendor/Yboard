@@ -1,8 +1,8 @@
-<?php $this->pageTitle=Yii::app()->name . ' - '.t("Login"); ?>
+<?php $this->pageTitle = Yii::app()->name . ' - ' . t("Login"); ?>
 
 <h1><?php echo $title; ?></h1>
 
 <div class="form">
-<?php echo $content; ?>
+    <?php echo $content; ?>
 
 </div><!-- yiiForm -->

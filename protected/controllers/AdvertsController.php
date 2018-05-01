@@ -79,7 +79,6 @@ class AdvertsController extends Controller {
         $this->render('index', array(
             'data' => $dataProvider,
         ));
-
     }
 
     /**
@@ -160,7 +159,7 @@ class AdvertsController extends Controller {
 
         if (isset($_POST['Reviews'])) {
             $model->attributes = $_POST['Reviews'];
-            if( $_POST['Adverts']['no_price']==="on" ){
+            if ($_POST['Adverts']['no_price'] === "on") {
                 $model->price = 0;
             }
             if ($model->save())
@@ -177,24 +176,22 @@ class AdvertsController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-        
+
         $criteria = array(
             'criteria' => array(
                 'limit' => '10',
                 'order' => 'id DESC',
-                
-            ));
-        
-        if( Yii::app()->params['moder_type'] ){
-            $criteria['criteria']['condition']='moderated=1';
+        ));
+
+        if (Yii::app()->params['moder_type']) {
+            $criteria['criteria']['condition'] = 'moderated=1';
         }
 
         $dataProvider = new CActiveDataProvider('Adverts', $criteria
         );
-        
-        if(Yii::app()->request->getParam('Adverts_page')) {
-            Yii::app()->params['meta']['vars']['page_number'] = 
-                Yii::app()->request->getParam('Adverts_page');
+
+        if (Yii::app()->request->getParam('Adverts_page')) {
+            Yii::app()->params['meta']['vars']['page_number'] = Yii::app()->request->getParam('Adverts_page');
         }
 
         $this->render('index', array(
@@ -230,10 +227,10 @@ class AdvertsController extends Controller {
             $model->user_id = Yii::app()->user->id;
             $model->created_at = date("Y-m-d H:i:s");
             $model->fields = serialize($_POST['Fields']);
-            if( $_POST['Adverts']['no_price']==="on" ){
+            if ($_POST['Adverts']['no_price'] === "on") {
                 $model->price = 0;
             }
-            
+
             if ($model->save()) {
                 $video = CUploadedFile::getInstances($model, 'youtube_id');
                 //YoutubeHelper::processAdverts($model, $video);
@@ -263,19 +260,18 @@ class AdvertsController extends Controller {
         $model->disableBehavior('CTimestampBehavior');
         $model->save();
         $model->fields = unserialize($model->fields);
-        
+
         $this->meta = Yii::app()->params['adv_meta'];
-        $this->meta['vars']['cat_name'] = 
-                Yii::app()->params['categories'][$model->category_id]['name'];
+        $this->meta['vars']['cat_name'] = Yii::app()->params['categories'][$model->category_id]['name'];
         $this->meta['vars']['adv_title'] = $model->name;
-		
-		$model->moderated;
-        
+
+        $model->moderated;
+
         // Похожие объявления   
         $dataRel = new CActiveDataProvider('Adverts', array(
             'criteria' => array(
                 'select' => 't.*',
-                'condition' => 't.category_id = '.$model->category_id ." and t.id != ".$model->id,
+                'condition' => 't.category_id = ' . $model->category_id . " and t.id != " . $model->id,
                 'order' => 'id DESC',
                 'limit' => 5,
             ),
@@ -427,7 +423,7 @@ class AdvertsController extends Controller {
         $model->price_min = $model->price_min['price_min'];
         $model->price_max = Yii::app()->request->getParam("Adverts");
         $model->price_max = $model->price_max['price_max'];
-        
+
         // Обработка дополнительных полей для поиска 
         $s_fields = $_GET['fields'];
         $txt_vld = new textValidator();
@@ -435,7 +431,7 @@ class AdvertsController extends Controller {
         if (is_array($s_fields)) {
             ksort($s_fields);
             foreach ($s_fields as $fn => $fv) {
-                if ($fv!=="") {
+                if ($fv !== "") {
                     if ($txt_vld->validate_str($fv) and $txt_vld->validate_str($fn)) {
                         if ($model->fields) {
                             $model->fields .= "%";
@@ -449,8 +445,8 @@ class AdvertsController extends Controller {
         }
 
         $dataProvider = $model->search();
-        
-        if( $dataProvider->getItemCount() == 0 ){
+
+        if ($dataProvider->getItemCount() == 0) {
             $model->unsetAttributes();
             $model->name = $searchStr;
             $model->text = $searchStr;

@@ -7,16 +7,16 @@
     </div>
     <div class="span-5 last">
         <div id="sidebar">
-        <?php
+            <?php
             $this->beginWidget('zii.widgets.CPortlet', array(
-                'title'=>'Site tree',
+                'title' => 'Site tree',
             ));
-            $this->widget('application.modules.cms.components.TreeMenu',array(
-                'showRoot'=>false,
-                //'tpl'=>'application.views.cms.menu.menu',
+            $this->widget('application.modules.cms.components.TreeMenu', array(
+                'showRoot' => false,
+                    //'tpl'=>'application.views.cms.menu.menu',
             ));
             $this->endWidget();
-        ?>
+            ?>
         </div><!-- sidebar -->
     </div>
 </div>

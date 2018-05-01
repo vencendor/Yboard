@@ -1,2 +1,4 @@
-<? return array (
-); 
+<?
+
+return array(
+);

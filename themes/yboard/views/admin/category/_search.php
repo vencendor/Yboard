@@ -16,29 +16,29 @@
     ?>
 
     <div class="row">
-<?php echo $form->label($model, 'id'); ?>
-<?php echo $form->textField($model, 'id'); ?>
+        <?php echo $form->label($model, 'id'); ?>
+        <?php echo $form->textField($model, 'id'); ?>
     </div>
 
     <div class="row">
-<?php echo $form->label($model, 'name'); ?>
-<?php echo $form->textField($model, 'name', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->label($model, 'name'); ?>
+        <?php echo $form->textField($model, 'name', array('size' => 60, 'maxlength' => 255)); ?>
     </div>
 
     <div class="row">
-<?php echo $form->label($model, 'icon'); ?>
-<?php echo $form->textField($model, 'icon', array('size' => 60, 'maxlength' => 255)); ?>
+        <?php echo $form->label($model, 'icon'); ?>
+        <?php echo $form->textField($model, 'icon', array('size' => 60, 'maxlength' => 255)); ?>
     </div>
-    
-        <div class="row">
-<?php echo $form->label($model, 'level'); ?>
-<?php echo $form->textField($model, 'level', array('size' => 60, 'maxlength' => 255)); ?>
+
+    <div class="row">
+        <?php echo $form->label($model, 'level'); ?>
+        <?php echo $form->textField($model, 'level', array('size' => 60, 'maxlength' => 255)); ?>
     </div>
 
     <div class="row buttons">
-      <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'label' => 'Отправить')); ?>
+        <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'label' => 'Отправить')); ?>
     </div>
 
-<?php $this->endWidget(); ?>
+    <?php $this->endWidget(); ?>
 
 </div><!-- search-form -->
