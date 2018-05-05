@@ -9,20 +9,20 @@ if ($model->category->parent)
 $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $model->category->id);
 ?>
 <div class="advert_full">
-    <div class='title' style='padding:0px 3px;'><?= $model->name ?> 
+    <div class='title' style='padding:0px 3px;'><? echo  $model->name ?> 
     </div>
     <div class='date'>
-        <span><a href='<? echo Yii::app()->createUrl('user/view', array('id' => $model->user->id))
+        <span><a href='<?php echo Yii::app()->createUrl('user/view', array('id' => $model->user->id))
 ?>'>
-                <i class='fa fa-user'></i><?= $model->user->username ?>
+                <i class='fa fa-user'></i><? echo  $model->user->username ?>
             </a></span>  
-        <span><i class='fa fa-clock-o'></i><?= PeopleDate::format($model->created_at) ?></span> 
-        <span><i class='fa fa-eye'></i><?= $model->views ?></span>
+        <span><i class='fa fa-clock-o'></i><? echo  PeopleDate::format($model->created_at) ?></span> 
+        <span><i class='fa fa-eye'></i><? echo  $model->views ?></span>
         <div style='float:right; font-size:20px;'>
             <a href='<?
             echo Yii::app()->createUrl('adverts/update', array('id' => $model->id));
             ?>'><i class='fa fa-pencil'></i></a> 
-            <a href='javascript:void(0)' onclick='setFavoriteAdv("<?= $model->id ?>", this)'><i class='fa fa-bookmark-o'></i></a>
+            <a href='javascript:void(0)' onclick='setFavoriteAdv("<? echo  $model->id ?>", this)'><i class='fa fa-bookmark-o'></i></a>
         </div>
     </div>
     <div class="content">
@@ -41,7 +41,7 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
 
         <div class='attributes'>
 
-            <? if (sizeof($model->fields) > 0 and is_array($model->fields)) { ?>
+            <?php if (sizeof($model->fields) > 0 and is_array($model->fields)) { ?>
                 <?php
                 if (is_array($model->fields))
                     foreach ($model->fields as $f_name => $field) {
@@ -52,11 +52,11 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
                     }
                 ?>
 
-            <? } ?>
+            <?php } ?>
         </div>
-        <div class='price'><?= t('Price') ?> - 
-            <? if ($model->price) { ?>
-                <?= $model->price ?> ( <?= Yii::app()->params['currency'][$model->currency] ?> ) 
+        <div class='price'><? echo  t('Price') ?> - 
+            <?php if ($model->price) { ?>
+                <? echo  $model->price ?> ( <? echo  Yii::app()->params['currency'][$model->currency] ?> ) 
                 <a href='javascript:void(0);' onclick='show_converter()' > открыть конвертор </a>
                 <div class='price_converter'><?
                     foreach (Yii::app()->params['currency'] as $cn => $cur) {
@@ -73,13 +73,13 @@ $this->breadcrumbs[$model->category->name] = array('site/category', 'id' => $mod
 
         <div> 
             <span> Контакты : </span> <br/>
-            <?= $model->user->phone ?> <br/>
-            <?= $model->user->email ?> <br/>
-            <?= $model->user->skype ?> 
+            <? echo  $model->user->phone ?> <br/>
+            <? echo  $model->user->email ?> <br/>
+            <? echo  $model->user->skype ?> 
         </div>
 
 
-        <? if (Yii::app()->user->id != $model->user->id and isset($model->user->id)) { ?>
+        <?php if (Yii::app()->user->id != $model->user->id and isset($model->user->id)) { ?>
             <div>
                 <?php
                 echo $this->renderPartial('/messages/_form', array(

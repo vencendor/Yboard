@@ -6,7 +6,7 @@
         <title><?php echo $this->meta_title(); ?></title>
         <meta name="description" content="<?php echo $this->meta_description(); ?>" />
 
-        <script> baseUrl = '<?= Yii::app()->baseUrl ?>';</script>
+        <script> baseUrl = '<? echo  Yii::app()->baseUrl ?>';</script>
 
 
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/yboard.js" ></script>
@@ -24,11 +24,11 @@
 
         <div id='header'>
             <div id="topheader">
-                <a href='<?= Yii::app()->createUrl("/") ?>' class="logo">Доска объявлений на Yii</a>
+                <a href='<? echo  Yii::app()->createUrl("/") ?>' class="logo">Доска объявлений на Yii</a>
                 <div class="menu_area">
                     <div class='ideas'>
-                        <a href="<?= Yii::app()->createUrl("/adverts") ?>" class="general">Объявления</a> 
-                        <a href='<?= Yii::app()->createUrl("/adverts/create") ?>' class="menu_text">
+                        <a href="<? echo  Yii::app()->createUrl("/adverts") ?>" class="general">Объявления</a> 
+                        <a href='<? echo  Yii::app()->createUrl("/adverts/create") ?>' class="menu_text">
                             <i class='fa fa-plus'></i>добавить
                         </a>
                     </div>
@@ -94,23 +94,23 @@
 
 
 
-                    <?= $this->getBanner('right_adv') ?>
+                    <? echo  $this->getBanner('right_adv') ?>
                     <div class='articleList'> 
-                        <? $this->widget('application.widgets.articleList'); ?>
+                        <?php $this->widget('application.widgets.articleList'); ?>
                     </div>
 
 
                 </div>
                 <div class="midarea">
-                    <form name='search_form' class='searchForm' action='<?= Yii::app()->createUrl('/adverts/search') ?>'>
+                    <form name='search_form' class='searchForm' action='<? echo  Yii::app()->createUrl('/adverts/search') ?>'>
                         <input type='text' name='searchStr'  
-                               value='<?= Yii::app()->request->getParam("searchStr") ?>' />
+                               value='<? echo  Yii::app()->request->getParam("searchStr") ?>' />
                         <input type='submit' value='Поиск' class='btn' /> <br/>
-                        <a href="javascript:void(0)" onclick="open_search()" ><?= t("Advanced search") ?></a>
+                        <a href="javascript:void(0)" onclick="open_search()" ><? echo  t("Advanced search") ?></a>
 
 
-                        <div class='advanced_search' <? echo is_array(Yii::app()->request->getParam("Adverts")) ? "" : "style='display:none'" ?> >
-                            <? $this->widget('application.widgets.advancedSearch'); ?>
+                        <div class='advanced_search' <?php echo is_array(Yii::app()->request->getParam("Adverts")) ? "" : "style='display:none'" ?> >
+                            <?php $this->widget('application.widgets.advancedSearch'); ?>
                         </div>
                     </form>
                     <?php if (isset($this->breadcrumbs)): ?>

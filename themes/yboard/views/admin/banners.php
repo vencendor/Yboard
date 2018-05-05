@@ -56,18 +56,18 @@
         $(".banner_viewer").hide('fast');
         $('#banner_viewer_' + b_name).show('fast');
         /*
-         $.get("<?= Yii::app()->createUrl('admin/banners/show') ?>?b_name=" + b_name + "&b_id=" + b_id, 
+         $.get("<? echo  Yii::app()->createUrl('admin/banners/show') ?>?b_name=" + b_name + "&b_id=" + b_id, 
          function (data){
          $('#banner_viewer_' + b_name).html(data);
          });
          /**/
-        $('#banner_viewer_' + b_name).html("<iframe width='100%' src='<?= Yii::app()->createUrl('/admin/banners/show') ?>?b_name=" + b_name + "&b_id=" + b_id + "'></iframe>");
+        $('#banner_viewer_' + b_name).html("<iframe width='100%' src='<? echo  Yii::app()->createUrl('/admin/banners/show') ?>?b_name=" + b_name + "&b_id=" + b_id + "'></iframe>");
     }
 
     function create_block() {
         var bl_name = prompt('Укажите id блока');
         if (bl_name != null) {
-            window.location = '<?= Yii::app()->createUrl('admin/banners') ?>?create_block=yes&new_name=' + bl_name;
+            window.location = '<? echo  Yii::app()->createUrl('admin/banners') ?>?create_block=yes&new_name=' + bl_name;
         }
     }
 
@@ -75,14 +75,14 @@
         var cf = confirm("Удалить этот рекламный код");
         console.log(cf);
         if (cf) {
-            window.location = '<?= Yii::app()->createUrl('admin/banners') ?>?delete_name=' + bl_name + '&delete_id=' + ads_id;
+            window.location = '<? echo  Yii::app()->createUrl('admin/banners') ?>?delete_name=' + bl_name + '&delete_id=' + ads_id;
         }
     }
 
     function delete_block(bl_name) {
         var cf = confirm("Удалить этот рекламный блок");
         if (cf) {
-            window.location = '<?= Yii::app()->createUrl('admin/banners') ?>?delete_block=' + bl_name;
+            window.location = '<? echo  Yii::app()->createUrl('admin/banners') ?>?delete_block=' + bl_name;
         }
     }
 
@@ -116,8 +116,8 @@ if ($message) {
 ?>
 
 <div align='center' class='add_code_form'>
-    <a href='<?= Yii::app()->createUrl("/admin/default/help") ?>#banners'> Инструкция </a>
-    <form method='post' name='insert_ads_form' action='<?= Yii::app()->createUrl('admin/banners') ?>' 
+    <a href='<? echo  Yii::app()->createUrl("/admin/default/help") ?>#banners'> Инструкция </a>
+    <form method='post' name='insert_ads_form' action='<? echo  Yii::app()->createUrl('admin/banners') ?>' 
           style='display:none' id='ads_code_redactor' align='center'>
         <h4>Добавление кода для блока</h4>
         <textarea  name='ads_code' style='width:625px'></textarea>

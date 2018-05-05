@@ -75,8 +75,8 @@ class SiteController extends Controller {
         if (sizeof($fields) > 0) {
             foreach ($fields as $f_iden => $fv) {
                 ?><div class="controls">
-                    <label for='Fields[<?= $f_iden ?>]'><?= $fv->name ?></label>
-                    <input type="text" id="Fields[<?= $f_iden ?>]" name="Fields[<?= $f_iden ?>]" >
+                    <label for='Fields[<? echo  $f_iden ?>]'><? echo  $fv->name ?></label>
+                    <input type="text" id="Fields[<? echo  $f_iden ?>]" name="Fields[<? echo  $f_iden ?>]" >
                 </div><?
             }
         }
@@ -217,7 +217,7 @@ short_open_tag option must be enabled in the php.ini or another method available
                         $config_array_str = var_export($config_data, true);
                         $config_array_str = str_replace("'params' => 'require',", "'params' => require 'settings.php',", $config_array_str);
                         //Сохранение конфигурации 
-                        file_put_contents($CONFIG, "<? return " . $config_array_str . " ?>");
+                        file_put_contents($CONFIG, "<?php return " . $config_array_str . " ?>");
 
                         // Сохранение настроек
                         $settings = new ConfigForm(Yii::getPathOfAlias('application.config.settings') . ".php");

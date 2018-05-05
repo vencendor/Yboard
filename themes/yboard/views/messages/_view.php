@@ -10,6 +10,6 @@
         (<?php echo PeopleDate::format($data->send_date); ?>)
     </i>  :
     <br/>
-    <? echo $data->message; ?>
+    <?php echo $data->message; ?>
 
 </div>

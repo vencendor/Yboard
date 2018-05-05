@@ -17,7 +17,7 @@ $this->breadcrumbs = array(
 
 
 <div class="form well">
-    <h3><?= t('Authorisation for members:') ?></h3>
+    <h3><? echo  t('Authorisation for members:') ?></h3>
 
     <?php echo CHtml::beginForm(); ?>
 

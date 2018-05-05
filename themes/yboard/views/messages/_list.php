@@ -10,7 +10,7 @@
         <?php echo PeopleDate::format($data['last_date']); ?>
     </i>
 
-    <a href='<? echo Yii::app()->createUrl('messages/dialog', array('user' => $data['interlocutor'])); ?>'> <b><?php echo CHtml::encode($data['username']); ?></b> </a>
+    <a href='<?php echo Yii::app()->createUrl('messages/dialog', array('user' => $data['interlocutor'])); ?>'> <b><?php echo CHtml::encode($data['username']); ?></b> </a>
     <br/>
     Сообщений (<?php echo CHtml::encode($data['count_mes']); ?>)
 

@@ -5,9 +5,9 @@
 /* @var $model CActiveRecord Messages */
 ?>
 
-<h4><?= t('Dialog') ?> с 
-    <a href='<? echo Yii::app()->createUrl('user/view/', array('id' => $userData->id)) ?>'>
-        <?= $userData->username ?></a>
+<h4><? echo  t('Dialog') ?> с 
+    <a href='<?php echo Yii::app()->createUrl('user/view/', array('id' => $userData->id)) ?>'>
+        <? echo  $userData->username ?></a>
 </h4>
 
 <div class='dialog'>

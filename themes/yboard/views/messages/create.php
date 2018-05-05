@@ -15,9 +15,9 @@ $this->menu = array(
 //var_dump(User::model()->findByPk($receiver)->id);
 ?>
 
-<div><?= t('Write messages to') ?> 
-    <a href='<?= Yii::app()->createUrl('user/view', array('id' => $receiver)) ?>'> 
-        <?= User::model()->findByPk($receiver)->username ?>
+<div><? echo  t('Write messages to') ?> 
+    <a href='<? echo  Yii::app()->createUrl('user/view', array('id' => $receiver)) ?>'> 
+        <? echo  User::model()->findByPk($receiver)->username ?>
     </a>
 </div>
 

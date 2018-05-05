@@ -110,17 +110,17 @@ class AdvertsController extends Controller {
                 foreach ($fields as $f_iden => $fv) {
                     ?>
                     <div class="controls">
-                        <label for='Fields[<?= $f_iden ?>]'><?= $fv->name ?></label>
-                        <? if ($fv->type == 1) { ?>
-                            <input type="checkbox" id="Fields[<?= $f_iden ?>]" name="Fields[<?= $f_iden ?>]" <? ($fv->atr ? "checked='checked'" : "") ?> >
+                        <label for='Fields[<? echo  $f_iden ?>]'><? echo  $fv->name ?></label>
+                        <?php if ($fv->type == 1) { ?>
+                            <input type="checkbox" id="Fields[<? echo  $f_iden ?>]" name="Fields[<? echo  $f_iden ?>]" <?php ($fv->atr ? "checked='checked'" : "") ?> >
                             <?
                         } elseif ($fv->type == 2) {
                             echo CHtml::dropDownList("Fields[" . $f_iden . "]", array()
                                     , explode(",", $fv->atr));
                         } else {
                             ?>
-                            <input type="text" id="Fields[<?= $f_iden ?>]" name="Fields[<?= $f_iden ?>]" >
-                        <? } ?>
+                            <input type="text" id="Fields[<? echo  $f_iden ?>]" name="Fields[<? echo  $f_iden ?>]" >
+                        <?php } ?>
                     </div>	
 
                     <?

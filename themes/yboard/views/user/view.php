@@ -34,46 +34,46 @@ $attributes = array(
  */
 ?>
 <div class='userHead'>
-    <h4><? echo $model->username; ?></h4> <?
+    <h4><?php echo $model->username; ?></h4> <?
     if ($model->lastvisit_at) {
         echo "(" . PeopleDate::format($model->lastvisit_at) . ")";
     }
     ?>
-    <? if (Yii::app()->user->id == Yii::app()->request->getParam("id")) { ?>
-        <a href='<? echo Yii::app()->createUrl('user/update', array('id' => $model->id)) ?>'> Редактировать </a>
-    <? } ?>
-    <? if (Yii::app()->user->isAdmin() and Yii::app()->user->id != $model->id) { ?>
-        <a href='<? echo Yii::app()->createUrl('user/ban', array('id' => $model->id)) ?>'> Заблокировать </a>
-    <? } ?>
+    <?php if (Yii::app()->user->id == Yii::app()->request->getParam("id")) { ?>
+        <a href='<?php echo Yii::app()->createUrl('user/update', array('id' => $model->id)) ?>'> Редактировать </a>
+    <?php } ?>
+    <?php if (Yii::app()->user->isAdmin() and Yii::app()->user->id != $model->id) { ?>
+        <a href='<?php echo Yii::app()->createUrl('user/ban', array('id' => $model->id)) ?>'> Заблокировать </a>
+    <?php } ?>
     <div> 
-        <a href='<? echo Yii::app()->createUrl("adverts/user", array('id' => $model->id)) ?>'> <?= t('Adverts') ?> </a> 
-        | <a href='<? echo Yii::app()->createUrl("user/view", array('id' => $model->id)) ?>'> <?= t('Personal dates') ?> </a> 
+        <a href='<?php echo Yii::app()->createUrl("adverts/user", array('id' => $model->id)) ?>'> <? echo  t('Adverts') ?> </a> 
+        | <a href='<?php echo Yii::app()->createUrl("user/view", array('id' => $model->id)) ?>'> <? echo  t('Personal dates') ?> </a> 
     </div>
 </div>
 <div> 
     <dl>
-        <? if ($model->full_name) { ?>
-            <dt><?= t('Полное имя') ?> :</dt> <dd> <?= $model->full_name ?> </dd>
-        <? } if ($model->birthday and $model->birthday !== "0000-00-00") { ?>
-            <dt><?= t('Дата рождения') ?> :</dt> <dd> <?= PeopleDate::format($model->birthday) ?> </dd>
-        <? } if ($model->location) { ?>
-            <dt><?= t('Место проживания') ?> :</dt> <dd> <?= $model->location ?> </dd>
-        <? } ?>
+        <?php if ($model->full_name) { ?>
+            <dt><? echo  t('Полное имя') ?> :</dt> <dd> <? echo  $model->full_name ?> </dd>
+        <?php } if ($model->birthday and $model->birthday !== "0000-00-00") { ?>
+            <dt><? echo  t('Дата рождения') ?> :</dt> <dd> <? echo  PeopleDate::format($model->birthday) ?> </dd>
+        <?php } if ($model->location) { ?>
+            <dt><? echo  t('Место проживания') ?> :</dt> <dd> <? echo  $model->location ?> </dd>
+        <?php } ?>
         <br/>
-        <h4><?= t('Контакты') ?> : </h4>
-        <? if ($model->phone) { ?>
-            <dt><?= t('Телефон') ?> :</dt> <dd> <?= $model->phone ?> </dd>
-        <? } if ($model->skype) { ?>
-            <dt><?= t('Skype') ?> :</dt> <dd> <?= $model->skype ?> </dd>
-        <? } if ($model->email) { ?>
-            <dt><?= t('Почта') ?> :</dt> <dd> <?= $model->email ?> </dd>
-        <? } if ($model->contacts) { ?>
+        <h4><? echo  t('Контакты') ?> : </h4>
+        <?php if ($model->phone) { ?>
+            <dt><? echo  t('Телефон') ?> :</dt> <dd> <? echo  $model->phone ?> </dd>
+        <?php } if ($model->skype) { ?>
+            <dt><? echo  t('Skype') ?> :</dt> <dd> <? echo  $model->skype ?> </dd>
+        <?php } if ($model->email) { ?>
+            <dt><? echo  t('Почта') ?> :</dt> <dd> <? echo  $model->email ?> </dd>
+        <?php } if ($model->contacts) { ?>
 
 
-            <dt><?= t('Другие контакты') ?> :</dt> <dd> <?= $model->contacts ?> </dd>
-        <? } if ($model->create_at) { ?>
-            <dt><?= t('Дата регистрации') ?> :</dt> <dd> <?= PeopleDate::format($model->create_at) ?> </dd>
-        <? } ?>
+            <dt><? echo  t('Другие контакты') ?> :</dt> <dd> <? echo  $model->contacts ?> </dd>
+        <?php } if ($model->create_at) { ?>
+            <dt><? echo  t('Дата регистрации') ?> :</dt> <dd> <? echo  PeopleDate::format($model->create_at) ?> </dd>
+        <?php } ?>
 
     </dl>
     <?

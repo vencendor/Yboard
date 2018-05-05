@@ -13,17 +13,17 @@
                 <a href='<?php echo Yii::app()->baseUrl; ?>' class="logo">Доска объявлений на Yii</a>
                 <div class="menu_area">
                     <div class='ideas'>
-                        <a href="<?= Yii::app()->createUrl("/adverts") ?>" class="general">Объявления</a> 
-                        <a href='<?= Yii::app()->createUrl("/adverts/create") ?>' class="menu_text"><i class='fa fa-plus'></i>добавить</a>
+                        <a href="<? echo  Yii::app()->createUrl("/adverts") ?>" class="general">Объявления</a> 
+                        <a href='<? echo  Yii::app()->createUrl("/adverts/create") ?>' class="menu_text"><i class='fa fa-plus'></i>добавить</a>
                     </div>
                     <div class='links'>
-                        <a href="<?= Yii::app()->createUrl("/user") ?>" class="general">Пользователи</a>
+                        <a href="<? echo  Yii::app()->createUrl("/user") ?>" class="general">Пользователи</a>
                     </div>
                     <div class='info'>
-                        <a href="<?= Yii::app()->createUrl("/site/page") ?>" class="general">Правила работы</a> 
+                        <a href="<? echo  Yii::app()->createUrl("/site/page") ?>" class="general">Правила работы</a> 
                     </div>
                     <div class="works">
-                        <a href="<?= Yii::app()->createUrl("/site/contacts") ?>" class="general">Контакты</a>
+                        <a href="<? echo  Yii::app()->createUrl("/site/contacts") ?>" class="general">Контакты</a>
                     </div>
                 </div>
             </div>

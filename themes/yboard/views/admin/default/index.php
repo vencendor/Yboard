@@ -24,22 +24,22 @@
     // element is supported
     var mychart1 = new AwesomeChart('canvas1');
     mychart1.title = "Новых регистрации за последний периуд";
-    mychart1.data = <?= $chart[0]['data'] ?>;
-    mychart1.labels = <?= $chart[0]['label'] ?>;
+    mychart1.data = <? echo  $chart[0]['data'] ?>;
+    mychart1.labels = <? echo  $chart[0]['label'] ?>;
     mychart1.draw();
 
 
 
     var mychart2 = new AwesomeChart('canvas2');
     mychart2.title = "Созданно объявлений";
-    mychart2.data = <?= $chart[1]['data'] ?>;
-    mychart2.labels = <?= $chart[1]['label'] ?>;
+    mychart2.data = <? echo  $chart[1]['data'] ?>;
+    mychart2.labels = <? echo  $chart[1]['label'] ?>;
     mychart2.draw();
 
     var mychart3 = new AwesomeChart('canvas3');
     mychart3.title = "Сообщений между пользователями";
-    mychart3.data = <?= $chart[2]['data'] ?>;
-    mychart3.labels = <?= $chart[2]['label'] ?>;
+    mychart3.data = <? echo  $chart[2]['data'] ?>;
+    mychart3.labels = <? echo  $chart[2]['label'] ?>;
     mychart3.draw();
     }
     }

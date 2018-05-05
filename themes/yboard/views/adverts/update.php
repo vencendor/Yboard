@@ -16,6 +16,6 @@ $this->menu = array(
 );
 ?>
 
-<h4> <?= t('Redact advert') ?> "<?php echo $model->name; ?>"</h4>
+<h4> <? echo  t('Redact advert') ?> "<?php echo $model->name; ?>"</h4>
 
 <?php echo $this->renderPartial('_form', array('model' => $model)); ?>

@@ -11,6 +11,6 @@ $this->menu = array(
 );
 ?>
 
-<h1><?= t('Update') ?> <?php echo $model->name; ?></h1>
+<h1><? echo  t('Update') ?> <?php echo $model->name; ?></h1>
 
 <?php echo $this->renderPartial('forms/' . $this->getFormPartial($model), array('model' => $model)); ?>

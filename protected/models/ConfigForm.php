@@ -58,7 +58,7 @@ class ConfigForm extends CFormModel {
             $conf_str = preg_replace("#([^\n\r]*" . $n . "[^\n\r]*)[\n\r]#is", "\\1//" . $v . "\n", $conf_str);
         }
 
-        file_put_contents($this->file_path, "<? \n return " . $conf_str . " \n ?>");
+        file_put_contents($this->file_path, "<?php \n return " . $conf_str . " \n ?>");
     }
 
     public function getConfig() {

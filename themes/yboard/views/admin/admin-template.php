@@ -7,7 +7,7 @@
             <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/admin.js"></script>
             <meta charset="utf-8" >
 
-                <title><?= $this->pageTitle ?></title>
+                <title><? echo  $this->pageTitle ?></title>
 
                 <meta name="description" content="Dashboard" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -156,7 +156,7 @@
                                 <!-- Page Body -->
                                 <div class="page-header position-relative">
                                     <div class="header-title">
-                                        <h1><?= $this->title ?></h1>
+                                        <h1><? echo  $this->title ?></h1>
                                     </div>
                                 </div>
                                 <div class="page-body">
@@ -170,7 +170,7 @@
                                         ));
                                         ?>
                                     </div>
-                                    <?= $content ?>
+                                    <? echo  $content ?>
                                 </div>
                                 <!-- /Page Body -->
                             </div>

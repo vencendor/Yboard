@@ -40,7 +40,7 @@ class advancedSearch extends CWidget {
             if ($subcat) {
                 ?>
                 <label for='cat_id'> Подкатегория </label> <select name='cat_id'>
-                    <option value='<?= $cat_id ?>'>  ---  </option>
+                    <option value='<? echo  $cat_id ?>'>  ---  </option>
                     <?
                     foreach ($subcat as $scat) {
                         echo "<option value='" . $scat['id'] . "' " . ($scat['id'] == Yii::app()->request->getParam("cat_id") ? "selected='selected'" : "") . ">" . $scat['name'] . "</option>";
