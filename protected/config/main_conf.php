@@ -1,5 +1,5 @@
 <?php return array (
-  'basePath' => 'D:\\xampp\\htdocs\\yboard/protected/',
+  'basePath' => dirname(__FILE__).'/../',
   'language' => 'ru',
   'name' => 'xsdfgsdfsdf',
   'theme' => 'yboard',
