@@ -1,7 +1,9 @@
-# Yboard - движок доски объявлений на Yii
+# Данная версия не поддерживается! Настоятельно рекомендуем переход на версию движка Yboard2 по адресу https://github.com/vencendor/Yboard2
+
+# Yboard - движок доски объявлений на Yii 1
 
 
-Основное зеркало проекта на котором будут выходить обновления - https://github.com/vencendor/yboard
+Основное зеркало проекта на котором будут выходить обновления - https://github.com/vencendor/yboard ( зеркало второй версии https://github.com/vencendor/Yboard2 )
 
 Сайт движка и демо - http://yboard.org
 
